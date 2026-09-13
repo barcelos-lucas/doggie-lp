@@ -78,8 +78,8 @@ export const portfolio = [
     "url": "https://www.instagram.com/tiabiatosadora/p/DcR_uAFDSed/"
   },
   {
-    "after": "/images/portfolio/DcR-7JgjWhz-after.webp",
-    "before": "/images/portfolio/DcR-7JgjWhz-before.webp",
+    "after": "/images/portfolio/DcR-7JgjWhz-before.webp",
+    "before": "/images/portfolio/DcR-7JgjWhz-after.webp",
     "afterAlt": "Cão de pelagem preta e dourada finalizado",
     "beforeAlt": "Cão de pelagem preta e dourada antes da finalização",
     "caption": "Técnica para cada pelagem",
@@ -94,16 +94,16 @@ export const portfolio = [
     "url": "https://www.instagram.com/tiabiatosadora/p/DcR-HVmDYhQ/"
   },
   {
-    "after": "/images/portfolio/DbMSwt_iVEP-after.webp",
-    "before": "/images/portfolio/DbMSwt_iVEP-before.webp",
+    "after": "/images/portfolio/DbMSwt_iVEP-before.webp",
+    "before": "/images/portfolio/DbMSwt_iVEP-after.webp",
     "afterAlt": "Cão de pelagem alaranjada finalizado",
     "beforeAlt": "Cão de pelagem alaranjada antes da finalização",
     "caption": "Kiara · resultado que se vê",
     "url": "https://www.instagram.com/tiabiatosadora/p/DbMSwt_iVEP/"
   },
   {
-    "after": "/images/portfolio/DbMSgaFiScR-after.webp",
-    "before": "/images/portfolio/DbMSgaFiScR-before.webp",
+    "after": "/images/portfolio/DbMSgaFiScR-before.webp",
+    "before": "/images/portfolio/DbMSgaFiScR-after.webp",
     "afterAlt": "Cão de pelagem creme finalizado",
     "beforeAlt": "Cão de pelagem creme antes da finalização",
     "caption": "Miss simpatia · cuidado em cada detalhe",
