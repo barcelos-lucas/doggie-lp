@@ -216,14 +216,19 @@
 .carousel-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
 .carousel-controls>span{font-size:13px;color:var(--muted)}
 .carousel-controls>div{display:flex;gap:7px;flex-shrink:0}
-.carousel-controls button{min-width:44px;min-height:44px;border:1px solid var(--line);border-radius:22px;background:var(--paper);color:var(--ink);padding:8px 13px;cursor:pointer;font-size:13px}
+.carousel-controls button{min-width:44px;min-height:44px;border:1px solid var(--line);border-radius:22px;background:var(--paper);color:var(--ink);padding:8px 13px;cursor:pointer;font-size:13px;transition:color .25s ease,border-color .25s ease,background-color .25s ease,transform .25s ease}
+.carousel-controls button:not(:disabled):hover{border-color:var(--gold-border);color:var(--primary);background:var(--surface-warm);transform:translateY(-1px)}
+.carousel-controls button:not(:disabled):active{transform:scale(.96)}
+.carousel-controls button[aria-pressed="true"]{border-color:var(--gold-border);background:var(--surface-warm);color:var(--primary)}
 .carousel-controls button:disabled{cursor:default;color:var(--muted)}
-.carousel-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:var(--gold-border) transparent;padding:5px 0 18px}
-.carousel-track figure{flex:0 0 82%;min-width:0;scroll-snap-align:start;border-radius:20px;overflow:hidden;background:var(--paper);border:1px solid var(--line)}
+.carousel-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-x:contain;scrollbar-width:none;padding:5px 0 18px;scroll-behavior:auto;will-change:scroll-position}
+.carousel-track::-webkit-scrollbar{display:none}
+.carousel-track figure{flex:0 0 82%;min-width:0;scroll-snap-align:start;border-radius:20px;overflow:hidden;background:var(--paper);border:1px solid var(--line);transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s cubic-bezier(.22,1,.36,1)}
 .carousel-track img{aspect-ratio:4/5;object-fit:cover}
 .carousel-track figcaption{padding:16px;font-size:13px;line-height:1.5;color:var(--muted)}
 .portfolio-carousel>.text-link{margin-top:20px}
 .carousel-track:focus-visible{outline:2px solid var(--primary);outline-offset:5px}
+@media(hover:hover){.carousel-track figure:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgb(50 34 24 / .12)}}
 @media(min-width:640px){.carousel-track figure{flex-basis:calc((100% - 16px)/2)}}
 @media(min-width:1024px){.carousel-track figure{flex-basis:calc((100% - 32px)/3)}}
 @media(max-width:379px){.carousel-controls{align-items:flex-start;flex-direction:column}}
@@ -239,4 +244,4 @@
 .comparison-frame.is-after .comparison-label{background:var(--primary)}
 .comparison-card figcaption{min-height:76px}
 @media(max-width:639px){.comparison-card figcaption{padding:13px 14px}.comparison-label{top:8px;left:8px;padding:4px 8px;font-size:9px}}
-@media(prefers-reduced-motion:reduce){.carousel-track{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){.carousel-track{scroll-behavior:auto}.carousel-track figure{transition:none}}
