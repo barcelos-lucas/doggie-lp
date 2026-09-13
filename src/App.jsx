@@ -28,7 +28,7 @@ function Brand() {
 }
 
 function ThemeToggle() {
-  const [dark, setDark] = useState(() => typeof document !== 'undefined' && document.documentElement.dataset.theme === 'dark');
+  const [dark, setDark] = useState(false);
   useEffect(() => {
     const stored = window.localStorage.getItem('doggie-theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
