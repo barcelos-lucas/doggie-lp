@@ -75,9 +75,9 @@
 /* One responsive theme control; visible independently of navigation. */
 .header-inner{gap:12px}
 .header-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.theme-toggle{position:relative;isolation:isolate;display:grid;grid-template-columns:1fr 1fr;width:88px;height:48px;padding:3px;flex-shrink:0;border:1px solid var(--line);border-radius:25px;background:var(--surface);color:var(--muted);cursor:pointer}
-.theme-toggle::before{content:"";position:absolute;z-index:-1;top:3px;bottom:3px;left:3px;width:calc((100% - 6px)/2);border-radius:22px;background:var(--surface-deep);transition:transform .2s ease}
-.theme-toggle.is-dark::before{transform:translateX(100%)}
+.theme-toggle{--theme-inset:3px;--theme-segment-width:calc((100% - 6px)/2);position:relative;isolation:isolate;display:grid;grid-template-columns:1fr 1fr;width:88px;height:48px;padding:3px;flex-shrink:0;border:1px solid var(--line);border-radius:25px;background:var(--surface);color:var(--muted);cursor:pointer}
+.theme-toggle::before{content:"";position:absolute;z-index:-1;top:var(--theme-inset);bottom:var(--theme-inset);left:var(--theme-inset);width:var(--theme-segment-width);border-radius:22px;background:var(--surface-deep);transition:left .2s ease}
+.theme-toggle.is-dark::before{left:calc(var(--theme-inset) + var(--theme-segment-width))}
 .theme-option{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;line-height:1;font-size:9px;font-weight:600}
 .theme-day,.is-dark .theme-night{color:var(--ink)}
 .is-dark .theme-day,.theme-night{color:var(--muted)}
