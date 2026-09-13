@@ -141,6 +141,50 @@
 @media(hover:hover){.plan-choice:hover{transform:translateY(-4px);border-color:var(--gold-ink)}}
 @media(max-width:639px){.plan-picker .plans-grid{gap:16px}.plan-choice{padding:24px}.plan-action .button{width:100%}}
 @media(prefers-reduced-motion:reduce){.plan-choice{transition:none}.plan-choice:hover{transform:none}}
+
+/* Services use the same focused selection pattern as the care plans. */
+.services-section>.container{text-align:center}
+.services-section>.container>.eyebrow{justify-content:center}
+.services-section>.container>.section-intro{max-width:520px;margin-inline:auto}
+.service-picker{border:0;padding:0;margin:32px 0 0;min-width:0}
+.service-picker legend{float:none;width:100%;font-size:13px;color:var(--muted);padding:0}
+.service-categories{max-width:1080px;margin:22px auto 0}
+.service-choice{position:relative;text-align:left;cursor:pointer;border-radius:24px;padding:26px 24px 22px;transition:border-color .2s,box-shadow .2s,transform .2s}
+.service-choice input{position:absolute;width:1px;height:1px;opacity:0}
+.service-choice.is-selected{border-color:var(--primary);box-shadow:0 0 0 1px var(--primary),0 12px 30px rgb(60 33 27 / .08)}
+.service-choice:has(input:focus-visible){outline:3px solid var(--gold-ink);outline-offset:5px}
+.service-choice-top{display:flex;align-items:center;justify-content:space-between;width:100%;margin-bottom:24px}
+.service-choice .service-icon{margin:0;color:var(--primary)}
+.service-choice-status{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted)}
+.service-radio-mark{width:22px;height:22px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center}
+.service-radio-mark svg{opacity:0}
+.service-choice.is-selected .service-radio-mark{background:var(--primary);border-color:var(--primary);color:var(--paper)}
+.service-choice.is-selected .service-radio-mark svg{opacity:1}
+.service-choice .service-category-head{flex:1}
+.service-choice .service-link{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.service-action{margin:30px auto 0;max-width:520px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.service-action p{font-size:14px;color:var(--muted)}
+.service-action p strong{color:var(--ink)}
+.service-action small{font-size:11px;line-height:1.6;color:var(--muted);max-width:340px}
+@media(hover:hover){.service-choice:hover{transform:translateY(-4px);border-color:var(--gold-ink)}}
+@media(max-width:639px){.service-choice{padding:24px 20px 20px}.service-action .button{width:100%}}
+@media(prefers-reduced-motion:reduce){.service-choice{transition:none}.service-choice:hover{transform:none}}
+
+/* Footer information is grouped by purpose for a clearer closing experience. */
+.footer{padding:58px 0 104px}
+.footer-main{display:grid;grid-template-columns:1.35fr 1fr;gap:38px 26px;padding-bottom:34px}
+.footer-brand{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.footer-brand .brand{margin-bottom:2px}
+.footer-brand>p{font-size:13px;line-height:1.6;color:var(--muted);max-width:250px}
+.footer-address{font-size:12px;line-height:1.6;color:var(--muted)}
+.footer-address:hover{color:var(--primary)}
+.footer-nav,.footer-contact,.footer-social{display:flex;flex-direction:column;align-items:flex-start;gap:9px}
+.footer-nav strong,.footer-contact strong,.footer-social strong{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:5px}
+.footer-nav a,.footer-contact a,.footer-social a{display:flex;align-items:center;gap:8px;min-height:30px;font-size:13px;color:var(--ink)}
+.footer-nav a:hover,.footer-contact a:hover,.footer-social a:hover{color:var(--primary)}
+.footer-bottom{margin-top:0;padding-top:22px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:10px;line-height:1.5;color:var(--muted)}
+@media(min-width:640px){.footer-main{grid-template-columns:1.4fr 1fr 1.1fr 1.1fr;gap:30px}.footer-brand{grid-row:span 2}.footer-bottom{margin-top:0}}
+@media(min-width:1024px){.footer-main{gap:46px}.footer{padding-bottom:28px}}
 .portfolio-carousel{margin-top:32px;min-width:0}
 .carousel-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
 .carousel-controls>span{font-size:13px;color:var(--muted)}

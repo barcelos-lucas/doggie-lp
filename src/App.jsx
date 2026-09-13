@@ -74,15 +74,20 @@ function PillarCard({ pillar }) {
 }
 
 function ServicesSection() {
+  const [selected, setSelected] = useState(serviceCategories[0].title);
+  const selectedCategory = serviceCategories.find((category) => category.title === selected) ?? serviceCategories[0];
   return <section id="servicos" className="section services-section"><div className="container" data-reveal>
     <p className="eyebrow">CUIDADOS PENSADOS PARA CADA PET</p><h2>O cuidado certo para<br /><em>cada necessidade.</em></h2>
     <p className="section-intro">Conhecimento técnico, tempo reservado e uma rotina de cuidados construída junto com você.</p>
-    <div className="service-categories">{serviceCategories.map((category) => { const Icon = serviceIcons[category.icon]; return <article className="service-category" key={category.title}>
-      <div className="service-category-head"><Icon className="service-icon" size={36} weight="light" aria-hidden="true" /><p className="service-eyebrow">{category.eyebrow}</p><h3>{category.title}</h3><p className="service-description">{category.description}</p></div>
+    <fieldset className="service-picker"><legend>Escolha uma frente de cuidado para conhecer</legend><div className="service-categories">{serviceCategories.map((category) => { const Icon = serviceIcons[category.icon]; return <label className={`service-category service-choice ${selected === category.title ? 'is-selected' : ''}`} key={category.title}>
+      <input type="radio" name="service-category" value={category.title} checked={selected === category.title} onChange={() => setSelected(category.title)} aria-label={category.title} />
+      <span className="service-choice-top"><Icon className="service-icon" size={36} weight="light" aria-hidden="true" /><span className="service-choice-status">{selected === category.title ? 'Selecionado' : 'Conhecer'}<span className="service-radio-mark"><Check size={13} aria-hidden="true" /></span></span></span>
+      <div className="service-category-head"><p className="service-eyebrow">{category.eyebrow}</p><h3>{category.title}</h3><p className="service-description">{category.description}</p></div>
       <ul>{category.items.map((item) => <li key={item}><Check size={17} aria-hidden="true" />{item}</li>)}</ul>
       {category.title.startsWith('Banho') && <p className="service-note"><strong>Banho terapêutico:</strong> realizado com produtos e protocolos específicos, quando indicados para as necessidades do pet e, quando necessário, sob orientação veterinária.</p>}
-      <a className="service-link" href={whatsappUrl(category.title)} target="_blank" rel="noopener noreferrer">Consultar esse cuidado <ArrowUpRight size={18} aria-hidden="true" /></a>
-    </article>; })}</div>
+      <span className="service-link">Consultar esse cuidado <ArrowUpRight size={18} aria-hidden="true" /></span>
+    </label>; })}</div></fieldset>
+    <div className="service-action"><p aria-live="polite">Vamos conversar sobre <strong>{selectedCategory.title.toLowerCase()}</strong>?</p><a className="button whatsapp" href={whatsappUrl(selectedCategory.title)} target="_blank" rel="noopener noreferrer" data-cta="services"><WhatsappLogo {...iconProps} /><span>Consultar este cuidado no WhatsApp</span><ArrowUpRight size={18} aria-hidden="true" /></a><small>A Tia Bia te ajuda a escolher o cuidado ideal para o seu pet.</small></div>
   </div></section>;
 }
 
@@ -211,7 +216,12 @@ export default function App() {
 
       <section className="closing"><div className="container"><PawPrint size={44} weight="light" aria-hidden="true" /><h2>Pronto para proporcionar<br /><em>um novo padrão de cuidado ao seu pet?</em></h2><p>Fale com a Tia Bia e consulte um horário pelo WhatsApp.</p><WhatsAppButton placement="closing" /></div></section>
     </main>
-    <footer className="footer"><div className="container"><div className="footer-top"><Brand /><p>Assunção — São Bernardo do Campo, SP</p><div className="footer-contact"><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer"><WhatsappLogo size={19} aria-hidden="true" />{business.displayPhone}</a><a href={business.instagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={19} aria-hidden="true" />@doggie.esteticapet</a></div></div><div className="footer-bottom"><span>{business.name}</span><span>{business.slogan}</span></div></div></footer>
+    <footer className="footer"><div className="container"><div className="footer-main">
+      <div className="footer-brand"><Brand /><p>Cuidado que encanta, com tempo e atenção para cada pet.</p><a className="footer-address" href="#localizacao">{business.street}<br />{business.district} · {business.city}, {business.state}</a></div>
+      <nav className="footer-nav" aria-label="Links do rodapé"><strong>Explore</strong><a href="#cuidado">Nosso cuidado</a><a href="#servicos">Serviços</a><a href="#planos">Planos</a><a href="#sobre">A Tia Bia</a><a href="#duvidas">Dúvidas</a></nav>
+      <div className="footer-contact"><strong>Fale com a gente</strong><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer"><WhatsappLogo size={19} aria-hidden="true" />{business.displayPhone}</a><a href="#localizacao">Como chegar <ArrowUpRight size={16} aria-hidden="true" /></a></div>
+      <div className="footer-social"><strong>Siga de perto</strong><a href={business.instagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={19} aria-hidden="true" />@doggie.esteticapet</a><a href={business.biaInstagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={19} aria-hidden="true" />@tiabiatosadora</a></div>
+    </div><div className="footer-bottom"><span>© 2026 Doggie Estética Animal. Todos os direitos reservados.</span><span>{business.slogan}</span></div></div></footer>
     <div className="mobile-cta"><WhatsAppButton placement="mobile-fixed" /></div>
   </>;
 }
