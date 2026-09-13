@@ -1,5 +1,9 @@
 # Landing Page Doggie — decisões consolidadas
 
+> Documento de referência para implementação da LP da Doggie.
+
+---
+
 ## Objetivo principal
 
 A landing page da Doggie deve ter como objetivo principal **levar a pessoa para o WhatsApp e transformar a visita em conversa/agendamento**, sem perder o posicionamento premium, técnico, personalizado e tranquilo da marca.
@@ -46,8 +50,6 @@ A foto ainda será produzida.
 
 # 2. Um novo padrão de cuidado para o seu pet
 
-Título definido:
-
 ## Um novo padrão de cuidado para o seu pet
 
 A seção deve mostrar, de forma concreta, por que a Doggie oferece uma experiência diferente do banho e tosa convencional.
@@ -78,7 +80,7 @@ Os serviços serão apresentados **por categorias**, e não como uma lista únic
 
 **Uma rotina de cuidados que vai além do banho, com atenção à pele e ao bem-estar.**
 
-Serviços e cuidados que podem aparecer nessa categoria:
+Serviços e cuidados:
 
 - Banho
 - Escovação
@@ -110,7 +112,7 @@ Serviços:
 - Carding
 - Remoção de pelos mortos
 
-O trimming não entra nesta categoria.
+**Observação:** trimming não entra nesta categoria.
 
 ---
 
@@ -135,7 +137,7 @@ Em vez de exibir uma tabela completa, a LP deve trabalhar com uma chamada simple
 
 ## Serviços a partir de R$ 65,00
 
-E destacar a vantagem dos planos:
+Destaque para a vantagem dos planos:
 
 **Economize até 18% com nossos Planos de cuidados.**
 
@@ -147,25 +149,33 @@ Observação discreta:
 
 # 5. Plano de cuidados
 
-Título definido:
-
 ## Plano de cuidados
-
-Frase definida:
 
 **Mais constância nos cuidados, mais praticidade na rotina e até 18% de economia.**
 
 A seção não deve mostrar os preços completos dos planos.
 
-### Semanal
+## Semanal
 
 Para pets que precisam de manutenção mais frequente.
 
+**Inclui:**
+- **4 banhos**
+- **1 tosa higiênica inclusa**
+
+Os atendimentos acontecem **1 vez por semana, durante 4 semanas consecutivas**, mantendo uma rotina contínua de cuidados.
+
 **Até 18% de economia**
 
-### Quinzenal
+## Quinzenal
 
-Para quem quer manter os cuidados em dia com intervalos maiores.
+Para quem quer manter os cuidados em dia com uma rotina quinzenal.
+
+**Inclui:**
+- **2 banhos**
+- **1 tosa higiênica inclusa**
+
+Os atendimentos acontecem em **frequência quinzenal**, alternando **uma semana com atendimento e a semana seguinte sem**, repetindo esse ciclo.
 
 **Cerca de 15% de economia**
 
@@ -182,8 +192,6 @@ A diferença entre os percentuais deve preservar uma percepção clara de vantag
 ---
 
 # 6. Cuidado que se vê
-
-Título definido:
 
 ## Cuidado que se vê
 
@@ -208,8 +216,6 @@ Destino:
 
 # 7. Conheça a Tia Bia
 
-Título definido:
-
 ## Conheça a Tia Bia
 
 Texto-base:
@@ -219,7 +225,7 @@ Texto-base:
 ## Especializada em:
 
 - Tosa bebê
-- Tosa tesoura em pelagem lisa
+- Tosa na tesoura em pelagem lisa
 - Trimming de Golden Retriever
 - Trimming de Spitz Alemão
 
@@ -228,8 +234,6 @@ Esses itens devem aparecer como especializações reais, pois correspondem a cur
 ---
 
 # 8. Sua experiência na Doggie
-
-Título definido:
 
 ## Sua experiência na Doggie
 
@@ -247,6 +251,7 @@ A lógica deve mostrar que existe:
 
 - escuta do tutor;
 - avaliação profissional;
+- orientação sobre o que o pet precisa naquele atendimento;
 - alinhamento antes de incluir serviços e adicionais.
 
 ### 3. Atendimento com tempo e atenção
@@ -275,8 +280,6 @@ Regras:
 ---
 
 # 10. O que você precisa saber
-
-Título definido:
 
 ## O que você precisa saber
 
@@ -322,8 +325,6 @@ Sim. Como os planos seguem uma frequência definida, o reagendamento deve aconte
 
 Os Planos de cuidados funcionam **de segunda a sexta**, em **dia e horário fixos**, conforme disponibilidade da agenda.
 
-Não mencionar sábado nessa resposta.
-
 ---
 
 ### Quanto tempo dura o atendimento?
@@ -352,11 +353,7 @@ Não incluir uma pergunta específica sobre **“Como sei o valor do atendimento
 
 # 11. Onde estamos
 
-Título:
-
 ## Onde estamos
-
-Informações:
 
 **Assunção — São Bernardo do Campo, SP**
 
@@ -373,8 +370,6 @@ O endereço completo não precisa ficar exposto em texto na LP.
 ---
 
 # 12. CTA final
-
-Texto definido:
 
 ## Pronto para proporcionar um novo padrão de cuidado ao seu pet?
 
@@ -453,7 +448,7 @@ A ordem pode ser revisada futuramente, mas não deve ser alterada neste momento.
 Itens ainda não definidos ou que serão concluídos posteriormente:
 
 - Menu do site.
-- Fotos da primeira dobra.
+- Foto da primeira dobra.
 - Fotos da seção “Cuidado que se vê”.
 - Avaliações/depoimentos reais.
 - Link exato do Google Maps.

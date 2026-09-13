@@ -53,18 +53,18 @@ export const serviceCategories = [
 ];
 
 export const plans = [
-  { name: 'Semanal', description: 'Para pets que precisam de manutenção mais frequente.', economy: 'Até 18% de economia' },
-  { name: 'Quinzenal', description: 'Para quem quer manter os cuidados em dia com intervalos maiores.', economy: 'Cerca de 15% de economia' },
+  { name: 'Semanal', description: 'Para pets que precisam de manutenção mais frequente.', includes: ['4 banhos', '1 tosa higiênica inclusa'], frequency: '1 vez por semana, durante 4 semanas consecutivas, mantendo uma rotina contínua de cuidados.', economy: 'Até 18% de economia' },
+  { name: 'Quinzenal', description: 'Para quem quer manter os cuidados em dia com uma rotina quinzenal.', includes: ['2 banhos', '1 tosa higiênica inclusa'], frequency: 'Uma semana com atendimento e a semana seguinte sem, repetindo esse ciclo em frequência quinzenal.', economy: 'Cerca de 15% de economia' },
 ];
 
 // Fotos finais serão adicionadas quando selecionadas pela Tia Bia.
 export const portfolio = [];
 
-export const specialties = ['Tosa bebê', 'Tosa tesoura em pelagem lisa', 'Trimming de Golden Retriever', 'Trimming de Spitz Alemão'];
+export const specialties = ['Tosa bebê', 'Tosa na tesoura em pelagem lisa', 'Trimming de Golden Retriever', 'Trimming de Spitz Alemão'];
 
 export const experienceSteps = [
   { number: '01', title: 'Primeiro contato', description: 'Você conta um pouco sobre o seu pet, o que procura e tudo o que gostaria de incluir no atendimento. A partir disso, orientamos sobre o serviço mais adequado.' },
-  { number: '02', title: 'Avaliação e definição do cuidado', description: 'Avaliamos pelagem, condição do pelo, rotina e particularidades do pet. Explicamos o que ele precisa e alinhamos com você os cuidados e adicionais.' },
+  { number: '02', title: 'Avaliação e definição do cuidado', description: 'Antes do atendimento, avaliamos pelagem, condição do pelo, rotina e particularidades do pet. A partir disso, explicamos o que ele precisa naquele momento e alinhamos com você os cuidados e adicionais que farão parte do atendimento.' },
   { number: '03', title: 'Atendimento com tempo e atenção', description: 'O pet é atendido com calma, respeitando seu comportamento, seus limites e o tempo necessário para cada cuidado.', badge: '1 pet por horário' },
   { number: '04', title: 'Finalização e orientação', description: 'Ao final, você recebe as orientações necessárias para manter os cuidados em casa e ajudar a prolongar o resultado do atendimento.' },
 ];

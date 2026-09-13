@@ -30,7 +30,8 @@ function Brand() {
 function ThemeToggle() {
   const [dark, setDark] = useState(false);
   useEffect(() => {
-    const stored = window.localStorage.getItem('doggie-theme');
+    let stored;
+    try { stored = window.localStorage.getItem('doggie-theme'); } catch { /* Storage can be disabled. */ }
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const next = stored ? stored === 'dark' : prefersDark;
     setDark(next);
@@ -40,12 +41,11 @@ function ThemeToggle() {
     const next = !dark;
     setDark(next);
     document.documentElement.dataset.theme = next ? 'dark' : 'light';
-    window.localStorage.setItem('doggie-theme', next ? 'dark' : 'light');
+    try { window.localStorage.setItem('doggie-theme', next ? 'dark' : 'light'); } catch { /* Keep the theme usable without persistence. */ }
   };
-  return <button type="button" className={`theme-toggle ${dark ? 'is-dark' : ''}`} onClick={toggle} aria-label={dark ? 'Ativar modo claro' : 'Ativar modo escuro'} title={dark ? 'Modo claro' : 'Modo escuro'}>
-    <span className="theme-toggle-icon" aria-hidden="true">{dark ? <Cat size={26} weight="regular" /> : <PawPrint size={26} weight="regular" />}</span>
-    <span className="theme-toggle-copy"><strong>{dark ? 'Noite' : 'Dia'}</strong><small>{dark ? 'modo escuro' : 'modo claro'}</small></span>
-    <span className="theme-toggle-track" aria-hidden="true"><span /></span>
+  return <button type="button" role="switch" aria-checked={dark} className={`theme-toggle ${dark ? 'is-dark' : ''}`} onClick={toggle} aria-label="Modo escuro" title={dark ? 'Ativar modo claro' : 'Ativar modo escuro'}>
+    <span className="theme-option theme-day" aria-hidden="true"><PawPrint size={19} weight="regular" /><span>Dia</span></span>
+    <span className="theme-option theme-night" aria-hidden="true"><Cat size={19} weight="regular" /><span>Noite</span></span>
   </button>;
 }
 
@@ -130,7 +130,7 @@ export default function App() {
 
       <section className="section price-section"><div className="container price-card" data-reveal><div><p className="eyebrow">TRANSPARÊNCIA PARA DECIDIR</p><h2>Serviços a partir de<br /><em>R$ 65,00</em></h2></div><div className="price-side"><strong>Economize até 18%</strong><p>com nossos Planos de cuidados.</p><small>Os valores podem variar conforme porte, pelagem, serviço e necessidades do pet.</small></div></div></section>
 
-      <section id="planos" className="section plans-section"><div className="container" data-reveal><p className="eyebrow">CUIDADO QUE VIRA ROTINA</p><h2>Plano de <em>cuidados.</em></h2><p className="section-intro">Mais constância nos cuidados, mais praticidade na rotina e até 18% de economia.</p><div className="plans-grid">{plans.map((plan) => <article className="plan-card" key={plan.name}><span className="plan-label">PLANO</span><h3>{plan.name}</h3><p>{plan.description}</p><strong>{plan.economy}</strong></article>)}</div><WhatsAppButton intent="plans" placement="plans" /></div></section>
+      <section id="planos" className="section plans-section"><div className="container" data-reveal><p className="eyebrow">CUIDADO QUE VIRA ROTINA</p><h2>Plano de <em>cuidados.</em></h2><p className="section-intro">Mais constância nos cuidados, mais praticidade na rotina e até 18% de economia.</p><div className="plans-grid">{plans.map((plan) => <article className="plan-card" key={plan.name}><span className="plan-label">PLANO</span><h3>{plan.name}</h3><p>{plan.description}</p><ul className="plan-includes">{plan.includes.map((item) => <li key={item}><Check size={17} aria-hidden="true" />{item}</li>)}</ul><p className="plan-frequency">{plan.frequency}</p><strong>{plan.economy}</strong></article>)}</div><WhatsAppButton intent="plans" placement="plans" /></div></section>
 
       <PortfolioSection />
 
@@ -144,9 +144,10 @@ export default function App() {
 
       <section id="localizacao" className="section location-section"><div className="container location-grid" data-reveal><div className="location-copy"><p className="eyebrow">PERTINHO DE VOCÊ</p><h2>Onde <em>estamos.</em></h2><p className="location-place">Assunção — São Bernardo do Campo, SP</p><p className="location-note">Atendimento com horário agendado.</p><a className="button outline" href={mapsUrl} target="_blank" rel="noopener noreferrer"><MapPin {...iconProps} /> Abrir no Google Maps <ArrowUpRight size={18} aria-hidden="true" /></a></div><MapPanel /></div></section>
 
-      <section className="closing"><div className="container"><PawPrint size={44} weight="light" aria-hidden="true" /><h2>Pronto para proporcionar<br /><em>um novo padrão de cuidado?</em></h2><p>Fale com a Tia Bia e consulte um horário pelo WhatsApp.</p><WhatsAppButton placement="closing" /></div></section>
+      <section className="closing"><div className="container"><PawPrint size={44} weight="light" aria-hidden="true" /><h2>Pronto para proporcionar<br /><em>um novo padrão de cuidado ao seu pet?</em></h2><p>Fale com a Tia Bia e consulte um horário pelo WhatsApp.</p><WhatsAppButton placement="closing" /></div></section>
     </main>
     <footer className="footer"><div className="container"><div className="footer-top"><Brand /><p>Assunção — São Bernardo do Campo, SP</p><div className="footer-contact"><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer"><WhatsappLogo size={19} aria-hidden="true" />{business.displayPhone}</a><a href={business.instagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={19} aria-hidden="true" />@doggie.esteticapet</a></div></div><div className="footer-bottom"><span>{business.name}</span><span>{business.slogan}</span></div></div></footer>
     <div className="mobile-cta"><WhatsAppButton placement="mobile-fixed" /></div>
   </>;
 }
+

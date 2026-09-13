@@ -25,12 +25,12 @@ clareza nos textos e botões. Mascote da identidade anterior preservado no cabe�
 Valores adaptados visualmente da logo para uso digital, sem alegar um manual
 de marca preexistente. Todos os componentes usam tokens semânticos em CSS.
 O modo escuro usa a mesma família cromática com vinho quase preto, creme e
-dourado; o seletor fica no menu, segue a preferência do sistema na primeira
+dourado; o seletor de pata/gato fica sempre visível no cabeçalho, segue a preferência do sistema na primeira
 visita e persiste a escolha no navegador.
 
 ## Arquitetura e conversão
 
-A página segue a ordem definida em `LP_Doggie_decisoes.md`: primeira dobra,
+A página segue a ordem definida em `LP_Doggie_COMPLETA.md`: primeira dobra,
 pilares de cuidado, serviços por categorias, chamada de preço, planos, portfólio,
 Tia Bia, experiência, avaliações, FAQ, localização, CTA final e rodapé.
 O CTA principal é “Consultar horário no WhatsApp”, com mensagem de agendamento.
@@ -64,3 +64,4 @@ fontes hospedadas pelo próprio site. Conteúdo pré-renderizado no build.
 - https://d862-bistro-clorofila.demos-673.pages.dev/
 - https://d899-legado-parrilla.demos-673.pages.dev/
 - https://barcelos-lucas.github.io/doggie/
+
