@@ -1,42 +1,86 @@
-// Business details confirmed by the owner on 2026-09-12.
+// Conteúdo centralizado da LP. Atualize este arquivo quando a Doggie enviar
+// fotos reais, avaliações ou novos detalhes comerciais.
 export const business = {
   name: 'Doggie Estética Animal',
+  slogan: 'cuidado que encanta',
   phone: '5511925850201',
   displayPhone: '(11) 92585-0201',
-  street: 'R. Heitor de Souza, 190',
   district: 'Assunção',
   city: 'São Bernardo do Campo',
   state: 'SP',
+  street: 'R. Heitor de Souza, 190',
   postalCode: '09811-300',
   instagram: 'https://www.instagram.com/doggie.esteticapet/',
-  // Opening hours carried over from the previous website; confirm before launch.
-  hours: 'Segunda a sexta',
-  hoursDetail: '7h às 12h · 13h às 18h',
 };
 
 export const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${business.street}, ${business.district}, ${business.city} - ${business.state}, ${business.postalCode}`)}`;
 
-export function whatsappUrl(service = '') {
-  const message = service
-    ? `Olá, tia Bia! Conheci a Doggie pelo site e gostaria de saber mais sobre ${service.toLowerCase()} para o meu cão.`
-    : 'Olá, tia Bia! Conheci a Doggie pelo site e quero saber mais sobre banho e tosa para o meu cão.';
+const messages = {
+  booking: 'Oi, Tia Bia! Gostaria de agendar um horário pro meu pet.',
+  plans: 'Oi, Tia Bia! Gostaria de conhecer melhor os Planos de cuidados da Doggie.',
+};
+
+export function whatsappUrl(intent = 'booking') {
+  const message = intent === 'plans' ? messages.plans : intent === 'booking' ? messages.booking : `Oi, Tia Bia! Gostaria de saber mais sobre ${intent}.`;
   return `https://wa.me/${business.phone}?text=${encodeURIComponent(message)}`;
 }
 
-// Only publish verified reviews with permission/source; never seed fictitious reviews.
-// Format: { name, text, rating (1–5), date (display text), url (public source) }.
+export const trustItems = ['10+ anos de experiência', 'Atendimento personalizado', 'São Bernardo do Campo'];
+
+export const carePillars = [
+  { title: 'Atendimento personalizado', description: 'Cada pet é avaliado de forma individual, considerando pelagem, comportamento, rotina e necessidades específicas.', icon: 'paw' },
+  { title: 'Mais tranquilidade, menos estresse', description: 'Atendimento com tempo reservado, respeitando o comportamento e os limites de cada pet.', icon: 'heart' },
+  { title: 'Conhecimento técnico que faz diferença', description: 'As técnicas são escolhidas com critério, respeitando as características do pelo e as necessidades de cada pet.', icon: 'sparkle' },
+  { title: 'Tempo e atenção para cada pet', description: 'Sem atendimento apressado. Cada horário permite um cuidado mais calmo, atento e bem executado.', icon: 'clock' },
+];
+
+export const serviceCategories = [
+  {
+    eyebrow: '01 · PELE E BEM-ESTAR', title: 'Banho e rotina de cuidados', icon: 'bath',
+    description: 'Uma rotina de cuidados que vai além do banho, com atenção à pele e ao bem-estar.',
+    items: ['Banho', 'Escovação', 'Manutenção periódica', 'Banho terapêutico', 'Cuidados para pele sensível', 'Cuidados para oleosidade', 'Cuidados para ressecamento', 'Protocolos específicos', 'Escovação de dentes'],
+  },
+  {
+    eyebrow: '02 · TÉCNICA E PELO', title: 'Técnica & pelagem', icon: 'sparkle',
+    description: 'Cada pelagem exige um olhar específico, com técnicas e cuidados adequados para cada necessidade.',
+    items: ['Hidratação', 'Cronograma de pelagem', 'Desembolo', 'Carding', 'Remoção de pelos mortos'],
+  },
+  {
+    eyebrow: '03 · ESTILO E ACABAMENTO', title: 'Tosas especializadas', icon: 'scissors',
+    description: 'Cada tosa é adaptada ao estilo desejado, à rotina do pet e ao que a pelagem permite com segurança e qualidade.',
+    items: ['Tosa na máquina', 'Tosa na tesoura', 'Tosa bebê', 'Tosa da raça', 'Trimming', 'Tosa higiênica'],
+  },
+];
+
+export const plans = [
+  { name: 'Semanal', description: 'Para pets que precisam de manutenção mais frequente.', economy: 'Até 18% de economia' },
+  { name: 'Quinzenal', description: 'Para quem quer manter os cuidados em dia com intervalos maiores.', economy: 'Cerca de 15% de economia' },
+];
+
+// Fotos finais serão adicionadas quando selecionadas pela Tia Bia.
+export const portfolio = [];
+
+export const specialties = ['Tosa bebê', 'Tosa tesoura em pelagem lisa', 'Trimming de Golden Retriever', 'Trimming de Spitz Alemão'];
+
+export const experienceSteps = [
+  { number: '01', title: 'Primeiro contato', description: 'Você conta um pouco sobre o seu pet, o que procura e tudo o que gostaria de incluir no atendimento. A partir disso, orientamos sobre o serviço mais adequado.' },
+  { number: '02', title: 'Avaliação e definição do cuidado', description: 'Avaliamos pelagem, condição do pelo, rotina e particularidades do pet. Explicamos o que ele precisa e alinhamos com você os cuidados e adicionais.' },
+  { number: '03', title: 'Atendimento com tempo e atenção', description: 'O pet é atendido com calma, respeitando seu comportamento, seus limites e o tempo necessário para cada cuidado.', badge: '1 pet por horário' },
+  { number: '04', title: 'Finalização e orientação', description: 'Ao final, você recebe as orientações necessárias para manter os cuidados em casa e ajudar a prolongar o resultado do atendimento.' },
+];
+
+// Depoimentos só entram quando houver avaliações reais disponíveis.
 export const reviews = [];
 export const reviewsProfileUrl = '';
 
-export const services = [
-  { name: 'Banho & cuidado', description: 'Limpeza e carinho para deixar a pelagem cheirosa e o abraço ainda melhor.', icon: 'bath', detail: 'Banho avulso ou pacotes' },
-  { name: 'Tosa do seu jeito', description: 'Um visual caprichado, considerando a pelagem e as necessidades do seu cão.', icon: 'scissors', detail: 'Estética e tosa higiênica' },
-  { name: 'Um cuidado a mais', description: 'Hidratação, remoção de pelos mortos e desembolo para completar a rotina.', icon: 'sparkle', detail: 'Cuidados complementares' },
-];
-
 export const faqs = [
-  { question: 'Como agendo o primeiro atendimento?', answer: 'É só chamar no WhatsApp! Conte o nome, o porte e a raça do seu cão, o cuidado que procura e sua preferência de dia. A gente conversa sobre as necessidades dele e confirma a disponibilidade com você.' },
-  { question: 'Quanto custa o banho e a tosa?', answer: 'O valor depende do porte, da pelagem e do serviço escolhido. Envie uma foto recente do seu cão pelo WhatsApp para conversarmos sobre o cuidado indicado e o orçamento.' },
-  { question: 'Meu cão tem alguma necessidade especial. Posso levar?', answer: 'Conte para a gente antes de agendar se ele tem pele sensível, alguma condição de saúde ou fica ansioso no banho. Assim podemos conversar sobre suas necessidades e avaliar o atendimento.' },
-  { question: 'Vocês têm pacotes de banho?', answer: 'Sim! Temos opções de banho avulso e pacotes semanais e quinzenais. Chame no WhatsApp para consultar as condições e encontrar uma rotina que faça sentido para o seu cão.' },
+  { question: 'Meu pet pode ficar esperando depois do atendimento?', answer: 'Para manter o ambiente tranquilo e respeitar o atendimento individualizado, pedimos que a retirada seja feita em até 30 minutos após o aviso de finalização. Após esse período, poderá ser cobrada uma taxa de permanência.' },
+  { question: 'E se eu me atrasar?', answer: 'Cada pet tem um horário reservado exclusivamente para ele. Temos uma tolerância de até 10 minutos. Após esse período, o atendimento poderá precisar ser reagendado para não comprometer a qualidade do serviço e os horários seguintes.' },
+  { question: 'E se eu precisar cancelar ou não comparecer?', answer: 'Cancelamentos e reagendamentos devem ser informados com pelo menos 24 horas de antecedência. Em situações imprevistas ou emergenciais, cada caso será avaliado individualmente. Em casos de faltas ou cancelamentos recorrentes, poderá ser solicitado sinal para novos agendamentos.' },
+  { question: 'A Doggie atende pets agressivos ou com parasitas?', answer: 'Por segurança do pet e da profissional, não realizamos atendimento em animais agressivos ou com presença de parasitas. Caso alguma dessas condições seja identificada, o atendimento poderá ser interrompido.' },
+  { question: 'Posso reagendar um atendimento do Plano de cuidados?', answer: 'Sim. Como os planos seguem uma frequência definida, o reagendamento deve acontecer dentro da mesma semana, conforme disponibilidade, para manter a regularidade dos cuidados.' },
+  { question: 'Em quais dias e horários posso contratar o Plano de cuidados?', answer: 'Os Planos de cuidados funcionam de segunda a sexta, em dia e horário fixos, conforme disponibilidade da agenda.' },
+  { question: 'Quanto tempo dura o atendimento?', answer: 'O tempo varia conforme porte, pelagem, comportamento e serviço realizado. Cada pet recebe o tempo necessário para um atendimento bem executado, sem pressa.' },
+  { question: 'Posso adicionar outros cuidados ao atendimento?', answer: 'Sim. Serviços adicionais podem ser solicitados pelo tutor ou indicados após a avaliação do pet. Antes de incluir qualquer cuidado extra, tudo é alinhado com você.' },
+  { question: 'O que preciso informar no primeiro atendimento?', answer: 'Conte sobre a rotina do seu pet, comportamento, histórico de pele e pelagem, alergias, sensibilidades, uso de medicamentos e qualquer informação importante para o atendimento.' },
 ];
