@@ -5,7 +5,7 @@ import {
 } from '@phosphor-icons/react';
 import MapPanel from './MapPanel.jsx';
 import {
-  business, carePillars, experienceSteps, faqs, mapsUrl, plans, portfolio, reviews,
+  business, carePillars, experienceSteps, faqs, mapsUrl, plans, portfolio, reviewExamples, reviews,
   reviewsProfileUrl, serviceCategories, specialties, whatsappUrl,
 } from './content.js';
 
@@ -183,10 +183,22 @@ function PortfolioSection() {
   </div></section>;
 }
 
+function ReviewCard({ review, preview }) {
+  return <figure className="review">
+    <div className="stars" aria-label={`${review.rating} de 5 estrelas`}>{Array.from({ length: review.rating }, (_, i) => <Star key={i} weight="fill" size={18} aria-hidden="true" />)}</div>
+    <blockquote>“{review.text}”</blockquote>
+    <figcaption><strong>{review.name}</strong><span>{review.pet} · {preview ? 'exemplo de layout' : `Google · ${review.date}`}</span></figcaption>
+  </figure>;
+}
+
 function ReviewsSection() {
+  const preview = reviews.length === 0;
+  const reviewItems = preview ? reviewExamples : reviews;
   return <section id="avaliacoes" className="section reviews-section"><div className="container" data-reveal>
     <p className="eyebrow">CONFIANÇA QUE SE CONSTRÓI</p><h2>Carinho que eles sentem.<br /><em>Confiança que você sente.</em></h2>
-    {reviews.length > 0 ? <><div className="review-grid">{reviews.map((review) => <figure className="review" key={`${review.name}-${review.date}`}><div className="stars" aria-label={`${review.rating} de 5 estrelas`}>{Array.from({ length: review.rating }, (_, i) => <Star key={i} weight="fill" size={18} aria-hidden="true" />)}</div><blockquote>“{review.text}”</blockquote><figcaption><strong>{review.name}</strong><a href={review.url} target="_blank" rel="noopener noreferrer">Google · {review.date}<ArrowUpRight size={14} aria-hidden="true" /></a></figcaption></figure>)}</div>{reviewsProfileUrl && <a className="text-link" href={reviewsProfileUrl} target="_blank" rel="noopener noreferrer">Ver avaliações no Google <ArrowUpRight size={18} /></a>}</> : <div className="review-empty"><Heart size={34} weight="light" aria-hidden="true" /><div><h3>Avaliações reais em breve.</h3><p>Estamos reunindo os depoimentos dos tutores que já conhecem o cuidado da Doggie. Veja nosso dia a dia e fale com a gente enquanto isso.</p><a className="text-link" href={business.instagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={19} aria-hidden="true" /> Ver nosso Instagram <ArrowUpRight size={18} aria-hidden="true" /></a></div></div>}
+    {preview && <div className="review-preview-note" role="note"><Sparkle size={20} aria-hidden="true" /><span><strong>Prévia da seção</strong> · estes depoimentos são exemplos de layout e serão substituídos pelas avaliações reais antes da publicação.</span></div>}
+    <div className={`review-grid ${preview ? 'is-preview' : ''}`}>{reviewItems.map((review) => <ReviewCard key={`${review.name}-${review.pet ?? review.date}`} review={review} preview={preview} />)}</div>
+    {preview ? <a className="text-link" href={business.instagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={19} aria-hidden="true" /> Ver nosso dia a dia no Instagram <ArrowUpRight size={18} aria-hidden="true" /></a> : reviewsProfileUrl && <a className="text-link" href={reviewsProfileUrl} target="_blank" rel="noopener noreferrer">Ver avaliações no Google <ArrowUpRight size={18} /></a>}
   </div></section>;
 }
 

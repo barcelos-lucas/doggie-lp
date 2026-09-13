@@ -119,9 +119,24 @@ export const experienceSteps = [
   { number: '04', title: 'Finalização e orientação', description: 'Ao final, você recebe as orientações necessárias para manter os cuidados em casa e ajudar a prolongar o resultado do atendimento.' },
 ];
 
-// Depoimentos só entram quando houver avaliações reais disponíveis.
+// Depoimentos publicados só entram quando houver avaliações reais disponíveis.
 export const reviews = [];
 export const reviewsProfileUrl = '';
+
+// Textos de demonstração para validar o layout enquanto as avaliações reais são reunidas.
+// Não publicar como prova social: substitua por reviews antes do lançamento.
+export const reviewExamples = [
+  { name: 'Marina A.', pet: 'Lola', rating: 5, text: 'A Lola chegou bem insegura e saiu tranquila. A Tia Bia foi explicando tudo com calma, e o resultado ficou lindo sem perder o jeitinho dela.' },
+  { name: 'Rafael M.', pet: 'Theo', rating: 5, text: 'Gostei de receber uma explicação antes de começar. O Theo voltou cheiroso, leve e sem aquele estresse que ele tinha em outros lugares.' },
+  { name: 'Juliana R.', pet: 'Mel', rating: 5, text: 'A tosa na tesoura ficou muito delicada. A pelagem da Mel ganhou forma, mas continuou natural, exatamente como eu queria.' },
+  { name: 'Camila S.', pet: 'Nina', rating: 5, text: 'Meu maior medo era a Nina ficar nervosa. O atendimento individual fez toda diferença e ela voltou para casa super bem.' },
+  { name: 'Felipe G.', pet: 'Bento', rating: 5, text: 'O horário reservado só para o Bento deixou tudo mais tranquilo. Atendimento cuidadoso, pontual e com muita atenção aos detalhes.' },
+  { name: 'Carol P.', pet: 'Frida', rating: 5, text: 'A Frida precisava de uma escovação mais cuidadosa e a Tia Bia explicou o que seria melhor para o pelo dela. Ficou macio e soltinho.' },
+  { name: 'Luana C.', pet: 'Ozzy', rating: 5, text: 'Desde a primeira conversa senti confiança. Fizeram perguntas sobre a rotina dele e entregaram um cuidado muito mais personalizado.' },
+  { name: 'Daniela F.', pet: 'Amora', rating: 5, text: 'Dá para perceber quando o trabalho é feito com carinho. A Amora voltou linda, cheirosa e sem pressa no atendimento.' },
+  { name: 'André V.', pet: 'Chico', rating: 5, text: 'O pelo do Chico voltou muito mais fácil de cuidar em casa. Além do banho, recebemos orientações simples que ajudaram bastante.' },
+  { name: 'Priscila L.', pet: 'Maya', rating: 5, text: 'A Maya ficou uma fofura e o acabamento ficou impecável. Adorei o cuidado em respeitar o que a pelagem dela permitia.' },
+];
 
 export const faqs = [
   { question: 'Meu pet pode ficar esperando depois do atendimento?', answer: 'Para manter o ambiente tranquilo e respeitar o atendimento individualizado, pedimos que a retirada seja feita em até 30 minutos após o aviso de finalização. Após esse período, poderá ser cobrada uma taxa de permanência.' },
