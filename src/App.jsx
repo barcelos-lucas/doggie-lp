@@ -208,7 +208,7 @@ function ReviewCard({ review, preview, hidden = false }) {
   return <figure className="review" aria-hidden={hidden || undefined}>
     <div className="stars" aria-label={`${review.rating} de 5 estrelas`}>{Array.from({ length: review.rating }, (_, i) => <Star key={i} weight="fill" size={18} aria-hidden="true" />)}</div>
     <blockquote>“{review.text}”</blockquote>
-    <figcaption><strong>{review.name}</strong><span>{review.pet} · {preview ? 'exemplo de layout' : `Google · ${review.date}`}</span></figcaption>
+    <figcaption><strong>{review.name}</strong><span>{preview ? review.pet : `${review.pet} · Google · ${review.date}`}</span></figcaption>
   </figure>;
 }
 
