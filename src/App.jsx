@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import {
-  ArrowUpRight, Bathtub, Check, Clock, Heart, InstagramLogo, List, MapPin, Moon, PawPrint,
-  Scissors, Sparkle, Star, Sun, WhatsappLogo, X,
+  ArrowUpRight, Bathtub, Cat, Check, Clock, Heart, InstagramLogo, List, MapPin, PawPrint,
+  Scissors, Sparkle, Star, WhatsappLogo, X,
 } from '@phosphor-icons/react';
 import MapPanel from './MapPanel.jsx';
 import {
@@ -42,7 +42,11 @@ function ThemeToggle() {
     document.documentElement.dataset.theme = next ? 'dark' : 'light';
     window.localStorage.setItem('doggie-theme', next ? 'dark' : 'light');
   };
-  return <button type="button" className="theme-toggle" onClick={toggle} aria-label={dark ? 'Ativar modo claro' : 'Ativar modo escuro'} title={dark ? 'Modo claro' : 'Modo escuro'}>{dark ? <Sun {...iconProps} /> : <Moon {...iconProps} />}</button>;
+  return <button type="button" className={`theme-toggle ${dark ? 'is-dark' : ''}`} onClick={toggle} aria-label={dark ? 'Ativar modo claro' : 'Ativar modo escuro'} title={dark ? 'Modo claro' : 'Modo escuro'}>
+    <span className="theme-toggle-icon" aria-hidden="true">{dark ? <Cat size={23} weight="duotone" /> : <PawPrint size={23} weight="duotone" />}</span>
+    <span className="theme-toggle-copy"><strong>{dark ? 'Noite' : 'Dia'}</strong><small>{dark ? 'modo escuro' : 'modo claro'}</small></span>
+    <span className="theme-toggle-track" aria-hidden="true"><span /></span>
+  </button>;
 }
 
 function Header() {
