@@ -6,7 +6,7 @@ import {
 import MapPanel from './MapPanel.jsx';
 import {
   business, carePillars, experienceSteps, faqs, mapsUrl, plans, portfolio, reviews,
-  reviewsProfileUrl, serviceCategories, specialties, trustItems, whatsappUrl,
+  reviewsProfileUrl, serviceCategories, specialties, whatsappUrl,
 } from './content.js';
 
 const iconProps = { size: 22, weight: 'regular', 'aria-hidden': true };
@@ -207,7 +207,6 @@ export default function App() {
           <h1>cuidado <em>que encanta</em></h1>
           <p className="hero-description">Atendimento individual, técnica e tranquilidade para cuidar de cada pet de forma única.</p>
           <WhatsAppButton placement="hero" />
-          <ul className="trust-list">{trustItems.map((item) => <li key={item}><Check size={17} aria-hidden="true" />{item}</li>)}</ul>
         </div>
         <div className="hero-visual"><figure className="hero-photo"><img src="/images/hero-960.webp" srcSet="/images/hero-640.webp 640w, /images/hero-960.webp 960w" sizes="(min-width: 1024px) 46vw, 90vw" width="960" height="1200" alt="Cão com bandana terracota; foto provisória enquanto a foto real da Tia Bia é produzida" fetchPriority="high" /><figcaption>Imagem provisória</figcaption></figure><div className="care-seal" aria-label="Um pet por horário"><PawPrint weight="light" size={31} aria-hidden="true" /><span>1 pet<br />por horário</span></div><p className="photo-note">tempo para cuidar bem.</p></div>
       </section>

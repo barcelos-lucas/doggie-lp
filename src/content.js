@@ -27,7 +27,6 @@ export function whatsappUrl(intent = 'booking') {
   return `https://wa.me/${business.phone}?text=${encodeURIComponent(message)}`;
 }
 
-export const trustItems = ['10+ anos de experiência', 'Atendimento personalizado', 'São Bernardo do Campo'];
 
 export const carePillars = [
   { title: 'Atendimento personalizado', description: 'Cada pet é avaliado de forma individual, considerando pelagem, comportamento, rotina e necessidades específicas.', icon: 'paw' },
