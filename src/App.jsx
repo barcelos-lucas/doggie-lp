@@ -191,12 +191,50 @@ function ReviewCard({ review, preview }) {
   </figure>;
 }
 
+function ReviewsCarousel({ items, preview }) {
+  const track = useRef(null);
+  const [paused, setPaused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [reduced, setReduced] = useState(true);
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setReduced(media.matches);
+    update(); media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
+  const move = (direction) => {
+    const el = track.current;
+    if (!el?.firstElementChild) return;
+    const step = el.firstElementChild.getBoundingClientRect().width + 16;
+    const end = el.scrollWidth - el.clientWidth;
+    const next = direction > 0 && el.scrollLeft >= end - 2 ? 0 : direction < 0 && el.scrollLeft <= 2 ? end : el.scrollLeft + direction * step;
+    el.scrollTo({ left: next, behavior: reduced ? 'instant' : 'smooth' });
+  };
+  useEffect(() => {
+    if (paused || hovered || reduced || items.length < 2) return undefined;
+    const timer = window.setInterval(() => {
+      if (!document.hidden && track.current?.getBoundingClientRect().bottom > 0 && track.current?.getBoundingClientRect().top < window.innerHeight) move(1);
+    }, 5000);
+    return () => window.clearInterval(timer);
+  }, [paused, hovered, reduced, items.length]);
+  return <div className="review-carousel" role="region" aria-roledescription="carrossel" aria-label="Avaliações dos tutores" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+    <div className="carousel-controls"><span>{preview ? 'Comentários para conhecer a experiência' : 'O que os tutores comentam'}</span>
+      <div><button type="button" onClick={() => { setPaused(true); move(-1); }} aria-label="Comentário anterior">←</button>
+        <button type="button" onClick={() => setPaused(!paused)} aria-pressed={paused} disabled={reduced}>{paused || reduced ? 'Pausado' : 'Pausar'}</button>
+        <button type="button" onClick={() => { setPaused(true); move(1); }} aria-label="Próximo comentário">→</button></div>
+    </div>
+    <div ref={track} className="carousel-track review-track" tabIndex={0} aria-label="Comentários; use as setas para navegar" onFocus={() => setPaused(true)} onPointerDown={() => setPaused(true)} onKeyDown={(event) => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); setPaused(true); move(event.key === 'ArrowRight' ? 1 : -1); } }}>
+      {items.map((review) => <ReviewCard key={`${review.name}-${review.pet ?? review.date}`} review={review} preview={preview} />)}
+    </div>
+  </div>;
+}
+
 function ReviewsSection() {
   const preview = reviews.length === 0;
   const reviewItems = preview ? reviewExamples : reviews;
   return <section id="avaliacoes" className="section reviews-section"><div className="container" data-reveal>
     <p className="eyebrow">CONFIANÇA QUE SE CONSTRÓI</p><h2>Carinho que eles sentem.<br /><em>Confiança que você sente.</em></h2>
-    <div className={`review-grid ${preview ? 'is-preview' : ''}`}>{reviewItems.map((review) => <ReviewCard key={`${review.name}-${review.pet ?? review.date}`} review={review} preview={preview} />)}</div>
+    <ReviewsCarousel items={reviewItems} preview={preview} />
     {preview ? <a className="text-link" href={business.instagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={19} aria-hidden="true" /> Ver nosso dia a dia no Instagram <ArrowUpRight size={18} aria-hidden="true" /></a> : reviewsProfileUrl && <a className="text-link" href={reviewsProfileUrl} target="_blank" rel="noopener noreferrer">Ver avaliações no Google <ArrowUpRight size={18} /></a>}
   </div></section>;
 }
