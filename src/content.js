@@ -11,6 +11,8 @@ export const business = {
   street: 'R. Heitor de Souza, 190',
   postalCode: '09811-300',
   instagram: 'https://www.instagram.com/doggie.esteticapet/',
+  biaInstagram: 'https://www.instagram.com/tiabiatosadora/',
+  wazeUrl: 'https://ul.waze.com/ul?from=place.ChIJJxPEsHVBzpQRcRdsyUdStsY&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location',
 };
 
 export const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${business.street}, ${business.district}, ${business.city} - ${business.state}, ${business.postalCode}`)}`;
@@ -57,8 +59,57 @@ export const plans = [
   { name: 'Quinzenal', description: 'Para quem quer manter os cuidados em dia com uma rotina quinzenal.', includes: ['2 banhos', '1 tosa higiênica inclusa'], frequency: 'Uma semana com atendimento e a semana seguinte sem, repetindo esse ciclo em frequência quinzenal.', economy: 'Cerca de 15% de economia' },
 ];
 
-// Fotos finais serão adicionadas quando selecionadas pela Tia Bia.
-export const portfolio = [];
+// Pares selecionados dos seis posts mais recentes do Instagram da Tia Bia.
+export const portfolio = [
+  {
+    "after": "/images/portfolio/DcR_3ayjRfB-after.webp",
+    "before": "/images/portfolio/DcR_3ayjRfB-before.webp",
+    "afterAlt": "Cão branco finalizado com laços vermelhos",
+    "beforeAlt": "Cão branco antes da finalização",
+    "caption": "Celeste · tosa bebê",
+    "url": "https://www.instagram.com/tiabiatosadora/p/DcR_3ayjRfB/"
+  },
+  {
+    "after": "/images/portfolio/DcR_uAFDSed-after.webp",
+    "before": "/images/portfolio/DcR_uAFDSed-before.webp",
+    "afterAlt": "Cão marrom e branco finalizado com gravata verde",
+    "beforeAlt": "Cão marrom e branco antes da finalização",
+    "caption": "Primeira tosa · carinho desde o início",
+    "url": "https://www.instagram.com/tiabiatosadora/p/DcR_uAFDSed/"
+  },
+  {
+    "after": "/images/portfolio/DcR-7JgjWhz-after.webp",
+    "before": "/images/portfolio/DcR-7JgjWhz-before.webp",
+    "afterAlt": "Cão de pelagem preta e dourada finalizado",
+    "beforeAlt": "Cão de pelagem preta e dourada antes da finalização",
+    "caption": "Técnica para cada pelagem",
+    "url": "https://www.instagram.com/tiabiatosadora/p/DcR-7JgjWhz/"
+  },
+  {
+    "after": "/images/portfolio/DcR-HVmDYhQ-after.webp",
+    "before": "/images/portfolio/DcR-HVmDYhQ-before.webp",
+    "afterAlt": "Spitz finalizado com pelagem volumosa",
+    "beforeAlt": "Spitz antes da finalização",
+    "caption": "Spitz · acabamento com personalidade",
+    "url": "https://www.instagram.com/tiabiatosadora/p/DcR-HVmDYhQ/"
+  },
+  {
+    "after": "/images/portfolio/DbMSwt_iVEP-after.webp",
+    "before": "/images/portfolio/DbMSwt_iVEP-before.webp",
+    "afterAlt": "Cão de pelagem alaranjada finalizado",
+    "beforeAlt": "Cão de pelagem alaranjada antes da finalização",
+    "caption": "Kiara · resultado que se vê",
+    "url": "https://www.instagram.com/tiabiatosadora/p/DbMSwt_iVEP/"
+  },
+  {
+    "after": "/images/portfolio/DbMSgaFiScR-after.webp",
+    "before": "/images/portfolio/DbMSgaFiScR-before.webp",
+    "afterAlt": "Cão de pelagem creme finalizado",
+    "beforeAlt": "Cão de pelagem creme antes da finalização",
+    "caption": "Miss simpatia · cuidado em cada detalhe",
+    "url": "https://www.instagram.com/tiabiatosadora/p/DbMSgaFiScR/"
+  }
+];
 
 export const specialties = ['Tosa bebê', 'Tosa na tesoura em pelagem lisa', 'Trimming de Golden Retriever', 'Trimming de Spitz Alemão'];
 

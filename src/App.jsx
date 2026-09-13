@@ -86,10 +86,75 @@ function ServicesSection() {
   </div></section>;
 }
 
+function PlansSection() {
+  const [selected, setSelected] = useState(plans[0].name);
+  return <section id="planos" className="section plans-section"><div className="container plans-container" data-reveal>
+    <p className="eyebrow">CUIDADO QUE VIRA ROTINA</p><h2>Plano de <em>cuidados.</em></h2>
+    <p className="section-intro">Mais constância nos cuidados, mais praticidade na rotina e até 18% de economia.</p>
+    <fieldset className="plan-picker"><legend>Qual rotina combina com seu pet?</legend><div className="plans-grid">
+      {plans.map((plan) => <label className={`plan-card plan-choice ${selected === plan.name ? 'is-selected' : ''}`} key={plan.name}>
+        <input type="radio" name="care-plan" value={plan.name} checked={selected === plan.name} onChange={() => setSelected(plan.name)} aria-label={`Plano ${plan.name}`} />
+        <span className="plan-choice-top"><PawPrint size={26} weight="duotone" aria-hidden="true" /><span className="plan-choice-status">{selected === plan.name ? 'Selecionado' : 'Selecionar'}<span className="plan-radio-mark"><Check size={13} aria-hidden="true" /></span></span></span>
+        <span className="plan-label">PLANO DE CUIDADOS</span><span className="plan-name">{plan.name}</span><span className="plan-description">{plan.description}</span>
+        <span className="plan-benefits">{plan.includes.map((item) => <span key={item}><Check size={18} aria-hidden="true" />{item}</span>)}</span>
+        <span className="plan-frequency">{plan.frequency}</span><strong>{plan.economy}</strong>
+      </label>)}
+    </div></fieldset>
+    <div className="plan-action"><p aria-live="polite">Vamos conversar sobre o plano <strong>{selected.toLowerCase()}</strong>?</p>
+      <a className="button whatsapp" href={whatsappUrl(`Plano de cuidados ${selected}`)} target="_blank" rel="noopener noreferrer" data-cta="plans"><WhatsappLogo {...iconProps} /><span>Quero conhecer o plano {selected.toLowerCase()}</span><ArrowUpRight size={18} aria-hidden="true" /></a>
+      <small>A escolha é um primeiro passo. A Tia Bia te ajuda a definir o cuidado ideal.</small>
+    </div>
+  </div></section>;
+}
+function PortfolioCarousel({ items }) {
+  const track = useRef(null);
+  const [paused, setPaused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [reduced, setReduced] = useState(true);
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setReduced(media.matches);
+    update(); media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
+  const move = (direction) => {
+    const el = track.current;
+    if (!el) return;
+    const step = el.firstElementChild.getBoundingClientRect().width + 16;
+    const end = el.scrollWidth - el.clientWidth;
+    const next = direction > 0 && el.scrollLeft >= end - 2 ? 0 : direction < 0 && el.scrollLeft <= 2 ? end : el.scrollLeft + direction * step;
+    el.scrollTo({ left: next, behavior: reduced ? 'instant' : 'smooth' });
+  };
+  useEffect(() => {
+    if (paused || hovered || reduced || items.length < 2) return undefined;
+    const timer = window.setInterval(() => {
+      if (!document.hidden && track.current?.getBoundingClientRect().bottom > 0 && track.current?.getBoundingClientRect().top < window.innerHeight) move(1);
+    }, 4500);
+    return () => window.clearInterval(timer);
+  }, [paused, hovered, reduced, items.length]);
+  return <div className="portfolio-carousel" role="region" aria-roledescription="carrossel" aria-label="Trabalhos da Tia Bia" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+    <div className="carousel-controls">
+      <span>Feitos com cuidado pela Tia Bia</span>
+      <div><button type="button" onClick={() => { setPaused(true); move(-1); }} aria-label="Foto anterior">←</button>
+      <button type="button" onClick={() => setPaused(!paused)} aria-pressed={paused} disabled={reduced}>{paused || reduced ? 'Pausado' : 'Pausar'}</button>
+      <button type="button" onClick={() => { setPaused(true); move(1); }} aria-label="Próxima foto">→</button></div>
+    </div>
+    <div ref={track} className="carousel-track" tabIndex={0} aria-label="Fotos dos trabalhos; use as setas para navegar" onFocus={() => setPaused(true)} onPointerDown={() => setPaused(true)} onKeyDown={(event) => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); setPaused(true); move(event.key === 'ArrowRight' ? 1 : -1); } }}>
+      {items.map((item, index) => <figure className="comparison-card" key={item.url} role="group" aria-label={`${index + 1} de ${items.length}: ${item.caption}`}>
+        <div className="comparison-pair">
+          <div className="comparison-frame"><span className="comparison-label">Antes</span><img src={item.before} alt={item.beforeAlt} width="900" height="900" loading="lazy" /></div>
+          <div className="comparison-frame is-after"><span className="comparison-label">Depois</span><img src={item.after} alt={item.afterAlt} width="900" height="900" loading="lazy" /></div>
+        </div>
+        <figcaption><span>{item.caption}</span><a href={item.url} target="_blank" rel="noopener noreferrer" aria-label={`Ver publicação original: ${item.caption}`}><InstagramLogo size={18} aria-hidden="true" /><ArrowUpRight size={16} aria-hidden="true" /></a></figcaption>
+      </figure>)}
+    </div>
+    <a className="text-link" href={business.biaInstagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={19} aria-hidden="true" />Mais trabalhos da Tia Bia<ArrowUpRight size={18} aria-hidden="true" /></a>
+  </div>;
+}
 function PortfolioSection() {
   return <section id="portfolio" className="section portfolio-section"><div className="container" data-reveal>
     <p className="eyebrow">RESULTADOS REAIS</p><h2>Cuidado que <em>se vê.</em></h2>
-    {portfolio.length > 0 ? <div className="portfolio-grid">{portfolio.map((item) => <figure key={item.src}><img src={item.src} alt={item.alt} loading="lazy" /><figcaption>{item.caption}</figcaption></figure>)}</div> : <div className="portfolio-empty"><div className="portfolio-mark"><Sparkle size={34} weight="light" aria-hidden="true" /></div><div><h3>Um portfólio feito de cuidado.</h3><p>Estamos selecionando as fotos finais dos nossos trabalhos. Enquanto isso, conheça o dia a dia da Doggie no Instagram.</p><a className="text-link" href={business.instagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={19} aria-hidden="true" /> Ver mais trabalhos no Instagram <ArrowUpRight size={18} aria-hidden="true" /></a></div></div>}
+    {portfolio.length > 0 ? <PortfolioCarousel items={portfolio} /> : <div className="portfolio-empty"><div className="portfolio-mark"><Sparkle size={34} weight="light" aria-hidden="true" /></div><div><h3>Um portfólio feito de cuidado.</h3><p>Estamos selecionando as fotos finais dos nossos trabalhos. Enquanto isso, conheça o dia a dia da Doggie no Instagram.</p><a className="text-link" href={business.instagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={19} aria-hidden="true" /> Ver mais trabalhos no Instagram <ArrowUpRight size={18} aria-hidden="true" /></a></div></div>}
   </div></section>;
 }
 
@@ -130,11 +195,11 @@ export default function App() {
 
       <section className="section price-section"><div className="container price-card" data-reveal><div><p className="eyebrow">TRANSPARÊNCIA PARA DECIDIR</p><h2>Serviços a partir de<br /><em>R$ 65,00</em></h2></div><div className="price-side"><strong>Economize até 18%</strong><p>com nossos Planos de cuidados.</p><small>Os valores podem variar conforme porte, pelagem, serviço e necessidades do pet.</small></div></div></section>
 
-      <section id="planos" className="section plans-section"><div className="container" data-reveal><p className="eyebrow">CUIDADO QUE VIRA ROTINA</p><h2>Plano de <em>cuidados.</em></h2><p className="section-intro">Mais constância nos cuidados, mais praticidade na rotina e até 18% de economia.</p><div className="plans-grid">{plans.map((plan) => <article className="plan-card" key={plan.name}><span className="plan-label">PLANO</span><h3>{plan.name}</h3><p>{plan.description}</p><ul className="plan-includes">{plan.includes.map((item) => <li key={item}><Check size={17} aria-hidden="true" />{item}</li>)}</ul><p className="plan-frequency">{plan.frequency}</p><strong>{plan.economy}</strong></article>)}</div><WhatsAppButton intent="plans" placement="plans" /></div></section>
+      <PlansSection />
 
       <PortfolioSection />
 
-      <section id="sobre" className="section about-section"><div className="container about-grid" data-reveal><div className="about-visual"><img src="/images/care-960.webp" width="960" height="960" alt="Imagem provisória de um cão recebendo cuidado durante a escovação" loading="lazy" /><span className="image-caption">Foto da Tia Bia em produção</span></div><div className="about-copy"><p className="eyebrow">A PESSOA POR TRÁS DO CUIDADO</p><h2>Conheça <em>a Tia Bia.</em></h2><p>Com mais de 10 anos de experiência em estética animal, a Tia Bia une prática, conhecimento técnico e atualização constante para tomar decisões adequadas para cada pet.</p><p>Na Doggie, cada atendimento considera características da pelagem, comportamento, rotina e necessidades individuais, buscando sempre o melhor resultado com segurança e qualidade.</p><h3 className="specialties-title">Especializada em:</h3><ul className="specialties">{specialties.map((item) => <li key={item}><Check {...iconProps} />{item}</li>)}</ul></div></div></section>
+      <section id="sobre" className="section about-section"><div className="container about-grid" data-reveal><div className="about-visual"><img src="/images/care-960.webp" width="960" height="960" alt="Imagem provisória de um cão recebendo cuidado durante a escovação" loading="lazy" /><span className="image-caption">Foto da Tia Bia em produção</span></div><div className="about-copy"><p className="eyebrow">A PESSOA POR TRÁS DO CUIDADO</p><h2>Conheça <em>a Tia Bia.</em></h2><p>Com mais de 10 anos de experiência em estética animal, a Tia Bia une prática, conhecimento técnico e atualização constante para tomar decisões adequadas para cada pet.</p><p>Na Doggie, cada atendimento considera características da pelagem, comportamento, rotina e necessidades individuais, buscando sempre o melhor resultado com segurança e qualidade.</p><h3 className="specialties-title">Especializada em:</h3><ul className="specialties">{specialties.map((item) => <li key={item}><Check {...iconProps} />{item}</li>)}</ul><a className="text-link bia-instagram" href={business.biaInstagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={20} aria-hidden="true" />Tia Bia · @tiabiatosadora<ArrowUpRight size={18} aria-hidden="true" /></a></div></div></section>
 
       <section id="experiencia" className="section experience-section"><div className="container" data-reveal><p className="eyebrow">DO PRIMEIRO OI À FINALIZAÇÃO</p><h2>Sua experiência<br /><em>na Doggie.</em></h2><div className="steps">{experienceSteps.map((step) => <article key={step.number}><span className="step-number">{step.number}</span><h3>{step.title}</h3>{step.badge && <span className="step-badge">{step.badge}</span>}<p>{step.description}</p></article>)}</div></div></section>
 
@@ -142,7 +207,7 @@ export default function App() {
 
       <section id="duvidas" className="section faq-section"><div className="container faq-grid" data-reveal><div><p className="eyebrow">COMBINE TUDO COM TRANQUILIDADE</p><h2>O que você<br /><em>precisa saber.</em></h2></div><div className="faqs">{faqs.map((faq) => <details key={faq.question}><summary>{faq.question}<span className="faq-symbol" aria-hidden="true">+</span></summary><p>{faq.answer}</p></details>)}</div></div></section>
 
-      <section id="localizacao" className="section location-section"><div className="container location-grid" data-reveal><div className="location-copy"><p className="eyebrow">PERTINHO DE VOCÊ</p><h2>Onde <em>estamos.</em></h2><p className="location-place">Assunção — São Bernardo do Campo, SP</p><p className="location-note">Atendimento com horário agendado.</p><a className="button outline" href={mapsUrl} target="_blank" rel="noopener noreferrer"><MapPin {...iconProps} /> Abrir no Google Maps <ArrowUpRight size={18} aria-hidden="true" /></a></div><MapPanel /></div></section>
+      <section id="localizacao" className="section location-section"><div className="container location-grid" data-reveal><div className="location-copy"><p className="eyebrow">PERTINHO DE VOCÊ</p><h2>Onde <em>estamos.</em></h2><p className="location-place">Assunção — São Bernardo do Campo, SP</p><p className="location-note">Atendimento com horário agendado.</p><div className="location-directions"><a className="button outline" href={mapsUrl} target="_blank" rel="noopener noreferrer"><MapPin {...iconProps} /> Abrir no Google Maps <ArrowUpRight size={18} aria-hidden="true" /></a><a className="button outline" href={business.wazeUrl} target="_blank" rel="noopener noreferrer"><MapPin {...iconProps} /> Abrir no Waze <ArrowUpRight size={18} aria-hidden="true" /></a></div></div><MapPanel /></div></section>
 
       <section className="closing"><div className="container"><PawPrint size={44} weight="light" aria-hidden="true" /><h2>Pronto para proporcionar<br /><em>um novo padrão de cuidado ao seu pet?</em></h2><p>Fale com a Tia Bia e consulte um horário pelo WhatsApp.</p><WhatsAppButton placement="closing" /></div></section>
     </main>
@@ -150,4 +215,3 @@ export default function App() {
     <div className="mobile-cta"><WhatsAppButton placement="mobile-fixed" /></div>
   </>;
 }
-
