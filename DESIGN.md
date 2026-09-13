@@ -24,6 +24,9 @@ clareza nos textos e botões. Mascote da identidade anterior preservado no cabe�
 
 Valores adaptados visualmente da logo para uso digital, sem alegar um manual
 de marca preexistente. Todos os componentes usam tokens semânticos em CSS.
+O modo escuro usa a mesma família cromática com vinho quase preto, creme e
+dourado; o seletor fica no menu, segue a preferência do sistema na primeira
+visita e persiste a escolha no navegador.
 
 ## Arquitetura e conversão
 
