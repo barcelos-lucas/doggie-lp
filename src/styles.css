@@ -37,6 +37,26 @@
 
 .brand strong{color:var(--primary)}.brand-period{color:var(--gold-ink)}.care-seal{color:var(--primary);background:var(--surface-warm)}
 
+/* Tema escuro sutil, preservando a família cromática da logo. */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --primary: #d96a56;
+  --primary-hover: #ef806b;
+  --paper: #211615;
+  --ink: #fff3e5;
+  --muted: #cbb2a3;
+  --gold-ink: #e4b96f;
+  --gold-border: #9d7048;
+  --line: #513930;
+  --surface: #2c1d1b;
+  --surface-warm: #38241f;
+  --surface-deep: #4a3026;
+}
+[data-theme="dark"] .header{background:rgb(33 22 21 / .96)}
+[data-theme="dark"] .hero-photo figcaption,[data-theme="dark"] .map-footer{background:var(--surface)}
+[data-theme="dark"] .button.outline{color:var(--ink)}
+.theme-toggle{display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:transparent;color:var(--gold-ink);cursor:pointer;transition:background .2s,transform .2s,border-color .2s}.theme-toggle:hover{background:var(--surface-warm);border-color:var(--gold-border);transform:translateY(-1px)}.navigation .theme-toggle{margin-top:7px}
+
 /* Nova arquitetura de conteúdo */
 .hero h1{max-width:620px}.hero h1 em{color:var(--primary);font-size:1em}.hero-description{max-width:470px}.trust-list{list-style:none;padding:0;margin:31px 0 0;display:flex;flex-wrap:wrap;gap:11px 18px;color:var(--muted)}.trust-list li{display:flex;align-items:center;gap:7px;font-size:11px}.trust-list svg{color:var(--gold-ink)}
 .care-section{background:var(--paper)}.pillars-grid{display:grid;gap:0;margin-top:38px;border-top:1px solid var(--line)}.pillar-card{padding:27px 0 29px;border-bottom:1px solid var(--line)}.pillar-icon{color:var(--primary);margin-bottom:19px}.pillar-card h3{font-size:20px;margin-bottom:10px}.pillar-card p{font-size:14px;color:var(--muted);max-width:330px}

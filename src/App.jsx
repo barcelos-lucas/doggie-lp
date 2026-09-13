@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import {
-  ArrowUpRight, Bathtub, Check, Clock, Heart, InstagramLogo, List, MapPin, PawPrint,
-  Scissors, Sparkle, Star, WhatsappLogo, X,
+  ArrowUpRight, Bathtub, Check, Clock, Heart, InstagramLogo, List, MapPin, Moon, PawPrint,
+  Scissors, Sparkle, Star, Sun, WhatsappLogo, X,
 } from '@phosphor-icons/react';
 import MapPanel from './MapPanel.jsx';
 import {
@@ -27,6 +27,24 @@ function Brand() {
   </a>;
 }
 
+function ThemeToggle() {
+  const [dark, setDark] = useState(() => typeof document !== 'undefined' && document.documentElement.dataset.theme === 'dark');
+  useEffect(() => {
+    const stored = window.localStorage.getItem('doggie-theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const next = stored ? stored === 'dark' : prefersDark;
+    setDark(next);
+    document.documentElement.dataset.theme = next ? 'dark' : 'light';
+  }, []);
+  const toggle = () => {
+    const next = !dark;
+    setDark(next);
+    document.documentElement.dataset.theme = next ? 'dark' : 'light';
+    window.localStorage.setItem('doggie-theme', next ? 'dark' : 'light');
+  };
+  return <button type="button" className="theme-toggle" onClick={toggle} aria-label={dark ? 'Ativar modo claro' : 'Ativar modo escuro'} title={dark ? 'Modo claro' : 'Modo escuro'}>{dark ? <Sun {...iconProps} /> : <Moon {...iconProps} />}</button>;
+}
+
 function Header() {
   const [open, setOpen] = useState(false);
   const toggle = useRef(null);
@@ -41,6 +59,7 @@ function Header() {
     <button ref={toggle} className="menu-toggle" aria-label={open ? 'Fechar menu' : 'Abrir menu'} aria-expanded={open} aria-controls="navigation" onClick={() => setOpen(!open)}>{open ? <X {...iconProps} /> : <List {...iconProps} />}</button>
     <nav id="navigation" className={open ? 'navigation open' : 'navigation'} aria-label="Navegação principal">
       {links.map(([label, id]) => <a key={id} href={`#${id}`} onClick={() => setOpen(false)}>{label}</a>)}
+      <ThemeToggle />
       <WhatsAppButton placement="header" />
     </nav>
   </div></header>;
