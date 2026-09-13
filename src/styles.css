@@ -204,36 +204,31 @@
 @media(max-width:359px){.care-ribbon-item{font-size:10px;padding-inline:22px}.care-ribbon-item::after{margin-left:22px}}
 @media(prefers-reduced-motion:reduce){.care-ribbon-track{animation:none;transform:none}.care-ribbon:hover .care-ribbon-track,.care-ribbon-viewport:focus-within .care-ribbon-track{animation-play-state:running}}
 .review figcaption span{font-size:12px;color:var(--muted)}
-.review-carousel{margin-top:32px;min-width:0}
-.review-track .review{flex:0 0 100%;min-width:0;padding:24px 22px 20px;border:1px solid var(--line);border-radius:20px;background:var(--surface-warm);scroll-snap-align:start}
-.review-track .review blockquote{font-size:20px;line-height:1.45;margin:18px 0 24px}
-.review-track .review figcaption{gap:5px}
-.review-track .review figcaption strong{font-size:13px}
-.review-track .review figcaption span{font-size:11px}
-@media(min-width:640px){.review-track .review{flex-basis:calc((100% - 16px)/2)}}
-@media(min-width:1024px){.review-track .review{flex-basis:calc((100% - 32px)/3)}}
-.portfolio-carousel{margin-top:32px;min-width:0}
-.carousel-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
-.carousel-controls>span{font-size:13px;color:var(--muted)}
-.carousel-controls>div{display:flex;gap:7px;flex-shrink:0}
-.carousel-controls button{min-width:44px;min-height:44px;border:1px solid var(--line);border-radius:22px;background:var(--paper);color:var(--ink);padding:8px 13px;cursor:pointer;font-size:13px;transition:color .25s ease,border-color .25s ease,background-color .25s ease,transform .25s ease}
-.carousel-controls button:not(:disabled):hover{border-color:var(--gold-border);color:var(--primary);background:var(--surface-warm);transform:translateY(-1px)}
-.carousel-controls button:not(:disabled):active{transform:scale(.96)}
-.carousel-controls button[aria-pressed="true"]{border-color:var(--gold-border);background:var(--surface-warm);color:var(--primary)}
-.carousel-controls button:disabled{cursor:default;color:var(--muted)}
-.carousel-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-x:contain;scrollbar-width:none;padding:5px 0 18px;scroll-behavior:auto;will-change:scroll-position}
-.carousel-track::-webkit-scrollbar{display:none}
-.carousel-track figure{flex:0 0 82%;min-width:0;scroll-snap-align:start;border-radius:20px;overflow:hidden;background:var(--paper);border:1px solid var(--line);transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s cubic-bezier(.22,1,.36,1)}
-.carousel-track img{aspect-ratio:4/5;object-fit:cover}
-.carousel-track figcaption{padding:16px;font-size:13px;line-height:1.5;color:var(--muted)}
+.review-carousel,.portfolio-carousel{margin-top:32px;min-width:0}
+.marquee-caption{margin:0 0 17px;font-size:13px;color:var(--muted)}
+.marquee-viewport{overflow:hidden;padding:5px 0 18px;outline:0}
+.marquee-viewport:focus-visible{outline:2px solid var(--primary);outline-offset:5px}
+.marquee-track{display:flex;width:200%;will-change:transform;animation:doggie-marquee 54s linear infinite}
+.portfolio-marquee-track{animation-duration:48s}
+.review-marquee-track{animation-duration:66s}
+.marquee-viewport:focus-within .marquee-track{animation-play-state:paused}
+.marquee-viewport:active .marquee-track{animation-play-state:paused}
+.marquee-set{box-sizing:border-box;display:flex;flex:0 0 50%;gap:16px;min-width:0;padding-right:16px}
+.marquee-set figure{flex:0 0 82%;min-width:0;border-radius:20px;overflow:hidden;background:var(--paper);border:1px solid var(--line);transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s cubic-bezier(.22,1,.36,1)}
+.marquee-track img{aspect-ratio:1;object-fit:contain;background:var(--surface-deep)}
+.marquee-track figcaption{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px;font-size:13px;line-height:1.5;color:var(--muted)}
+.marquee-track figcaption a{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;color:var(--primary)}
+.review-marquee-track .review{flex-basis:100%;padding:24px 22px 20px;background:var(--surface-warm)}
+.review-marquee-track .review blockquote{font-size:20px;line-height:1.45;margin:18px 0 24px}
+.review-marquee-track .review figcaption{gap:5px}
+.review-marquee-track .review figcaption strong{font-size:13px}
+.review-marquee-track .review figcaption span{font-size:11px}
 .portfolio-carousel>.text-link{margin-top:20px}
-.carousel-track:focus-visible{outline:2px solid var(--primary);outline-offset:5px}
-@media(hover:hover){.carousel-track figure:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgb(50 34 24 / .12)}}
-@media(min-width:640px){.carousel-track figure{flex-basis:calc((100% - 16px)/2)}}
-@media(min-width:1024px){.carousel-track figure{flex-basis:calc((100% - 32px)/3)}}
-@media(max-width:379px){.carousel-controls{align-items:flex-start;flex-direction:column}}
-
-.carousel-track img{aspect-ratio:1;object-fit:contain;background:var(--surface-deep)}.carousel-track figcaption{display:flex;align-items:center;justify-content:space-between;gap:12px}.carousel-track figcaption a{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;color:var(--primary)}
+@media(hover:hover){.marquee-track figure:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgb(50 34 24 / .12)}.marquee-viewport:hover .marquee-track{animation-play-state:paused}}
+@media(min-width:640px){.marquee-set figure{flex-basis:calc((100% - 16px)/2)}.review-marquee-track .review{flex-basis:calc((100% - 16px)/2)}}
+@media(min-width:1024px){.marquee-set figure{flex-basis:calc((100% - 32px)/3)}.review-marquee-track .review{flex-basis:calc((100% - 32px)/3)}}
+@media(prefers-reduced-motion:reduce){.marquee-track{animation:none;transform:none}.marquee-track figure{transition:none}}
+@keyframes doggie-marquee{to{transform:translateX(-50%)}}
 
 /* Visual comparison for the two photos selected from each Instagram post. */
 .comparison-card{display:flex;flex-direction:column}
@@ -244,4 +239,3 @@
 .comparison-frame.is-after .comparison-label{background:var(--primary)}
 .comparison-card figcaption{min-height:76px}
 @media(max-width:639px){.comparison-card figcaption{padding:13px 14px}.comparison-label{top:8px;left:8px;padding:4px 8px;font-size:9px}}
-@media(prefers-reduced-motion:reduce){.carousel-track{scroll-behavior:auto}.carousel-track figure{transition:none}}

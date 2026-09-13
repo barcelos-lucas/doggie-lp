@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import {
-  ArrowUpRight, Bathtub, Cat, CaretLeft, CaretRight, Check, Clock, Heart, InstagramLogo, List, MapPin, PawPrint,
+  ArrowUpRight, Bathtub, Cat, Check, Clock, Heart, InstagramLogo, List, MapPin, PawPrint,
   Scissors, Sparkle, Star, WhatsappLogo, X,
 } from '@phosphor-icons/react';
 import MapPanel from './MapPanel.jsx';
@@ -132,67 +132,20 @@ function PlansSection() {
   </div></section>;
 }
 function PortfolioCarousel({ items }) {
-  const track = useRef(null);
-  const [paused, setPaused] = useState(false);
-  const [hovered, setHovered] = useState(false);
-  const [reduced, setReduced] = useState(true);
-  useEffect(() => {
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => setReduced(media.matches);
-    update(); media.addEventListener('change', update);
-    return () => media.removeEventListener('change', update);
-  }, []);
-  const move = (direction) => {
-    const el = track.current;
-    if (!el) return;
-    const first = el.firstElementChild;
-    const cycle = el.children[items.length]?.offsetLeft ?? 0;
-    const gap = parseFloat(getComputedStyle(el).columnGap || getComputedStyle(el).gap || '16') || 16;
-    const step = first ? first.getBoundingClientRect().width + gap : 0;
-    let next = el.scrollLeft + direction * step;
-    if (cycle > 0 && next >= cycle) next -= cycle;
-    if (cycle > 0 && next < 0) next += cycle;
-    el.scrollTo({ left: next, behavior: reduced ? 'instant' : 'smooth' });
-  };
-  useEffect(() => {
-    if (paused || hovered || reduced || items.length < 2) return undefined;
-    let frame;
-    let previous = performance.now();
-    const tick = (now) => {
-      const el = track.current;
-      const bounds = el?.getBoundingClientRect();
-      if (el && !document.hidden && bounds?.bottom > 0 && bounds.top < window.innerHeight) {
-        const cycle = el.children[items.length]?.offsetLeft ?? 0;
-        if (cycle > 0) {
-          el.scrollLeft += Math.min(now - previous, 64) * 0.024;
-          if (el.scrollLeft >= cycle) el.scrollLeft -= cycle;
-        }
-      }
-      previous = now;
-      frame = window.requestAnimationFrame(tick);
-    };
-    frame = window.requestAnimationFrame(tick);
-    return () => window.cancelAnimationFrame(frame);
-  }, [paused, hovered, reduced, items.length]);
-  return <div className="portfolio-carousel" role="region" aria-roledescription="carrossel" aria-label="Trabalhos da Tia Bia" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-    <div className="carousel-controls">
-      <span>Feitos com cuidado pela Tia Bia</span>
-      <div><button type="button" onClick={() => { setPaused(true); move(-1); }} aria-label="Foto anterior"><CaretLeft size={19} weight="bold" aria-hidden="true" /></button>
-      <button type="button" onClick={() => setPaused(!paused)} aria-pressed={paused} disabled={reduced}>{paused || reduced ? 'Pausado' : 'Pausar'}</button>
-      <button type="button" onClick={() => { setPaused(true); move(1); }} aria-label="Próxima foto"><CaretRight size={19} weight="bold" aria-hidden="true" /></button></div>
+  const renderCard = (item, index, clone = false) => <figure className="comparison-card" key={`${item.url}-${clone ? 'loop-' : ''}${index}`} role="group" aria-hidden={clone || undefined} aria-label={clone ? undefined : `${index + 1} de ${items.length}: ${item.caption}`}>
+    <div className="comparison-pair">
+      <div className="comparison-frame"><span className="comparison-label">Antes</span><img src={item.before} alt={clone ? '' : item.beforeAlt} width="900" height="900" loading="lazy" /></div>
+      <div className="comparison-frame is-after"><span className="comparison-label">Depois</span><img src={item.after} alt={clone ? '' : item.afterAlt} width="900" height="900" loading="lazy" /></div>
     </div>
-    <div ref={track} className="carousel-track" tabIndex={0} aria-label="Fotos dos trabalhos; use as setas para navegar" onFocus={() => setPaused(true)} onPointerDown={() => setPaused(true)} onKeyDown={(event) => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); setPaused(true); move(event.key === 'ArrowRight' ? 1 : -1); } }}>
-      {[...items, ...items].map((item, index) => {
-        const clone = index >= items.length;
-        const itemIndex = index % items.length;
-        return <figure className="comparison-card" key={`${item.url}-${index}`} role="group" aria-hidden={clone || undefined} aria-label={clone ? undefined : `${itemIndex + 1} de ${items.length}: ${item.caption}`}>
-          <div className="comparison-pair">
-            <div className="comparison-frame"><span className="comparison-label">Antes</span><img src={item.before} alt={clone ? '' : item.beforeAlt} width="900" height="900" loading="lazy" /></div>
-            <div className="comparison-frame is-after"><span className="comparison-label">Depois</span><img src={item.after} alt={clone ? '' : item.afterAlt} width="900" height="900" loading="lazy" /></div>
-          </div>
-          <figcaption><span>{item.caption}</span><a href={item.url} tabIndex={clone ? -1 : undefined} target="_blank" rel="noopener noreferrer" aria-label={`Ver publicação original: ${item.caption}`}><InstagramLogo size={18} aria-hidden="true" /><ArrowUpRight size={16} aria-hidden="true" /></a></figcaption>
-        </figure>;
-      })}
+    <figcaption><span>{item.caption}</span><a href={item.url} tabIndex={clone ? -1 : undefined} target="_blank" rel="noopener noreferrer" aria-label={`Ver publicação original: ${item.caption}`}><InstagramLogo size={18} aria-hidden="true" /><ArrowUpRight size={16} aria-hidden="true" /></a></figcaption>
+  </figure>;
+  return <div className="portfolio-carousel marquee-carousel" role="region" aria-roledescription="carrossel" aria-label="Trabalhos da Tia Bia">
+    <p className="marquee-caption">Feitos com cuidado pela Tia Bia</p>
+    <div className="marquee-viewport" tabIndex={0} aria-label="Fotos dos trabalhos; movimento contínuo. Passe o mouse ou use o foco para pausar.">
+      <div className="marquee-track portfolio-marquee-track">
+        <div className="marquee-set">{items.map((item, index) => renderCard(item, index))}</div>
+        <div className="marquee-set" aria-hidden="true">{items.map((item, index) => renderCard(item, index, true))}</div>
+      </div>
     </div>
     <a className="text-link" href={business.biaInstagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={19} aria-hidden="true" />Mais trabalhos da Tia Bia<ArrowUpRight size={18} aria-hidden="true" /></a>
   </div>;
@@ -213,55 +166,13 @@ function ReviewCard({ review, preview, hidden = false }) {
 }
 
 function ReviewsCarousel({ items, preview }) {
-  const track = useRef(null);
-  const [paused, setPaused] = useState(false);
-  const [hovered, setHovered] = useState(false);
-  const [reduced, setReduced] = useState(true);
-  useEffect(() => {
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => setReduced(media.matches);
-    update(); media.addEventListener('change', update);
-    return () => media.removeEventListener('change', update);
-  }, []);
-  const move = (direction) => {
-    const el = track.current;
-    if (!el?.firstElementChild) return;
-    const cycle = el.children[items.length]?.offsetLeft ?? 0;
-    const gap = parseFloat(getComputedStyle(el).columnGap || getComputedStyle(el).gap || '16') || 16;
-    const step = el.firstElementChild.getBoundingClientRect().width + gap;
-    let next = el.scrollLeft + direction * step;
-    if (cycle > 0 && next >= cycle) next -= cycle;
-    if (cycle > 0 && next < 0) next += cycle;
-    el.scrollTo({ left: next, behavior: reduced ? 'instant' : 'smooth' });
-  };
-  useEffect(() => {
-    if (paused || hovered || reduced || items.length < 2) return undefined;
-    let frame;
-    let previous = performance.now();
-    const tick = (now) => {
-      const el = track.current;
-      const bounds = el?.getBoundingClientRect();
-      if (el && !document.hidden && bounds?.bottom > 0 && bounds.top < window.innerHeight) {
-        const cycle = el.children[items.length]?.offsetLeft ?? 0;
-        if (cycle > 0) {
-          el.scrollLeft += Math.min(now - previous, 64) * 0.018;
-          if (el.scrollLeft >= cycle) el.scrollLeft -= cycle;
-        }
-      }
-      previous = now;
-      frame = window.requestAnimationFrame(tick);
-    };
-    frame = window.requestAnimationFrame(tick);
-    return () => window.cancelAnimationFrame(frame);
-  }, [paused, hovered, reduced, items.length]);
-  return <div className="review-carousel" role="region" aria-roledescription="carrossel" aria-label="Avaliações dos tutores" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-    <div className="carousel-controls"><span>{preview ? 'Comentários para conhecer a experiência' : 'O que os tutores comentam'}</span>
-      <div><button type="button" onClick={() => { setPaused(true); move(-1); }} aria-label="Comentário anterior"><CaretLeft size={19} weight="bold" aria-hidden="true" /></button>
-        <button type="button" onClick={() => setPaused(!paused)} aria-pressed={paused} disabled={reduced}>{paused || reduced ? 'Pausado' : 'Pausar'}</button>
-      <button type="button" onClick={() => { setPaused(true); move(1); }} aria-label="Próximo comentário"><CaretRight size={19} weight="bold" aria-hidden="true" /></button></div>
-    </div>
-    <div ref={track} className="carousel-track review-track" tabIndex={0} aria-label="Comentários; use as setas para navegar" onFocus={() => setPaused(true)} onPointerDown={() => setPaused(true)} onKeyDown={(event) => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); setPaused(true); move(event.key === 'ArrowRight' ? 1 : -1); } }}>
-      {[...items, ...items].map((review, index) => <ReviewCard key={`${review.name}-${review.pet ?? review.date}-${index}`} review={review} preview={preview} hidden={index >= items.length} />)}
+  return <div className="review-carousel marquee-carousel" role="region" aria-roledescription="carrossel" aria-label="Avaliações dos tutores">
+    <p className="marquee-caption">{preview ? 'Comentários para conhecer a experiência' : 'O que os tutores comentam'}</p>
+    <div className="marquee-viewport" tabIndex={0} aria-label="Comentários; movimento contínuo. Passe o mouse ou use o foco para pausar.">
+      <div className="marquee-track review-marquee-track">
+        <div className="marquee-set">{items.map((review) => <ReviewCard key={`${review.name}-${review.pet ?? review.date}`} review={review} preview={preview} />)}</div>
+        <div className="marquee-set" aria-hidden="true">{items.map((review) => <ReviewCard key={`${review.name}-${review.pet ?? review.date}-loop`} review={review} preview={preview} hidden />)}</div>
+      </div>
     </div>
   </div>;
 }
