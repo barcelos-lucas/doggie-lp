@@ -133,7 +133,6 @@ export const reviewExamples = [
   { name: 'Felipe G.', pet: 'Bento', rating: 5, text: 'O horário reservado só para o Bento deixou tudo mais tranquilo. Atendimento cuidadoso, pontual e com muita atenção aos detalhes.' },
   { name: 'Carol P.', pet: 'Frida', rating: 5, text: 'A Frida precisava de uma escovação mais cuidadosa e a Tia Bia explicou o que seria melhor para o pelo dela. Ficou macio e soltinho.' },
   { name: 'Luana C.', pet: 'Ozzy', rating: 5, text: 'Desde a primeira conversa senti confiança. Fizeram perguntas sobre a rotina dele e entregaram um cuidado muito mais personalizado.' },
-  { name: 'Daniela F.', pet: 'Amora', rating: 5, text: 'Dá para perceber quando o trabalho é feito com carinho. A Amora voltou linda, cheirosa e sem pressa no atendimento.' },
   { name: 'André V.', pet: 'Chico', rating: 5, text: 'O pelo do Chico voltou muito mais fácil de cuidar em casa. Além do banho, recebemos orientações simples que ajudaram bastante.' },
   { name: 'Priscila L.', pet: 'Maya', rating: 5, text: 'A Maya ficou uma fofura e o acabamento ficou impecável. Adorei o cuidado em respeitar o que a pelagem dela permitia.' },
 ];
