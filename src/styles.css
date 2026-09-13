@@ -258,3 +258,8 @@
 .comparison-frame.is-after .comparison-label{background:var(--primary)}
 .comparison-card figcaption{min-height:76px}
 @media(max-width:639px){.comparison-card figcaption{padding:13px 14px}.comparison-label{top:8px;left:8px;padding:4px 8px;font-size:9px}}
+
+/* Ritmo vertical mais compacto entre blocos consecutivos. */
+main>.section+.section{padding-top:40px}
+@media(min-width:640px){main>.section+.section{padding-top:58px}}
+@media(min-width:1024px){main>.section+.section{padding-top:68px}}
