@@ -43,7 +43,7 @@ function ThemeToggle() {
     window.localStorage.setItem('doggie-theme', next ? 'dark' : 'light');
   };
   return <button type="button" className={`theme-toggle ${dark ? 'is-dark' : ''}`} onClick={toggle} aria-label={dark ? 'Ativar modo claro' : 'Ativar modo escuro'} title={dark ? 'Modo claro' : 'Modo escuro'}>
-    <span className="theme-toggle-icon" aria-hidden="true">{dark ? <Cat size={23} weight="duotone" /> : <PawPrint size={23} weight="duotone" />}</span>
+    <span className="theme-toggle-icon" aria-hidden="true">{dark ? <Cat size={26} weight="regular" /> : <PawPrint size={26} weight="regular" />}</span>
     <span className="theme-toggle-copy"><strong>{dark ? 'Noite' : 'Dia'}</strong><small>{dark ? 'modo escuro' : 'modo claro'}</small></span>
     <span className="theme-toggle-track" aria-hidden="true"><span /></span>
   </button>;
