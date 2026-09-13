@@ -60,10 +60,9 @@ function Header() {
   }, [open]);
   const links = [['Cuidado', 'cuidado'], ['Serviços', 'servicos'], ['Planos', 'planos'], ['A Tia Bia', 'sobre'], ['Dúvidas', 'duvidas']];
   return <header className="header"><div className="container header-inner"><Brand />
-    <button ref={toggle} className="menu-toggle" aria-label={open ? 'Fechar menu' : 'Abrir menu'} aria-expanded={open} aria-controls="navigation" onClick={() => setOpen(!open)}>{open ? <X {...iconProps} /> : <List {...iconProps} />}</button>
+    <div className="header-actions"><ThemeToggle /><button ref={toggle} className="menu-toggle" aria-label={open ? 'Fechar menu' : 'Abrir menu'} aria-expanded={open} aria-controls="navigation" onClick={() => setOpen(!open)}>{open ? <X {...iconProps} /> : <List {...iconProps} />}</button></div>
     <nav id="navigation" className={open ? 'navigation open' : 'navigation'} aria-label="Navegação principal">
       {links.map(([label, id]) => <a key={id} href={`#${id}`} onClick={() => setOpen(false)}>{label}</a>)}
-      <ThemeToggle />
       <WhatsAppButton placement="header" />
     </nav>
   </div></header>;
