@@ -133,15 +133,6 @@ function PlansSection() {
 }
 function PortfolioCarousel({ items }) {
   const track = useRef(null);
-  const [paused, setPaused] = useState(false);
-  const [hovered, setHovered] = useState(false);
-  const [reduced, setReduced] = useState(true);
-  useEffect(() => {
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => setReduced(media.matches);
-    update(); media.addEventListener('change', update);
-    return () => media.removeEventListener('change', update);
-  }, []);
   const move = (direction) => {
     const el = track.current;
     if (!el?.firstElementChild) return;
@@ -151,16 +142,9 @@ function PortfolioCarousel({ items }) {
     let next = el.scrollLeft + direction * step;
     if (cycle > 0 && next >= cycle) next -= cycle;
     if (cycle > 0 && next < 0) next += cycle;
-    el.scrollTo({ left: next, behavior: reduced ? 'instant' : 'smooth' });
+    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    el.scrollTo({ left: next, behavior });
   };
-  useEffect(() => {
-    if (paused || hovered || reduced || items.length < 2) return undefined;
-    const timer = window.setInterval(() => {
-      const bounds = track.current?.getBoundingClientRect();
-      if (!document.hidden && bounds?.bottom > 0 && bounds.top < window.innerHeight) move(1);
-    }, 4800);
-    return () => window.clearInterval(timer);
-  }, [paused, hovered, reduced, items.length]);
   const renderCard = (item, index, clone = false) => <figure className="comparison-card" key={`${item.url}-${clone ? 'loop-' : ''}${index}`} role="group" aria-hidden={clone || undefined} aria-label={clone ? undefined : `${index + 1} de ${items.length}: ${item.caption}`}>
     <div className="comparison-pair">
       <div className="comparison-frame"><span className="comparison-label">Antes</span><img src={item.before} alt={clone ? '' : item.beforeAlt} width="900" height="900" loading="lazy" /></div>
@@ -168,9 +152,9 @@ function PortfolioCarousel({ items }) {
     </div>
     <figcaption><span>{item.caption}</span><a href={item.url} tabIndex={clone ? -1 : undefined} target="_blank" rel="noopener noreferrer" aria-label={`Ver publicação original: ${item.caption}`}><InstagramLogo size={18} aria-hidden="true" /><ArrowUpRight size={16} aria-hidden="true" /></a></figcaption>
   </figure>;
-  return <div className="portfolio-carousel" role="region" aria-roledescription="carrossel" aria-label="Trabalhos da Tia Bia" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-    <div className="carousel-controls"><span>Feitos com cuidado pela Tia Bia</span><div><button type="button" onClick={() => { setPaused(true); move(-1); }} aria-label="Foto anterior"><CaretLeft size={19} weight="bold" aria-hidden="true" /></button><button type="button" onClick={() => setPaused(!paused)} aria-pressed={paused} disabled={reduced}>{paused || reduced ? 'Pausado' : 'Pausar'}</button><button type="button" onClick={() => { setPaused(true); move(1); }} aria-label="Próxima foto"><CaretRight size={19} weight="bold" aria-hidden="true" /></button></div></div>
-    <div ref={track} className="carousel-track" tabIndex={0} aria-label="Fotos dos trabalhos; arraste para navegar" onFocus={() => setPaused(true)} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false); }} onPointerDown={() => setPaused(true)} onPointerUp={() => setPaused(false)} onPointerCancel={() => setPaused(false)} onKeyDown={(event) => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); setPaused(true); move(event.key === 'ArrowRight' ? 1 : -1); } }}>
+  return <div className="portfolio-carousel" role="region" aria-roledescription="carrossel" aria-label="Trabalhos da Tia Bia">
+    <div className="carousel-controls"><span>Feitos com cuidado pela Tia Bia</span><div><button type="button" onClick={() => move(-1)} aria-label="Foto anterior"><CaretLeft size={19} weight="bold" aria-hidden="true" /></button><button type="button" onClick={() => move(1)} aria-label="Próxima foto"><CaretRight size={19} weight="bold" aria-hidden="true" /></button></div></div>
+    <div ref={track} className="carousel-track" tabIndex={0} aria-label="Fotos dos trabalhos; arraste para navegar" onKeyDown={(event) => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); move(event.key === 'ArrowRight' ? 1 : -1); } }}>
       {[...items, ...items].map((item, index) => renderCard(item, index % items.length, index >= items.length))}
     </div>
     <a className="text-link" href={business.biaInstagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={19} aria-hidden="true" />Mais trabalhos da Tia Bia<ArrowUpRight size={18} aria-hidden="true" /></a>
@@ -193,15 +177,6 @@ function ReviewCard({ review, preview, hidden = false }) {
 
 function ReviewsCarousel({ items, preview }) {
   const track = useRef(null);
-  const [paused, setPaused] = useState(false);
-  const [hovered, setHovered] = useState(false);
-  const [reduced, setReduced] = useState(true);
-  useEffect(() => {
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => setReduced(media.matches);
-    update(); media.addEventListener('change', update);
-    return () => media.removeEventListener('change', update);
-  }, []);
   const move = (direction) => {
     const el = track.current;
     if (!el?.firstElementChild) return;
@@ -211,19 +186,12 @@ function ReviewsCarousel({ items, preview }) {
     let next = el.scrollLeft + direction * step;
     if (cycle > 0 && next >= cycle) next -= cycle;
     if (cycle > 0 && next < 0) next += cycle;
-    el.scrollTo({ left: next, behavior: reduced ? 'instant' : 'smooth' });
+    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    el.scrollTo({ left: next, behavior });
   };
-  useEffect(() => {
-    if (paused || hovered || reduced || items.length < 2) return undefined;
-    const timer = window.setInterval(() => {
-      const bounds = track.current?.getBoundingClientRect();
-      if (!document.hidden && bounds?.bottom > 0 && bounds.top < window.innerHeight) move(1);
-    }, 5200);
-    return () => window.clearInterval(timer);
-  }, [paused, hovered, reduced, items.length]);
-  return <div className="review-carousel" role="region" aria-roledescription="carrossel" aria-label="Avaliações dos tutores" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-    <div className="carousel-controls"><span>{preview ? 'Comentários para conhecer a experiência' : 'O que os tutores comentam'}</span><div><button type="button" onClick={() => { setPaused(true); move(-1); }} aria-label="Comentário anterior"><CaretLeft size={19} weight="bold" aria-hidden="true" /></button><button type="button" onClick={() => setPaused(!paused)} aria-pressed={paused} disabled={reduced}>{paused || reduced ? 'Pausado' : 'Pausar'}</button><button type="button" onClick={() => { setPaused(true); move(1); }} aria-label="Próximo comentário"><CaretRight size={19} weight="bold" aria-hidden="true" /></button></div></div>
-    <div ref={track} className="carousel-track review-track" tabIndex={0} aria-label="Comentários; arraste para navegar" onFocus={() => setPaused(true)} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false); }} onPointerDown={() => setPaused(true)} onPointerUp={() => setPaused(false)} onPointerCancel={() => setPaused(false)} onKeyDown={(event) => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); setPaused(true); move(event.key === 'ArrowRight' ? 1 : -1); } }}>
+  return <div className="review-carousel" role="region" aria-roledescription="carrossel" aria-label="Avaliações dos tutores">
+    <div className="carousel-controls"><span>{preview ? 'Comentários para conhecer a experiência' : 'O que os tutores comentam'}</span><div><button type="button" onClick={() => move(-1)} aria-label="Comentário anterior"><CaretLeft size={19} weight="bold" aria-hidden="true" /></button><button type="button" onClick={() => move(1)} aria-label="Próximo comentário"><CaretRight size={19} weight="bold" aria-hidden="true" /></button></div></div>
+    <div ref={track} className="carousel-track review-track" tabIndex={0} aria-label="Comentários; arraste para navegar" onKeyDown={(event) => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); move(event.key === 'ArrowRight' ? 1 : -1); } }}>
       {[...items, ...items].map((review, index) => <ReviewCard key={`${review.name}-${review.pet ?? review.date}-${index}`} review={review} preview={preview} hidden={index >= items.length} />)}
     </div>
   </div>;
