@@ -224,7 +224,6 @@ export default function App() {
           <h1>cuidado <em>que encanta</em></h1>
           <p className="hero-description">Atendimento individual, técnica e tranquilidade para cuidar de cada pet de forma única.</p>
           <WhatsAppButton placement="hero" />
-          <a className="hero-secondary" href="#cuidado"><Heart size={17} aria-hidden="true" />Conheça nosso jeito de cuidar<ArrowUpRight size={16} aria-hidden="true" /></a>
           <div className="hero-trust" aria-label="Diferenciais rápidos da Doggie"><span><PawPrint size={16} weight="duotone" aria-hidden="true" />1 pet por horário</span><span><Clock size={16} weight="duotone" aria-hidden="true" />10+ anos de experiência</span><span><Heart size={16} weight="duotone" aria-hidden="true" />Avaliação individual</span></div>
         </div>
         <div className="hero-visual"><figure className="hero-photo"><img src="/images/hero-960.webp" srcSet="/images/hero-640.webp 640w, /images/hero-960.webp 960w" sizes="(min-width: 1024px) 46vw, 90vw" width="960" height="1200" alt="Cão com bandana terracota; foto provisória enquanto a foto real da Tia Bia é produzida" fetchPriority="high" /><figcaption>Imagem provisória</figcaption></figure><div className="care-seal" aria-label="Um pet por horário"><PawPrint weight="light" size={31} aria-hidden="true" /><span>1 pet<br />por horário</span></div><p className="photo-note">tempo para cuidar bem.</p></div>
