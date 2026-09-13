@@ -12,6 +12,26 @@ import {
 const iconProps = { size: 22, weight: 'regular', 'aria-hidden': true };
 const pillarIcons = { paw: PawPrint, heart: Heart, sparkle: Sparkle, clock: Clock };
 const serviceIcons = { bath: Bathtub, scissors: Scissors, sparkle: Sparkle };
+const careHighlights = [
+  { label: '1 pet por horário', icon: Clock },
+  { label: 'Técnica para cada pelagem', icon: Scissors },
+  { label: 'Banho com tempo e calma', icon: Heart },
+  { label: 'Avaliação individual', icon: PawPrint },
+  { label: '10+ anos de experiência', icon: Sparkle },
+  { label: 'Orientação para a rotina', icon: Check },
+];
+
+function CareRibbon() {
+  const renderItems = (hidden = false) => careHighlights.map(({ label, icon: Icon }) => <span className="care-ribbon-item" key={`${hidden ? 'hidden-' : ''}${label}`} aria-hidden={hidden}>
+    <Icon size={20} weight="duotone" aria-hidden="true" /><strong>{label}</strong>
+  </span>);
+  return <div className="care-ribbon" aria-label="Diferenciais da Doggie">
+    <div className="care-ribbon-viewport" tabIndex={0}>
+      <div className="care-ribbon-track"><div className="care-ribbon-group">{renderItems()}</div><div className="care-ribbon-group" aria-hidden="true">{renderItems(true)}</div></div>
+    </div>
+    <p className="sr-only">Diferenciais: {careHighlights.map(({ label }) => label).join(', ')}.</p>
+  </div>;
+}
 
 function WhatsAppButton({ intent = 'booking', className = '', placement = 'page' }) {
   const label = intent === 'plans' ? 'Quero conhecer os planos' : 'Consultar horário no WhatsApp';
@@ -192,7 +212,7 @@ export default function App() {
         <div className="hero-visual"><figure className="hero-photo"><img src="/images/hero-960.webp" srcSet="/images/hero-640.webp 640w, /images/hero-960.webp 960w" sizes="(min-width: 1024px) 46vw, 90vw" width="960" height="1200" alt="Cão com bandana terracota; foto provisória enquanto a foto real da Tia Bia é produzida" fetchPriority="high" /><figcaption>Imagem provisória</figcaption></figure><div className="care-seal" aria-label="Um pet por horário"><PawPrint weight="light" size={31} aria-hidden="true" /><span>1 pet<br />por horário</span></div><p className="photo-note">tempo para cuidar bem.</p></div>
       </section>
 
-      <div className="care-ribbon"><div className="container"><span><PawPrint {...iconProps} /> Técnica</span><span><Heart {...iconProps} /> Tranquilidade</span><span><Sparkle {...iconProps} /> Cuidado individual</span></div></div>
+      <CareRibbon />
 
       <section id="cuidado" className="section care-section"><div className="container" data-reveal><p className="eyebrow">UM JEITO MAIS TRANQUILO DE CUIDAR</p><h2>Um novo padrão de cuidado<br /><em>para o seu pet.</em></h2><p className="section-intro">A experiência Doggie combina conhecimento técnico, avaliação individual e tempo para fazer cada atendimento com calma.</p><div className="pillars-grid">{carePillars.map((pillar) => <PillarCard key={pillar.title} pillar={pillar} />)}</div></div></section>
 
