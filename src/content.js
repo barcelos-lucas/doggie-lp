@@ -126,15 +126,15 @@ export const reviewsProfileUrl = '';
 // Textos de demonstração para validar o layout enquanto as avaliações reais são reunidas.
 // Não publicar como prova social: substitua por reviews antes do lançamento.
 export const reviewExamples = [
-  { name: 'Mariana A.', pet: 'Jujuba', rating: 5, text: 'A Jujuba chegou toda desconfiada e saiu super tranquila. A Tia Bia foi explicando tudo e deixou ela no tempo dela. Voltou linda demais.' },
-  { name: 'Rafa M.', pet: 'Paçoca', rating: 5, text: 'O Paçoca voltou cheiroso, leve e sem aquele estresse de antes. Gostei muito de conversarem comigo antes para entender o que ele precisava.' },
-  { name: 'Ju R.', pet: 'Bolota', rating: 5, text: 'A tosa na tesoura do Bolota ficou um capricho só. Deu forma no pelo, mas manteve aquele jeitão fofo que a gente ama.' },
-  { name: 'Cami S.', pet: 'Nina', rating: 5, text: 'Eu morria de medo da Nina ficar nervosa, mas o atendimento individual fez toda diferença. Ela voltou para casa bem e toda cheirosa.' },
-  { name: 'Felipe G.', pet: 'Trovão', rating: 5, text: 'Ter um horário só para o Trovão deixou tudo mais sossegado. Atendimento pontual, cuidadoso e com atenção em cada detalhe.' },
-  { name: 'Carol P.', pet: 'Pipoca', rating: 5, text: 'A Pipoca estava com o pelo bem embaraçado e a Tia Bia explicou o melhor caminho. Ficou macio, soltinho e sem judiar dela.' },
-  { name: 'Lu C.', pet: 'Cacau', rating: 5, text: 'Já na primeira conversa senti confiança. Perguntaram da rotina da Cacau e cuidaram dela de um jeito muito mais personalizado.' },
-  { name: 'André V.', pet: 'Chico', rating: 5, text: 'O pelo do Chico ficou muito mais fácil de cuidar em casa. As dicas que recebemos depois do banho ajudaram de verdade.' },
-  { name: 'Pri L.', pet: 'Xodó', rating: 5, text: 'O Xodó ficou uma fofura e o acabamento ficou impecável. Adorei o cuidado de respeitar o que o pelo dele permitia.' },
+  { name: 'Mariana A.', pet: 'Jujuba', rating: 5, text: 'A Jujuba é medrosa demais, rs. Foi a primeira vez que voltou do banho sem ficar se escondendo. A Bia teve mó paciência com ela.' },
+  { name: 'Rafa M.', pet: 'Paçoca', rating: 5, text: 'Gente, o Paçoca voltou OUTRO cachorro kkk. Cheiroso, soltinho e sem aquele nó no pelo. E explicaram tudo antes, do jeitinho que eu gosto.' },
+  { name: 'Ju R.', pet: 'Bolota', rating: 5, text: 'Pedi uma tosa bem simples pro Bolota e ficou lindo!! Respeitaram o formato dele e não passaram a máquina. Ficou a cara dele.' },
+  { name: 'Cami S.', pet: 'Nina', rating: 5, text: 'Minha Nina não para quieta nunca. Mesmo assim, fizeram tudo com calma e ela saiu bem tranquila. Isso pra mim vale ouro.' },
+  { name: 'Felipe G.', pet: 'Trovão', rating: 5, text: 'O Trovão é grandão e fica agitado, mas o horário só dele ajudou mto. Atendimento atencioso e sem correria.' },
+  { name: 'Carol P.', pet: 'Pipoca', rating: 5, text: 'A Pipoca tava uma bolinha de nós (eu sei, vacilei na escovação). A Tia Bia resolveu com cuidado e ainda me passou umas dicas pra manter em casa.' },
+  { name: 'Dani C.', pet: 'Cacau', rating: 5, text: 'A Cacau já é idosinha, então fico preocupada com tudo. A Bia conversou comigo, explicou o que dava pra fazer e respeitou o tempo dela. Saí aliviada.' },
+  { name: 'André V.', pet: 'Chico', rating: 5, text: 'O Chico voltou macio demais kkk. O banho ficou ótimo e as orientações foram bem práticas, nada complicado.' },
+  { name: 'Pri L.', pet: 'Xodó', rating: 5, text: 'O Xodó ficou um charme! O mais legal foi poder falar o que eu queria e ouvir o que fazia sentido pra pelagem dele. Atendimento nota 10.' },
 ];
 
 export const faqs = [
