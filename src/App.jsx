@@ -196,7 +196,6 @@ function ReviewsSection() {
   const reviewItems = preview ? reviewExamples : reviews;
   return <section id="avaliacoes" className="section reviews-section"><div className="container" data-reveal>
     <p className="eyebrow">CONFIANÇA QUE SE CONSTRÓI</p><h2>Carinho que eles sentem.<br /><em>Confiança que você sente.</em></h2>
-    {preview && <div className="review-preview-note" role="note"><Sparkle size={20} aria-hidden="true" /><span><strong>Prévia da seção</strong> · estes depoimentos são exemplos de layout e serão substituídos pelas avaliações reais antes da publicação.</span></div>}
     <div className={`review-grid ${preview ? 'is-preview' : ''}`}>{reviewItems.map((review) => <ReviewCard key={`${review.name}-${review.pet ?? review.date}`} review={review} preview={preview} />)}</div>
     {preview ? <a className="text-link" href={business.instagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={19} aria-hidden="true" /> Ver nosso dia a dia no Instagram <ArrowUpRight size={18} aria-hidden="true" /></a> : reviewsProfileUrl && <a className="text-link" href={reviewsProfileUrl} target="_blank" rel="noopener noreferrer">Ver avaliações no Google <ArrowUpRight size={18} /></a>}
   </div></section>;
