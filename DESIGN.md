@@ -24,25 +24,32 @@ clareza nos textos e botões. Mascote da identidade anterior preservado no cabe�
 
 Valores adaptados visualmente da logo para uso digital, sem alegar um manual
 de marca preexistente. Todos os componentes usam tokens semânticos em CSS.
+O modo escuro usa a mesma família cromática com vinho quase preto, creme e
+dourado; o seletor de pata/gato fica sempre visível no cabeçalho, segue a preferência do sistema na primeira
+visita e persiste a escolha no navegador.
 
-## Conversão
+## Arquitetura e conversão
 
-O primeiro CTA aparece antes da foto no celular. Contato fixo na parte inferior,
-serviços com mensagens específicas e CTA após explicação do primeiro atendimento.
-Não há formulário intermediário nem promessa de disponibilidade automática.
-Os links abrem uma conversa com texto pré-preenchido; o usuário decide enviar.
+A página segue a ordem definida em `LP_Doggie_COMPLETA.md`: primeira dobra,
+pilares de cuidado, serviços por categorias, chamada de preço, planos, portfólio,
+Tia Bia, experiência, avaliações, FAQ, localização, CTA final e rodapé.
+O CTA principal é “Consultar horário no WhatsApp”, com mensagem de agendamento.
+Os Planos de cuidados usam uma mensagem própria. O contato fica fixo na parte
+inferior do celular, sem formulário intermediário ou promessa de disponibilidade.
 
 ## Conteúdo e procedência
 
 - Endereço e WhatsApp confirmados pelo proprietário em 12/09/2026.
-- Horários, serviços, pacotes e Instagram vieram da versão anterior do site.
-- Horários precisam de confirmação antes da publicação.
+- Serviços, planos e Instagram vieram das decisões consolidadas e da versão
+  anterior do site.
+- A seção de localização exibe apenas bairro e cidade; o endereço completo fica
+  no destino do Google Maps.
 - As duas fotografias são conceituais, geradas por IA, e identificadas como
   ilustrativas na interface. Não representam clientes nem o espaço real.
 - Não foram publicadas avaliações ou notas fictícias. O componente aceita
   avaliações verificadas em `src/content.js`; enquanto vazio, exibe um convite
-  para conhecer a marca no Instagram. Inserir depoimentos e URL oficial do Google
-  é a pendência de conteúdo para concluir a prova social solicitada.
+  para conhecer a marca no Instagram. Inserir depoimentos reais é uma pendência
+  editorial futura.
 - Fotografias reais do atendimento e da equipe são a próxima melhoria editorial.
 
 ## Responsividade e acessibilidade
@@ -57,3 +64,4 @@ fontes hospedadas pelo próprio site. Conteúdo pré-renderizado no build.
 - https://d862-bistro-clorofila.demos-673.pages.dev/
 - https://d899-legado-parrilla.demos-673.pages.dev/
 - https://barcelos-lucas.github.io/doggie/
+
