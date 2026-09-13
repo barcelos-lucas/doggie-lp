@@ -237,9 +237,9 @@
 .carousel-track img{aspect-ratio:1;object-fit:contain;background:var(--surface-deep)}
 .carousel-track figcaption{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px;font-size:13px;line-height:1.5;color:var(--muted)}
 .carousel-track figcaption a{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;color:var(--primary)}
-.review-track .review{padding:24px 22px 20px;background:var(--surface-warm)}
+.review-track .review{display:flex;flex-direction:column;padding:24px 22px 20px;background:var(--surface-warm)}
 .review-track .review blockquote{font-size:20px;line-height:1.45;margin:18px 0 24px}
-.review-track .review figcaption{gap:5px}
+.review-track .review figcaption{display:flex;flex-direction:column;align-items:flex-start;gap:5px;margin-top:auto;min-height:34px}
 .review-track .review figcaption strong{font-size:13px}
 .review-track .review figcaption span{font-size:11px}
 .portfolio-carousel>.text-link{margin-top:20px}
