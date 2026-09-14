@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import {
-  ArrowUpRight, Bathtub, Cat, CaretLeft, CaretRight, Check, Clock, Heart, InstagramLogo, List, MapPin, PawPrint,
+  ArrowUpRight, Bathtub, CaretLeft, CaretRight, Certificate, Check, Clock, HairDryer, Heart, InstagramLogo, List, MapPin, PawPrint,
   Scissors, Sparkle, Star, WhatsappLogo, X,
 } from '@phosphor-icons/react';
 import {
@@ -9,8 +9,8 @@ import {
 } from './content.js';
 
 const iconProps = { size: 22, weight: 'regular', 'aria-hidden': true };
-const pillarIcons = { paw: PawPrint, heart: Heart, sparkle: Sparkle, clock: Clock };
-const serviceIcons = { bath: Bathtub, scissors: Scissors, sparkle: Sparkle };
+const pillarIcons = { paw: PawPrint, heart: Heart, certificate: Certificate, clock: Clock };
+const serviceIcons = { bath: Bathtub, scissors: Scissors, dryer: HairDryer };
 const careHighlights = [
   { label: 'Agendamento personalizado', icon: Clock },
   { label: 'Técnica para cada pelagem', icon: Scissors },
@@ -46,6 +46,16 @@ function Brand() {
   </a>;
 }
 
+function CatPaw({ filled = false }) {
+  return <svg width="19" height="19" viewBox="0 0 24 24" fill={filled ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" aria-hidden="true">
+    <ellipse cx="5" cy="9" rx="2" ry="2.6" transform="rotate(-25 5 9)" />
+    <ellipse cx="9.5" cy="5.5" rx="2" ry="2.7" transform="rotate(-8 9.5 5.5)" />
+    <ellipse cx="14.5" cy="5.5" rx="2" ry="2.7" transform="rotate(8 14.5 5.5)" />
+    <ellipse cx="19" cy="9" rx="2" ry="2.6" transform="rotate(25 19 9)" />
+    <path d="M12 11c-2.2 0-3.2 2.2-4.9 4.1-1.2 1.4-1.5 3.1-.5 4.3 1.2 1.4 3.4.1 5.4.1s4.2 1.3 5.4-.1c1-1.2.7-2.9-.5-4.3C15.2 13.2 14.2 11 12 11Z" />
+  </svg>;
+}
+
 function ThemeToggle() {
   const [dark, setDark] = useState(false);
   useEffect(() => {
@@ -62,8 +72,8 @@ function ThemeToggle() {
     try { window.localStorage.setItem('doggie-theme', next ? 'dark' : 'light'); } catch { /* Keep the theme usable without persistence. */ }
   };
   return <button type="button" role="switch" aria-checked={dark} className={`theme-toggle ${dark ? 'is-dark' : ''}`} onClick={toggle} aria-label="Modo escuro" title={dark ? 'Ativar modo claro' : 'Ativar modo escuro'}>
-    <span className="theme-option theme-day" aria-hidden="true"><PawPrint size={19} weight="regular" /><span>Dia</span></span>
-    <span className="theme-option theme-night" aria-hidden="true"><Cat size={19} weight="regular" /><span>Noite</span></span>
+    <span className="theme-option theme-day" aria-hidden="true"><CatPaw /><span>Claro</span></span>
+    <span className="theme-option theme-night" aria-hidden="true"><CatPaw filled /><span>Escuro</span></span>
   </button>;
 }
 
@@ -123,7 +133,7 @@ function PlansSection() {
         <span className="plan-frequency">{plan.frequency}</span><strong>{plan.economy}</strong>
       </label>)}
     </div></fieldset>
-    <div className="plan-action"><p aria-live="polite">Vamos conversar sobre o plano <strong>{selected.toLowerCase()}</strong>?</p>
+    <div className="plan-action"><p aria-live="polite"><strong>Vamos conversar sobre os planos de cuidados?</strong></p>
       <a className="button whatsapp" href={whatsappUrl(`Plano de cuidados ${selected}`)} target="_blank" rel="noopener noreferrer" data-cta="plans"><WhatsappLogo {...iconProps} /><span>Quero conhecer o plano {selected.toLowerCase()}</span><ArrowUpRight size={18} aria-hidden="true" /></a>
       <small>A escolha é um primeiro passo. A Tia Bia te ajuda a definir o cuidado ideal.</small>
     </div>
@@ -136,23 +146,23 @@ function PortfolioCarousel({ items }) {
     if (!el?.firstElementChild) return;
     const gap = parseFloat(getComputedStyle(el).gap || '16') || 16;
     const step = el.firstElementChild.getBoundingClientRect().width + gap;
-    const cycle = el.children[items.length]?.offsetLeft ?? 0;
-    let next = el.scrollLeft + direction * step;
-    if (cycle > 0 && next >= cycle) next -= cycle;
-    if (cycle > 0 && next < 0) next += cycle;
+    const max = el.scrollWidth - el.clientWidth;
+    const next = direction > 0
+      ? (el.scrollLeft >= max - 2 ? 0 : Math.min(max, el.scrollLeft + step))
+      : (el.scrollLeft <= 2 ? max : Math.max(0, el.scrollLeft - step));
     const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
     el.scrollTo({ left: next, behavior });
   };
-  const renderCard = (item, index, clone = false) => <figure className="comparison-card" key={`${item.url}-${clone ? 'loop-' : ''}${index}`} role="group" aria-hidden={clone || undefined} aria-label={clone ? undefined : `${index + 1} de ${items.length}: ${item.caption}`}>
+  const renderCard = (item, index) => <figure className="portfolio-card" key={item.url} role="group" aria-label={`${index + 1} de ${items.length}: ${item.alt}`}>
     <div className="portfolio-media">
-      {item.type === 'video' ? <video src={item.src} poster={item.poster} controls playsInline preload="none" aria-label={item.alt} tabIndex={clone ? -1 : undefined} onPlay={(event) => { document.querySelectorAll('.portfolio-media video').forEach((video) => { if (video !== event.currentTarget) video.pause(); }); }} /> : <img src={item.src} alt={clone ? '' : item.alt} width="900" height="900" loading="lazy" />}
+      {item.type === 'video' ? <video src={item.src} poster={item.poster} controls playsInline preload="none" aria-label={item.alt} onPlay={(event) => { document.querySelectorAll('.portfolio-media video').forEach((video) => { if (video !== event.currentTarget) video.pause(); }); }} /> : <img src={item.src} alt={item.alt} width="900" height="900" loading="lazy" />}
     </div>
-    <figcaption><span>{item.caption}</span><a href={item.url} tabIndex={clone ? -1 : undefined} target="_blank" rel="noopener noreferrer" aria-label={`Ver publicação original: ${item.caption}`}><InstagramLogo size={18} aria-hidden="true" /><ArrowUpRight size={16} aria-hidden="true" /></a></figcaption>
+    <figcaption><a className="portfolio-instagram" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={`Ver no Instagram: ${item.alt}`}><InstagramLogo size={18} aria-hidden="true" /><span>Ver no Instagram</span><ArrowUpRight size={16} aria-hidden="true" /></a></figcaption>
   </figure>;
   return <div className="portfolio-carousel" role="region" aria-roledescription="carrossel" aria-label="Trabalhos da Tia Bia">
     <div className="carousel-controls"><span>Feitos com cuidado pela Tia Bia</span><div><button type="button" onClick={() => move(-1)} aria-label="Foto anterior"><CaretLeft size={19} weight="bold" aria-hidden="true" /></button><button type="button" onClick={() => move(1)} aria-label="Próxima foto"><CaretRight size={19} weight="bold" aria-hidden="true" /></button></div></div>
     <div ref={track} className="carousel-track" tabIndex={0} aria-label="Fotos dos trabalhos; arraste para navegar" onKeyDown={(event) => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); move(event.key === 'ArrowRight' ? 1 : -1); } }}>
-      {[...items, ...items].map((item, index) => renderCard(item, index % items.length, index >= items.length))}
+      {items.map(renderCard)}
     </div>
     <a className="text-link" href={business.biaInstagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={19} aria-hidden="true" />Mais trabalhos da Tia Bia<ArrowUpRight size={18} aria-hidden="true" /></a>
   </div>;

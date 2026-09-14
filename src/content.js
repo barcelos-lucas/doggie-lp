@@ -31,7 +31,7 @@ export function whatsappUrl(intent = 'booking') {
 export const carePillars = [
   { title: 'Atendimento personalizado', description: 'Cada pet é avaliado de forma individual, considerando pelagem, comportamento, rotina e necessidades específicas.', icon: 'paw' },
   { title: 'Mais tranquilidade, menos estresse', description: 'Atendimento com tempo reservado, respeitando o comportamento e os limites de cada pet.', icon: 'heart' },
-  { title: 'Conhecimento técnico que faz diferença', description: 'As técnicas são escolhidas com critério, respeitando as características do pelo e as necessidades de cada pet.', icon: 'sparkle' },
+  { title: 'Conhecimento técnico que faz diferença', description: 'As técnicas são escolhidas com critério, respeitando as características do pelo e as necessidades de cada pet.', icon: 'certificate' },
   { title: 'Tempo e atenção para cada pet', description: 'Sem atendimento apressado. Cada horário permite um cuidado mais calmo, atento e bem executado.', icon: 'clock' },
 ];
 
@@ -42,7 +42,7 @@ export const serviceCategories = [
     items: ['Banho', 'Escovação', 'Manutenção periódica', 'Banho terapêutico', 'Cuidados para pele sensível', 'Cuidados para oleosidade', 'Cuidados para ressecamento', 'Protocolos específicos', 'Escovação de dentes'],
   },
   {
-    eyebrow: '02 · TÉCNICA E PELO', title: 'Técnica & pelagem', icon: 'sparkle',
+    eyebrow: '02 · TÉCNICA E PELO', title: 'Técnica & pelagem', icon: 'dryer',
     description: 'Cada pelagem exige um olhar específico, com técnicas e cuidados adequados para cada necessidade.',
     items: ['Hidratação', 'Cronograma de pelagem', 'Desembolo', 'Carding', 'Remoção de pelos mortos'],
   },
@@ -61,47 +61,67 @@ export const plans = [
 // Existing local work photos; replace with the requested selection once supplied.
 export const portfolio = [
   {
+    "type": "video",
+    "src": "/images/portfolio/DGlvVqdJlnO.mp4",
+    "poster": "/images/portfolio/DGlvVqdJlnO-poster.webp",
+    "alt": "Vídeo da tosa do Theo pela Tia Bia",
+    "url": "https://www.instagram.com/reel/DGlvVqdJlnO/"
+  },
+  {
+    "type": "video",
+    "src": "/images/portfolio/DaEQp_1tUoj.mp4",
+    "alt": "Vídeo do cuidado com um Spitz Alemão",
+    "url": "https://www.instagram.com/p/DaEQp_1tUoj/",
+    "poster": "/images/portfolio/DaEQp_1tUoj-poster.webp"
+  },
+  {
+    "type": "video",
+    "src": "/images/portfolio/C_OA0Q4xS8V.mp4",
+    "poster": "/images/portfolio/C_OA0Q4xS8V-poster.webp",
+    "alt": "Vídeo da transformação do Charlie com a Tia Bia",
+    "url": "https://www.instagram.com/p/C_OA0Q4xS8V/"
+  },
+  {
     "type": "image",
     "src": "/images/portfolio/DEimVqgpRwy-work.webp",
     "alt": "Golden Retriever cuidado pela Tia Bia",
-    "caption": "Golden Retriever",
     "url": "https://www.instagram.com/p/DEimVqgpRwy/?img_index=5"
   },
   {
     "type": "image",
     "src": "/images/portfolio/DP98t3QDaIt-work.webp",
     "alt": "Yorkshire com a tosa finalizada",
-    "caption": "Yorkshire",
     "url": "https://www.instagram.com/p/DP98t3QDaIt/?img_index=4"
-  },
-  {
-    "type": "video",
-    "src": "/images/portfolio/DaEQp_1tUoj.mp4",
-    "alt": "Vídeo do cuidado com um Spitz Alemão",
-    "caption": "Spitz em movimento",
-    "url": "https://www.instagram.com/p/DaEQp_1tUoj/",
-    "poster": "/images/portfolio/DaEQp_1tUoj-poster.webp"
   },
   {
     "type": "image",
     "src": "/images/portfolio/DbMRvjmicaF-work.webp",
     "alt": "Spitz com pelagem finalizada",
-    "caption": "Spitz Alemão",
     "url": "https://www.instagram.com/p/DbMRvjmicaF/?img_index=5"
   },
   {
     "type": "image",
     "src": "/images/portfolio/DbMSwt_iVEP-work.webp",
     "alt": "Kiara após os cuidados da Tia Bia",
-    "caption": "Kiara",
     "url": "https://www.instagram.com/p/DbMSwt_iVEP/?img_index=2"
   },
   {
     "type": "image",
     "src": "/images/portfolio/DcR_3ayjRfB-work.webp",
     "alt": "Celeste com a tosa finalizada",
-    "caption": "Celeste",
     "url": "https://www.instagram.com/p/DcR_3ayjRfB/?img_index=3"
+  },
+  {
+    "type": "image",
+    "src": "/images/portfolio/DPm4VGZEvnu-work.webp",
+    "alt": "Tosa realizada pela Tia Bia",
+    "url": "https://www.instagram.com/p/DPm4VGZEvnu/?img_index=1"
+  },
+  {
+    "type": "image",
+    "src": "/images/portfolio/C_jPWxUxPlF-work.webp",
+    "alt": "Shih-tzu com tosa finalizada e laço verde",
+    "url": "https://www.instagram.com/p/C_jPWxUxPlF/?img_index=2"
   }
 ];
 
