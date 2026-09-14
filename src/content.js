@@ -62,45 +62,46 @@ export const plans = [
 export const portfolio = [
   {
     "type": "image",
-    "src": "/images/portfolio/DcR_3ayjRfB-after.webp",
-    "alt": "Cão branco finalizado com laços vermelhos",
-    "caption": "Celeste · tosa bebê",
-    "url": "https://www.instagram.com/tiabiatosadora/p/DcR_3ayjRfB/"
+    "src": "/images/portfolio/DEimVqgpRwy-work.webp",
+    "alt": "Golden Retriever cuidado pela Tia Bia",
+    "caption": "Golden Retriever",
+    "url": "https://www.instagram.com/p/DEimVqgpRwy/?img_index=5"
   },
   {
     "type": "image",
-    "src": "/images/portfolio/DcR_uAFDSed-after.webp",
-    "alt": "Cão marrom e branco finalizado com gravata verde",
-    "caption": "Primeira tosa · carinho desde o início",
-    "url": "https://www.instagram.com/tiabiatosadora/p/DcR_uAFDSed/"
+    "src": "/images/portfolio/DP98t3QDaIt-work.webp",
+    "alt": "Yorkshire com a tosa finalizada",
+    "caption": "Yorkshire",
+    "url": "https://www.instagram.com/p/DP98t3QDaIt/?img_index=4"
+  },
+  {
+    "type": "video",
+    "src": "/images/portfolio/DaEQp_1tUoj.mp4",
+    "alt": "Vídeo do cuidado com um Spitz Alemão",
+    "caption": "Spitz em movimento",
+    "url": "https://www.instagram.com/p/DaEQp_1tUoj/",
+    "poster": "/images/portfolio/DaEQp_1tUoj-poster.webp"
   },
   {
     "type": "image",
-    "src": "/images/portfolio/DcR-7JgjWhz-before.webp",
-    "alt": "Cão de pelagem preta e dourada finalizado",
-    "caption": "Técnica para cada pelagem",
-    "url": "https://www.instagram.com/tiabiatosadora/p/DcR-7JgjWhz/"
+    "src": "/images/portfolio/DbMRvjmicaF-work.webp",
+    "alt": "Spitz com pelagem finalizada",
+    "caption": "Spitz Alemão",
+    "url": "https://www.instagram.com/p/DbMRvjmicaF/?img_index=5"
   },
   {
     "type": "image",
-    "src": "/images/portfolio/DcR-HVmDYhQ-after.webp",
-    "alt": "Spitz finalizado com pelagem volumosa",
-    "caption": "Spitz · acabamento com personalidade",
-    "url": "https://www.instagram.com/tiabiatosadora/p/DcR-HVmDYhQ/"
+    "src": "/images/portfolio/DbMSwt_iVEP-work.webp",
+    "alt": "Kiara após os cuidados da Tia Bia",
+    "caption": "Kiara",
+    "url": "https://www.instagram.com/p/DbMSwt_iVEP/?img_index=2"
   },
   {
     "type": "image",
-    "src": "/images/portfolio/DbMSwt_iVEP-before.webp",
-    "alt": "Cão de pelagem alaranjada finalizado",
-    "caption": "Kiara · resultado que se vê",
-    "url": "https://www.instagram.com/tiabiatosadora/p/DbMSwt_iVEP/"
-  },
-  {
-    "type": "image",
-    "src": "/images/portfolio/DbMSgaFiScR-before.webp",
-    "alt": "Cão de pelagem creme finalizado",
-    "caption": "Miss simpatia · cuidado em cada detalhe",
-    "url": "https://www.instagram.com/tiabiatosadora/p/DbMSgaFiScR/"
+    "src": "/images/portfolio/DcR_3ayjRfB-work.webp",
+    "alt": "Celeste com a tosa finalizada",
+    "caption": "Celeste",
+    "url": "https://www.instagram.com/p/DcR_3ayjRfB/?img_index=3"
   }
 ];
 
