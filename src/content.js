@@ -5,7 +5,7 @@ export const business = {
   slogan: 'cuidado que encanta',
   phone: '5511925850201',
   displayPhone: '(11) 92585-0201',
-  district: 'Assunção',
+  district: 'Demarchi',
   city: 'São Bernardo do Campo',
   state: 'SP',
   street: 'R. Heitor de Souza, 190',
@@ -58,53 +58,47 @@ export const plans = [
   { name: 'Quinzenal', description: 'Para quem quer manter os cuidados em dia com uma rotina quinzenal.', includes: ['2 banhos', '1 tosa higiênica inclusa'], frequency: 'Uma semana com atendimento e a semana seguinte sem, repetindo esse ciclo em frequência quinzenal.', economy: 'Cerca de 15% de economia' },
 ];
 
-// Pares selecionados dos seis posts mais recentes do Instagram da Tia Bia.
+// Existing local work photos; replace with the requested selection once supplied.
 export const portfolio = [
   {
-    "after": "/images/portfolio/DcR_3ayjRfB-after.webp",
-    "before": "/images/portfolio/DcR_3ayjRfB-before.webp",
-    "afterAlt": "Cão branco finalizado com laços vermelhos",
-    "beforeAlt": "Cão branco antes da finalização",
+    "type": "image",
+    "src": "/images/portfolio/DcR_3ayjRfB-after.webp",
+    "alt": "Cão branco finalizado com laços vermelhos",
     "caption": "Celeste · tosa bebê",
     "url": "https://www.instagram.com/tiabiatosadora/p/DcR_3ayjRfB/"
   },
   {
-    "after": "/images/portfolio/DcR_uAFDSed-after.webp",
-    "before": "/images/portfolio/DcR_uAFDSed-before.webp",
-    "afterAlt": "Cão marrom e branco finalizado com gravata verde",
-    "beforeAlt": "Cão marrom e branco antes da finalização",
+    "type": "image",
+    "src": "/images/portfolio/DcR_uAFDSed-after.webp",
+    "alt": "Cão marrom e branco finalizado com gravata verde",
     "caption": "Primeira tosa · carinho desde o início",
     "url": "https://www.instagram.com/tiabiatosadora/p/DcR_uAFDSed/"
   },
   {
-    "after": "/images/portfolio/DcR-7JgjWhz-before.webp",
-    "before": "/images/portfolio/DcR-7JgjWhz-after.webp",
-    "afterAlt": "Cão de pelagem preta e dourada finalizado",
-    "beforeAlt": "Cão de pelagem preta e dourada antes da finalização",
+    "type": "image",
+    "src": "/images/portfolio/DcR-7JgjWhz-before.webp",
+    "alt": "Cão de pelagem preta e dourada finalizado",
     "caption": "Técnica para cada pelagem",
     "url": "https://www.instagram.com/tiabiatosadora/p/DcR-7JgjWhz/"
   },
   {
-    "after": "/images/portfolio/DcR-HVmDYhQ-after.webp",
-    "before": "/images/portfolio/DcR-HVmDYhQ-before.webp",
-    "afterAlt": "Spitz finalizado com pelagem volumosa",
-    "beforeAlt": "Spitz antes da finalização",
+    "type": "image",
+    "src": "/images/portfolio/DcR-HVmDYhQ-after.webp",
+    "alt": "Spitz finalizado com pelagem volumosa",
     "caption": "Spitz · acabamento com personalidade",
     "url": "https://www.instagram.com/tiabiatosadora/p/DcR-HVmDYhQ/"
   },
   {
-    "after": "/images/portfolio/DbMSwt_iVEP-before.webp",
-    "before": "/images/portfolio/DbMSwt_iVEP-after.webp",
-    "afterAlt": "Cão de pelagem alaranjada finalizado",
-    "beforeAlt": "Cão de pelagem alaranjada antes da finalização",
+    "type": "image",
+    "src": "/images/portfolio/DbMSwt_iVEP-before.webp",
+    "alt": "Cão de pelagem alaranjada finalizado",
     "caption": "Kiara · resultado que se vê",
     "url": "https://www.instagram.com/tiabiatosadora/p/DbMSwt_iVEP/"
   },
   {
-    "after": "/images/portfolio/DbMSgaFiScR-before.webp",
-    "before": "/images/portfolio/DbMSgaFiScR-after.webp",
-    "afterAlt": "Cão de pelagem creme finalizado",
-    "beforeAlt": "Cão de pelagem creme antes da finalização",
+    "type": "image",
+    "src": "/images/portfolio/DbMSgaFiScR-before.webp",
+    "alt": "Cão de pelagem creme finalizado",
     "caption": "Miss simpatia · cuidado em cada detalhe",
     "url": "https://www.instagram.com/tiabiatosadora/p/DbMSgaFiScR/"
   }
@@ -115,7 +109,7 @@ export const specialties = ['Tosa bebê', 'Tosa na tesoura em pelagem lisa', 'Tr
 export const experienceSteps = [
   { number: '01', title: 'Primeiro contato', description: 'Você conta um pouco sobre o seu pet, o que procura e tudo o que gostaria de incluir no atendimento. A partir disso, orientamos sobre o serviço mais adequado.' },
   { number: '02', title: 'Avaliação e definição do cuidado', description: 'Antes do atendimento, avaliamos pelagem, condição do pelo, rotina e particularidades do pet. A partir disso, explicamos o que ele precisa naquele momento e alinhamos com você os cuidados e adicionais que farão parte do atendimento.' },
-  { number: '03', title: 'Atendimento com tempo e atenção', description: 'O pet é atendido com calma, respeitando seu comportamento, seus limites e o tempo necessário para cada cuidado.', badge: '1 pet por horário' },
+  { number: '03', title: 'Atendimento com tempo e atenção', description: 'O pet é atendido com calma, respeitando seu comportamento, seus limites e o tempo necessário para cada cuidado.', badge: 'Agendamento personalizado' },
   { number: '04', title: 'Finalização e orientação', description: 'Ao final, você recebe as orientações necessárias para manter os cuidados em casa e ajudar a prolongar o resultado do atendimento.' },
 ];
 

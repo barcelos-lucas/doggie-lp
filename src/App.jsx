@@ -3,7 +3,6 @@ import {
   ArrowUpRight, Bathtub, Cat, CaretLeft, CaretRight, Check, Clock, Heart, InstagramLogo, List, MapPin, PawPrint,
   Scissors, Sparkle, Star, WhatsappLogo, X,
 } from '@phosphor-icons/react';
-import MapPanel from './MapPanel.jsx';
 import {
   business, carePillars, experienceSteps, faqs, mapsUrl, plans, portfolio, reviewExamples, reviews,
   reviewsProfileUrl, serviceCategories, specialties, whatsappUrl,
@@ -13,7 +12,7 @@ const iconProps = { size: 22, weight: 'regular', 'aria-hidden': true };
 const pillarIcons = { paw: PawPrint, heart: Heart, sparkle: Sparkle, clock: Clock };
 const serviceIcons = { bath: Bathtub, scissors: Scissors, sparkle: Sparkle };
 const careHighlights = [
-  { label: '1 pet por horário', icon: Clock },
+  { label: 'Agendamento personalizado', icon: Clock },
   { label: 'Técnica para cada pelagem', icon: Scissors },
   { label: 'Banho com tempo e calma', icon: Heart },
   { label: 'Avaliação individual', icon: PawPrint },
@@ -146,9 +145,8 @@ function PortfolioCarousel({ items }) {
     el.scrollTo({ left: next, behavior });
   };
   const renderCard = (item, index, clone = false) => <figure className="comparison-card" key={`${item.url}-${clone ? 'loop-' : ''}${index}`} role="group" aria-hidden={clone || undefined} aria-label={clone ? undefined : `${index + 1} de ${items.length}: ${item.caption}`}>
-    <div className="comparison-pair">
-      <div className="comparison-frame"><span className="comparison-label">Antes</span><img src={item.before} alt={clone ? '' : item.beforeAlt} width="900" height="900" loading="lazy" /></div>
-      <div className="comparison-frame is-after"><span className="comparison-label">Depois</span><img src={item.after} alt={clone ? '' : item.afterAlt} width="900" height="900" loading="lazy" /></div>
+    <div className="portfolio-media">
+      {item.type === 'video' ? <video src={item.src} poster={item.poster} controls playsInline preload="none" aria-label={item.alt} tabIndex={clone ? -1 : undefined} onPlay={(event) => { document.querySelectorAll('.portfolio-media video').forEach((video) => { if (video !== event.currentTarget) video.pause(); }); }} /> : <img src={item.src} alt={clone ? '' : item.alt} width="900" height="900" loading="lazy" />}
     </div>
     <figcaption><span>{item.caption}</span><a href={item.url} tabIndex={clone ? -1 : undefined} target="_blank" rel="noopener noreferrer" aria-label={`Ver publicação original: ${item.caption}`}><InstagramLogo size={18} aria-hidden="true" /><ArrowUpRight size={16} aria-hidden="true" /></a></figcaption>
   </figure>;
@@ -225,7 +223,7 @@ export default function App() {
           <p className="hero-description">Atendimento individual, técnica e tranquilidade para cuidar de cada pet de forma única.</p>
           <WhatsAppButton placement="hero" />
         </div>
-        <div className="hero-visual"><figure className="hero-photo"><img src="/images/hero-960.webp" srcSet="/images/hero-640.webp 640w, /images/hero-960.webp 960w" sizes="(min-width: 1024px) 46vw, 90vw" width="960" height="1200" alt="Cão com bandana terracota; foto provisória enquanto a foto real da Tia Bia é produzida" fetchPriority="high" /><figcaption>Imagem provisória</figcaption></figure><div className="care-seal" aria-label="Um pet por horário"><PawPrint weight="light" size={31} aria-hidden="true" /><span>1 pet<br />por horário</span></div><p className="photo-note">tempo para cuidar bem.</p></div>
+        <div className="hero-visual"><figure className="hero-photo"><img src="/images/hero-960.webp" srcSet="/images/hero-640.webp 640w, /images/hero-960.webp 960w" sizes="(min-width: 1024px) 46vw, 90vw" width="960" height="1200" alt="Cão com bandana terracota; foto provisória enquanto a foto real da Tia Bia é produzida" fetchPriority="high" /><figcaption>Imagem provisória</figcaption></figure><div className="care-seal" aria-label="Agendamento personalizado"><PawPrint weight="light" size={31} aria-hidden="true" /><span>Agendamento<br />personalizado</span></div><p className="photo-note">tempo para cuidar bem.</p></div>
       </section>
 
       <CareRibbon />
@@ -248,7 +246,7 @@ export default function App() {
 
       <section id="duvidas" className="section faq-section"><div className="container faq-grid" data-reveal><div><p className="eyebrow">COMBINE TUDO COM TRANQUILIDADE</p><h2>O que você<br /><em>precisa saber.</em></h2></div><div className="faqs">{faqs.map((faq) => <details key={faq.question}><summary>{faq.question}<span className="faq-symbol" aria-hidden="true">+</span></summary><p>{faq.answer}</p></details>)}</div></div></section>
 
-      <section id="localizacao" className="section location-section"><div className="container location-grid" data-reveal><div className="location-copy"><p className="eyebrow"><MapPin size={15} weight="duotone" aria-hidden="true" /> PERTINHO DE VOCÊ</p><h2>Onde <em>estamos.</em></h2><div className="location-address-block"><span className="location-pin"><MapPin size={24} weight="duotone" aria-hidden="true" /></span><div><span className="location-label">Endereço</span><strong>R. Heitor de Souza, 190</strong><p>Assunção · São Bernardo do Campo, SP</p></div></div><p className="location-note"><Clock size={18} weight="duotone" aria-hidden="true" /> Atendimento com horário agendado</p><div className="location-directions"><a className="button outline" href={mapsUrl} target="_blank" rel="noopener noreferrer"><MapPin {...iconProps} /> Abrir no Google Maps <ArrowUpRight size={18} aria-hidden="true" /></a><a className="button outline" href={business.wazeUrl} target="_blank" rel="noopener noreferrer"><MapPin {...iconProps} /> Abrir no Waze <ArrowUpRight size={18} aria-hidden="true" /></a></div></div><MapPanel /></div></section>
+      <section id="localizacao" className="section location-section"><div className="container location-grid location-single" data-reveal><div className="location-copy"><p className="eyebrow"><MapPin size={15} weight="duotone" aria-hidden="true" /> PERTINHO DE VOCÊ</p><h2>Onde <em>estamos.</em></h2><div className="location-address-block"><span className="location-pin"><MapPin size={24} weight="duotone" aria-hidden="true" /></span><div><span className="location-label">Endereço</span><strong>R. Heitor de Souza, 190</strong><p>Demarchi · São Bernardo do Campo, SP</p></div></div><p className="location-note"><Clock size={18} weight="duotone" aria-hidden="true" /> Atendimento com horário agendado</p><div className="location-directions"><a className="button outline" href={mapsUrl} target="_blank" rel="noopener noreferrer"><MapPin {...iconProps} /> Abrir no Google Maps <ArrowUpRight size={18} aria-hidden="true" /></a><a className="button outline" href={business.wazeUrl} target="_blank" rel="noopener noreferrer"><MapPin {...iconProps} /> Abrir no Waze <ArrowUpRight size={18} aria-hidden="true" /></a></div></div></div></section>
 
       <section className="closing"><div className="container"><PawPrint size={44} weight="light" aria-hidden="true" /><h2>Pronto para proporcionar<br /><em>um novo padrão de cuidado ao seu pet?</em></h2><p>Fale com a Tia Bia e consulte um horário pelo WhatsApp.</p><WhatsAppButton placement="closing" /></div></section>
     </main>
