@@ -1,19 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import {
-  ArrowUpRight, Bathtub, Cat, CaretLeft, CaretRight, Check, Clock, Heart, InstagramLogo, List, MapPin, PawPrint,
+  ArrowUpRight, Bathtub, CaretLeft, CaretRight, Certificate, Check, Clock, HairDryer, Heart, InstagramLogo, List, MapPin, PawPrint,
   Scissors, Sparkle, Star, WhatsappLogo, X,
 } from '@phosphor-icons/react';
-import MapPanel from './MapPanel.jsx';
 import {
   business, carePillars, experienceSteps, faqs, mapsUrl, plans, portfolio, reviewExamples, reviews,
   reviewsProfileUrl, serviceCategories, specialties, whatsappUrl,
 } from './content.js';
 
 const iconProps = { size: 22, weight: 'regular', 'aria-hidden': true };
-const pillarIcons = { paw: PawPrint, heart: Heart, sparkle: Sparkle, clock: Clock };
-const serviceIcons = { bath: Bathtub, scissors: Scissors, sparkle: Sparkle };
+const pillarIcons = { paw: PawPrint, heart: Heart, certificate: Certificate, clock: Clock };
+const serviceIcons = { bath: Bathtub, scissors: Scissors, dryer: HairDryer };
 const careHighlights = [
-  { label: '1 pet por horário', icon: Clock },
+  { label: 'Agendamento personalizado', icon: Clock },
   { label: 'Técnica para cada pelagem', icon: Scissors },
   { label: 'Banho com tempo e calma', icon: Heart },
   { label: 'Avaliação individual', icon: PawPrint },
@@ -47,13 +46,22 @@ function Brand() {
   </a>;
 }
 
+function CatPaw({ filled = false }) {
+  return <svg width="19" height="19" viewBox="0 0 24 24" fill={filled ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" aria-hidden="true">
+    <ellipse cx="5" cy="9" rx="2" ry="2.6" transform="rotate(-25 5 9)" />
+    <ellipse cx="9.5" cy="5.5" rx="2" ry="2.7" transform="rotate(-8 9.5 5.5)" />
+    <ellipse cx="14.5" cy="5.5" rx="2" ry="2.7" transform="rotate(8 14.5 5.5)" />
+    <ellipse cx="19" cy="9" rx="2" ry="2.6" transform="rotate(25 19 9)" />
+    <path d="M12 11c-2.2 0-3.2 2.2-4.9 4.1-1.2 1.4-1.5 3.1-.5 4.3 1.2 1.4 3.4.1 5.4.1s4.2 1.3 5.4-.1c1-1.2.7-2.9-.5-4.3C15.2 13.2 14.2 11 12 11Z" />
+  </svg>;
+}
+
 function ThemeToggle() {
   const [dark, setDark] = useState(false);
   useEffect(() => {
     let stored;
     try { stored = window.localStorage.getItem('doggie-theme'); } catch { /* Storage can be disabled. */ }
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const next = stored ? stored === 'dark' : prefersDark;
+    const next = stored === 'dark';
     setDark(next);
     document.documentElement.dataset.theme = next ? 'dark' : 'light';
   }, []);
@@ -64,8 +72,8 @@ function ThemeToggle() {
     try { window.localStorage.setItem('doggie-theme', next ? 'dark' : 'light'); } catch { /* Keep the theme usable without persistence. */ }
   };
   return <button type="button" role="switch" aria-checked={dark} className={`theme-toggle ${dark ? 'is-dark' : ''}`} onClick={toggle} aria-label="Modo escuro" title={dark ? 'Ativar modo claro' : 'Ativar modo escuro'}>
-    <span className="theme-option theme-day" aria-hidden="true"><PawPrint size={19} weight="regular" /><span>Dia</span></span>
-    <span className="theme-option theme-night" aria-hidden="true"><Cat size={19} weight="regular" /><span>Noite</span></span>
+    <span className="theme-option theme-day" aria-hidden="true"><CatPaw /><span>Claro</span></span>
+    <span className="theme-option theme-night" aria-hidden="true"><CatPaw filled /><span>Escuro</span></span>
   </button>;
 }
 
@@ -125,7 +133,7 @@ function PlansSection() {
         <span className="plan-frequency">{plan.frequency}</span><strong>{plan.economy}</strong>
       </label>)}
     </div></fieldset>
-    <div className="plan-action"><p aria-live="polite">Vamos conversar sobre o plano <strong>{selected.toLowerCase()}</strong>?</p>
+    <div className="plan-action"><p aria-live="polite"><strong>Vamos conversar sobre os planos de cuidados?</strong></p>
       <a className="button whatsapp" href={whatsappUrl(`Plano de cuidados ${selected}`)} target="_blank" rel="noopener noreferrer" data-cta="plans"><WhatsappLogo {...iconProps} /><span>Quero conhecer o plano {selected.toLowerCase()}</span><ArrowUpRight size={18} aria-hidden="true" /></a>
       <small>A escolha é um primeiro passo. A Tia Bia te ajuda a definir o cuidado ideal.</small>
     </div>
@@ -138,24 +146,23 @@ function PortfolioCarousel({ items }) {
     if (!el?.firstElementChild) return;
     const gap = parseFloat(getComputedStyle(el).gap || '16') || 16;
     const step = el.firstElementChild.getBoundingClientRect().width + gap;
-    const cycle = el.children[items.length]?.offsetLeft ?? 0;
-    let next = el.scrollLeft + direction * step;
-    if (cycle > 0 && next >= cycle) next -= cycle;
-    if (cycle > 0 && next < 0) next += cycle;
+    const max = el.scrollWidth - el.clientWidth;
+    const next = direction > 0
+      ? (el.scrollLeft >= max - 2 ? 0 : Math.min(max, el.scrollLeft + step))
+      : (el.scrollLeft <= 2 ? max : Math.max(0, el.scrollLeft - step));
     const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
     el.scrollTo({ left: next, behavior });
   };
-  const renderCard = (item, index, clone = false) => <figure className="comparison-card" key={`${item.url}-${clone ? 'loop-' : ''}${index}`} role="group" aria-hidden={clone || undefined} aria-label={clone ? undefined : `${index + 1} de ${items.length}: ${item.caption}`}>
-    <div className="comparison-pair">
-      <div className="comparison-frame"><span className="comparison-label">Antes</span><img src={item.before} alt={clone ? '' : item.beforeAlt} width="900" height="900" loading="lazy" /></div>
-      <div className="comparison-frame is-after"><span className="comparison-label">Depois</span><img src={item.after} alt={clone ? '' : item.afterAlt} width="900" height="900" loading="lazy" /></div>
+  const renderCard = (item, index) => <figure className="portfolio-card" key={item.url} role="group" aria-label={`${index + 1} de ${items.length}: ${item.alt}`}>
+    <div className="portfolio-media">
+      {item.type === 'video' ? <video src={item.src} poster={item.poster} controls playsInline preload="none" aria-label={item.alt} onPlay={(event) => { document.querySelectorAll('.portfolio-media video').forEach((video) => { if (video !== event.currentTarget) video.pause(); }); }} /> : <img src={item.src} alt={item.alt} width="900" height="900" loading="lazy" />}
     </div>
-    <figcaption><span>{item.caption}</span><a href={item.url} tabIndex={clone ? -1 : undefined} target="_blank" rel="noopener noreferrer" aria-label={`Ver publicação original: ${item.caption}`}><InstagramLogo size={18} aria-hidden="true" /><ArrowUpRight size={16} aria-hidden="true" /></a></figcaption>
+    <figcaption><a className="portfolio-instagram" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={`Ver no Instagram: ${item.alt}`}><InstagramLogo size={18} aria-hidden="true" /><span>Ver no Instagram</span><ArrowUpRight size={16} aria-hidden="true" /></a></figcaption>
   </figure>;
   return <div className="portfolio-carousel" role="region" aria-roledescription="carrossel" aria-label="Trabalhos da Tia Bia">
     <div className="carousel-controls"><span>Feitos com cuidado pela Tia Bia</span><div><button type="button" onClick={() => move(-1)} aria-label="Foto anterior"><CaretLeft size={19} weight="bold" aria-hidden="true" /></button><button type="button" onClick={() => move(1)} aria-label="Próxima foto"><CaretRight size={19} weight="bold" aria-hidden="true" /></button></div></div>
     <div ref={track} className="carousel-track" tabIndex={0} aria-label="Fotos dos trabalhos; arraste para navegar" onKeyDown={(event) => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); move(event.key === 'ArrowRight' ? 1 : -1); } }}>
-      {[...items, ...items].map((item, index) => renderCard(item, index % items.length, index >= items.length))}
+      {items.map(renderCard)}
     </div>
     <a className="text-link" href={business.biaInstagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={19} aria-hidden="true" />Mais trabalhos da Tia Bia<ArrowUpRight size={18} aria-hidden="true" /></a>
   </div>;
@@ -225,7 +232,7 @@ export default function App() {
           <p className="hero-description">Atendimento individual, técnica e tranquilidade para cuidar de cada pet de forma única.</p>
           <WhatsAppButton placement="hero" />
         </div>
-        <div className="hero-visual"><figure className="hero-photo"><img src="/images/hero-960.webp" srcSet="/images/hero-640.webp 640w, /images/hero-960.webp 960w" sizes="(min-width: 1024px) 46vw, 90vw" width="960" height="1200" alt="Cão com bandana terracota; foto provisória enquanto a foto real da Tia Bia é produzida" fetchPriority="high" /><figcaption>Imagem provisória</figcaption></figure><div className="care-seal" aria-label="Um pet por horário"><PawPrint weight="light" size={31} aria-hidden="true" /><span>1 pet<br />por horário</span></div><p className="photo-note">tempo para cuidar bem.</p></div>
+        <div className="hero-visual"><figure className="hero-photo"><img src="/images/hero-960.webp" srcSet="/images/hero-640.webp 640w, /images/hero-960.webp 960w" sizes="(min-width: 1024px) 46vw, 90vw" width="960" height="1200" alt="Cão com bandana terracota; foto provisória enquanto a foto real da Tia Bia é produzida" fetchPriority="high" /><figcaption>Imagem provisória</figcaption></figure><div className="care-seal" aria-label="Agendamento personalizado"><PawPrint weight="light" size={31} aria-hidden="true" /><span>Agendamento<br />personalizado</span></div><p className="photo-note">tempo para cuidar bem.</p></div>
       </section>
 
       <CareRibbon />
@@ -248,7 +255,7 @@ export default function App() {
 
       <section id="duvidas" className="section faq-section"><div className="container faq-grid" data-reveal><div><p className="eyebrow">COMBINE TUDO COM TRANQUILIDADE</p><h2>O que você<br /><em>precisa saber.</em></h2></div><div className="faqs">{faqs.map((faq) => <details key={faq.question}><summary>{faq.question}<span className="faq-symbol" aria-hidden="true">+</span></summary><p>{faq.answer}</p></details>)}</div></div></section>
 
-      <section id="localizacao" className="section location-section"><div className="container location-grid" data-reveal><div className="location-copy"><p className="eyebrow"><MapPin size={15} weight="duotone" aria-hidden="true" /> PERTINHO DE VOCÊ</p><h2>Onde <em>estamos.</em></h2><div className="location-address-block"><span className="location-pin"><MapPin size={24} weight="duotone" aria-hidden="true" /></span><div><span className="location-label">Endereço</span><strong>R. Heitor de Souza, 190</strong><p>Assunção · São Bernardo do Campo, SP</p></div></div><p className="location-note"><Clock size={18} weight="duotone" aria-hidden="true" /> Atendimento com horário agendado</p><div className="location-directions"><a className="button outline" href={mapsUrl} target="_blank" rel="noopener noreferrer"><MapPin {...iconProps} /> Abrir no Google Maps <ArrowUpRight size={18} aria-hidden="true" /></a><a className="button outline" href={business.wazeUrl} target="_blank" rel="noopener noreferrer"><MapPin {...iconProps} /> Abrir no Waze <ArrowUpRight size={18} aria-hidden="true" /></a></div></div><MapPanel /></div></section>
+      <section id="localizacao" className="section location-section"><div className="container location-grid location-single" data-reveal><div className="location-copy"><div className="location-heading"><p className="eyebrow"><MapPin size={15} weight="duotone" aria-hidden="true" /> PERTINHO DE VOCÊ</p><h2>Onde <em>estamos.</em></h2></div><div className="location-details"><div className="location-address-block"><span className="location-pin"><MapPin size={24} weight="duotone" aria-hidden="true" /></span><div><span className="location-label">Endereço</span><strong>R. Heitor de Souza, 190</strong><p>Demarchi · São Bernardo do Campo, SP</p></div></div><p className="location-note"><Clock size={18} weight="duotone" aria-hidden="true" /> Atendimento com horário agendado</p><div className="location-directions"><a className="button outline" href={mapsUrl} target="_blank" rel="noopener noreferrer"><MapPin {...iconProps} /> Abrir no Google Maps <ArrowUpRight size={18} aria-hidden="true" /></a><a className="button outline" href={business.wazeUrl} target="_blank" rel="noopener noreferrer"><MapPin {...iconProps} /> Abrir no Waze <ArrowUpRight size={18} aria-hidden="true" /></a></div></div></div></div></section>
 
       <section className="closing"><div className="container"><PawPrint size={44} weight="light" aria-hidden="true" /><h2>Pronto para proporcionar<br /><em>um novo padrão de cuidado ao seu pet?</em></h2><p>Fale com a Tia Bia e consulte um horário pelo WhatsApp.</p><WhatsAppButton placement="closing" /></div></section>
     </main>

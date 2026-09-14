@@ -5,7 +5,7 @@ export const business = {
   slogan: 'cuidado que encanta',
   phone: '5511925850201',
   displayPhone: '(11) 92585-0201',
-  district: 'Assunção',
+  district: 'Demarchi',
   city: 'São Bernardo do Campo',
   state: 'SP',
   street: 'R. Heitor de Souza, 190',
@@ -31,7 +31,7 @@ export function whatsappUrl(intent = 'booking') {
 export const carePillars = [
   { title: 'Atendimento personalizado', description: 'Cada pet é avaliado de forma individual, considerando pelagem, comportamento, rotina e necessidades específicas.', icon: 'paw' },
   { title: 'Mais tranquilidade, menos estresse', description: 'Atendimento com tempo reservado, respeitando o comportamento e os limites de cada pet.', icon: 'heart' },
-  { title: 'Conhecimento técnico que faz diferença', description: 'As técnicas são escolhidas com critério, respeitando as características do pelo e as necessidades de cada pet.', icon: 'sparkle' },
+  { title: 'Conhecimento técnico que faz diferença', description: 'As técnicas são escolhidas com critério, respeitando as características do pelo e as necessidades de cada pet.', icon: 'certificate' },
   { title: 'Tempo e atenção para cada pet', description: 'Sem atendimento apressado. Cada horário permite um cuidado mais calmo, atento e bem executado.', icon: 'clock' },
 ];
 
@@ -42,7 +42,7 @@ export const serviceCategories = [
     items: ['Banho', 'Escovação', 'Manutenção periódica', 'Banho terapêutico', 'Cuidados para pele sensível', 'Cuidados para oleosidade', 'Cuidados para ressecamento', 'Protocolos específicos', 'Escovação de dentes'],
   },
   {
-    eyebrow: '02 · TÉCNICA E PELO', title: 'Técnica & pelagem', icon: 'sparkle',
+    eyebrow: '02 · TÉCNICA E PELO', title: 'Técnica & pelagem', icon: 'dryer',
     description: 'Cada pelagem exige um olhar específico, com técnicas e cuidados adequados para cada necessidade.',
     items: ['Hidratação', 'Cronograma de pelagem', 'Desembolo', 'Carding', 'Remoção de pelos mortos'],
   },
@@ -58,55 +58,70 @@ export const plans = [
   { name: 'Quinzenal', description: 'Para quem quer manter os cuidados em dia com uma rotina quinzenal.', includes: ['2 banhos', '1 tosa higiênica inclusa'], frequency: 'Uma semana com atendimento e a semana seguinte sem, repetindo esse ciclo em frequência quinzenal.', economy: 'Cerca de 15% de economia' },
 ];
 
-// Pares selecionados dos seis posts mais recentes do Instagram da Tia Bia.
+// Existing local work photos; replace with the requested selection once supplied.
 export const portfolio = [
   {
-    "after": "/images/portfolio/DcR_3ayjRfB-after.webp",
-    "before": "/images/portfolio/DcR_3ayjRfB-before.webp",
-    "afterAlt": "Cão branco finalizado com laços vermelhos",
-    "beforeAlt": "Cão branco antes da finalização",
-    "caption": "Celeste · tosa bebê",
-    "url": "https://www.instagram.com/tiabiatosadora/p/DcR_3ayjRfB/"
+    "type": "video",
+    "src": "/images/portfolio/DGlvVqdJlnO.mp4",
+    "poster": "/images/portfolio/DGlvVqdJlnO-poster.webp",
+    "alt": "Vídeo da tosa do Theo pela Tia Bia",
+    "url": "https://www.instagram.com/reel/DGlvVqdJlnO/"
   },
   {
-    "after": "/images/portfolio/DcR_uAFDSed-after.webp",
-    "before": "/images/portfolio/DcR_uAFDSed-before.webp",
-    "afterAlt": "Cão marrom e branco finalizado com gravata verde",
-    "beforeAlt": "Cão marrom e branco antes da finalização",
-    "caption": "Primeira tosa · carinho desde o início",
-    "url": "https://www.instagram.com/tiabiatosadora/p/DcR_uAFDSed/"
+    "type": "video",
+    "src": "/images/portfolio/DaEQp_1tUoj.mp4",
+    "alt": "Vídeo do cuidado com um Spitz Alemão",
+    "url": "https://www.instagram.com/p/DaEQp_1tUoj/",
+    "poster": "/images/portfolio/DaEQp_1tUoj-poster.webp"
   },
   {
-    "after": "/images/portfolio/DcR-7JgjWhz-before.webp",
-    "before": "/images/portfolio/DcR-7JgjWhz-after.webp",
-    "afterAlt": "Cão de pelagem preta e dourada finalizado",
-    "beforeAlt": "Cão de pelagem preta e dourada antes da finalização",
-    "caption": "Técnica para cada pelagem",
-    "url": "https://www.instagram.com/tiabiatosadora/p/DcR-7JgjWhz/"
+    "type": "video",
+    "src": "/images/portfolio/C_OA0Q4xS8V.mp4",
+    "poster": "/images/portfolio/C_OA0Q4xS8V-poster.webp",
+    "alt": "Vídeo da transformação do Charlie com a Tia Bia",
+    "url": "https://www.instagram.com/p/C_OA0Q4xS8V/"
   },
   {
-    "after": "/images/portfolio/DcR-HVmDYhQ-after.webp",
-    "before": "/images/portfolio/DcR-HVmDYhQ-before.webp",
-    "afterAlt": "Spitz finalizado com pelagem volumosa",
-    "beforeAlt": "Spitz antes da finalização",
-    "caption": "Spitz · acabamento com personalidade",
-    "url": "https://www.instagram.com/tiabiatosadora/p/DcR-HVmDYhQ/"
+    "type": "image",
+    "src": "/images/portfolio/DEimVqgpRwy-work.webp",
+    "alt": "Golden Retriever cuidado pela Tia Bia",
+    "url": "https://www.instagram.com/p/DEimVqgpRwy/?img_index=5"
   },
   {
-    "after": "/images/portfolio/DbMSwt_iVEP-before.webp",
-    "before": "/images/portfolio/DbMSwt_iVEP-after.webp",
-    "afterAlt": "Cão de pelagem alaranjada finalizado",
-    "beforeAlt": "Cão de pelagem alaranjada antes da finalização",
-    "caption": "Kiara · resultado que se vê",
-    "url": "https://www.instagram.com/tiabiatosadora/p/DbMSwt_iVEP/"
+    "type": "image",
+    "src": "/images/portfolio/DP98t3QDaIt-work.webp",
+    "alt": "Yorkshire com a tosa finalizada",
+    "url": "https://www.instagram.com/p/DP98t3QDaIt/?img_index=4"
   },
   {
-    "after": "/images/portfolio/DbMSgaFiScR-before.webp",
-    "before": "/images/portfolio/DbMSgaFiScR-after.webp",
-    "afterAlt": "Cão de pelagem creme finalizado",
-    "beforeAlt": "Cão de pelagem creme antes da finalização",
-    "caption": "Miss simpatia · cuidado em cada detalhe",
-    "url": "https://www.instagram.com/tiabiatosadora/p/DbMSgaFiScR/"
+    "type": "image",
+    "src": "/images/portfolio/DbMRvjmicaF-work.webp",
+    "alt": "Spitz com pelagem finalizada",
+    "url": "https://www.instagram.com/p/DbMRvjmicaF/?img_index=5"
+  },
+  {
+    "type": "image",
+    "src": "/images/portfolio/DbMSwt_iVEP-work.webp",
+    "alt": "Kiara após os cuidados da Tia Bia",
+    "url": "https://www.instagram.com/p/DbMSwt_iVEP/?img_index=2"
+  },
+  {
+    "type": "image",
+    "src": "/images/portfolio/DcR_3ayjRfB-work.webp",
+    "alt": "Celeste com a tosa finalizada",
+    "url": "https://www.instagram.com/p/DcR_3ayjRfB/?img_index=3"
+  },
+  {
+    "type": "image",
+    "src": "/images/portfolio/DPm4VGZEvnu-work.webp",
+    "alt": "Tosa realizada pela Tia Bia",
+    "url": "https://www.instagram.com/p/DPm4VGZEvnu/?img_index=1"
+  },
+  {
+    "type": "image",
+    "src": "/images/portfolio/C_jPWxUxPlF-work.webp",
+    "alt": "Shih-tzu com tosa finalizada e laço verde",
+    "url": "https://www.instagram.com/p/C_jPWxUxPlF/?img_index=2"
   }
 ];
 
@@ -115,7 +130,7 @@ export const specialties = ['Tosa bebê', 'Tosa na tesoura em pelagem lisa', 'Tr
 export const experienceSteps = [
   { number: '01', title: 'Primeiro contato', description: 'Você conta um pouco sobre o seu pet, o que procura e tudo o que gostaria de incluir no atendimento. A partir disso, orientamos sobre o serviço mais adequado.' },
   { number: '02', title: 'Avaliação e definição do cuidado', description: 'Antes do atendimento, avaliamos pelagem, condição do pelo, rotina e particularidades do pet. A partir disso, explicamos o que ele precisa naquele momento e alinhamos com você os cuidados e adicionais que farão parte do atendimento.' },
-  { number: '03', title: 'Atendimento com tempo e atenção', description: 'O pet é atendido com calma, respeitando seu comportamento, seus limites e o tempo necessário para cada cuidado.', badge: '1 pet por horário' },
+  { number: '03', title: 'Atendimento com tempo e atenção', description: 'O pet é atendido com calma, respeitando seu comportamento, seus limites e o tempo necessário para cada cuidado.', badge: 'Agendamento personalizado' },
   { number: '04', title: 'Finalização e orientação', description: 'Ao final, você recebe as orientações necessárias para manter os cuidados em casa e ajudar a prolongar o resultado do atendimento.' },
 ];
 
