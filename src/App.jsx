@@ -79,7 +79,7 @@ function ThemeToggle() {
   const [dark, setDark] = useState(false);
   useEffect(() => {
     let stored = 'light';
-    try { window.localStorage.removeItem('doggie-theme'); } catch { /* Storage can be disabled. */ }
+    try { stored = window.localStorage.getItem('doggie-theme') || 'light'; } catch { /* Storage can be disabled. */ }
     const next = stored === 'dark';
     setDark(next);
     document.documentElement.dataset.theme = next ? 'dark' : 'light';
