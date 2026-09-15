@@ -426,3 +426,32 @@ main>.section+.section{padding-top:40px}
 @media(min-width:760px){.location-single .location-copy{grid-template-columns:1fr 1.1fr;padding:36px;gap:40px}.location-single .location-details{padding:30px}.visit-message{min-height:140px}}
 @media(max-width:390px){.location-single .location-copy{padding:20px}.location-single .location-details{padding:18px}.visit-message{min-height:145px}}
 @media(prefers-reduced-motion:reduce){.visit-paws button>svg{transition:none}}
+
+/* The trail walks toward the address, without advancing the visitor's reading. */
+@media(prefers-reduced-motion:no-preference){
+  .visit-paws button>svg{animation:visit-paw-step 6s ease-in-out infinite}
+  .visit-paws button:nth-child(2)>svg{animation-delay:.65s}
+  .visit-paws button:nth-child(3)>svg{animation-delay:1.3s}
+  .visit-paws button.is-current>svg{animation-name:visit-paw-selected}
+  .location-single .location-pin{animation:visit-pin-sway 7s ease-in-out infinite}
+  .visit-message>svg{animation:visit-message-arrive .35s ease-out both}
+}
+@keyframes visit-paw-step{
+  0%,12%,100%{translate:0 0;scale:1}
+  5%{translate:0 -6px;scale:1.07}
+}
+@keyframes visit-paw-selected{
+  0%,12%,100%{translate:0 0;scale:1}
+  5%{translate:0 -7px;scale:1.09}
+}
+@keyframes visit-pin-sway{
+  0%,100%{rotate:0deg}
+  40%{rotate:9deg}
+  70%{rotate:3deg}
+}
+@keyframes visit-message-arrive{
+  from{opacity:0;translate:0 5px}
+  to{opacity:1;translate:0 0}
+}
+@media(hover:hover){.visit-trail:hover .visit-paws button>svg{animation-play-state:paused}}
+.visit-trail:focus-within .visit-paws button>svg{animation-play-state:paused}
