@@ -2,7 +2,7 @@ import VisitTrail from './VisitTrail.jsx';
 import WhatsAppMark from './WhatsAppMark.jsx';
 import { useEffect, useRef, useState } from 'react';
 import {
-  ArrowUpRight, Bathtub, Bone, CaretLeft, CaretRight, Certificate, Check, Clock, HairDryer, Heart, InstagramLogo, List, MapPin, Medal, PawPrint,
+  ArrowUpRight, Bathtub, Bone, CaretLeft, CaretRight, Certificate, Check, Clock, HairDryer, Heart, InstagramLogo, List, MapPin, Medal, PawPrint, Play,
   Scissors, Sparkle, Star, TennisBall, WhatsappLogo, X,
 } from '@phosphor-icons/react';
 import {
@@ -180,7 +180,7 @@ function PortfolioCarousel({ items }) {
   };
   const renderCard = (item, index) => <figure className="portfolio-card" key={item.url} role="group" aria-label={`${index + 1} de ${items.length}: ${item.alt}`}>
     <div className="portfolio-media">
-      {item.type === 'video' ? <video src={item.src} poster={item.poster} controls playsInline preload="none" aria-label={item.alt} onPlay={(event) => { document.querySelectorAll('.portfolio-media video').forEach((video) => { if (video !== event.currentTarget) video.pause(); }); }} /> : <img src={item.src} alt={item.alt} width="900" height="900" loading="lazy" />}
+      {item.type === 'video' ? <><video src={item.src} poster={item.poster} playsInline loop muted preload="none" aria-label={item.alt} onPlay={(event) => { document.querySelectorAll('.portfolio-media video').forEach((video) => { if (video !== event.currentTarget) video.pause(); }); event.currentTarget.closest('.portfolio-media').classList.add('is-playing'); }} onPause={(event) => event.currentTarget.closest('.portfolio-media').classList.remove('is-playing')} onClick={(event) => { const video = event.currentTarget; if (video.paused) { video.muted = false; video.play(); } else { video.muted = !video.muted; } }} /><Play className="portfolio-play-hint" size={44} weight="fill" aria-hidden="true" /></> : <img src={item.src} alt={item.alt} width="900" height="900" loading="lazy" />}
     </div>
     <figcaption><a className="portfolio-instagram" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={`Ver no Instagram: ${item.alt}`}><InstagramLogo size={18} aria-hidden="true" /><span>Ver no Instagram</span><ArrowUpRight size={16} aria-hidden="true" /></a></figcaption>
   </figure>;
@@ -307,7 +307,7 @@ export default function App({ initialPath }) {
 
       <section className="closing"><div className="closing-pets" aria-hidden="true">{[PawPrint, Heart, Bone, PawPrint, TennisBall, Heart, PawPrint, Bone].map((Icon, index) => <span key={index} style={{ "--pet-index": index }}><Icon size={28 + index % 3 * 8} weight="duotone" /></span>)}</div><div className="container"><PawPrint size={44} weight="light" aria-hidden="true" /><h2>Pronto para proporcionar<br /><em>um novo padrão de cuidado ao seu pet?</em></h2><p>Fale com a Tia Bia e consulte um horário pelo WhatsApp.</p><WhatsAppButton placement="closing" /></div></section>
     </main>
-    <footer className="footer"><div className="footer-paw-trail" aria-hidden="true">{Array.from({ length: 32 }, (_, index) => <PawPrint key={index} size={19} weight="fill" style={{ "--step": index }} />)}</div><div className="container"><div className="footer-main">
+    <footer className="footer"><div className="footer-paw-trail" aria-hidden="true">{Array.from({ length: 20 }, (_, index) => <PawPrint key={index} size={19} weight="fill" style={{ "--step": index }} />)}</div><div className="container"><div className="footer-main">
       <div className="footer-brand"><Brand /><p>Cuidado que encanta, com tempo e atenção para cada pet.</p><a className="footer-address" href="#localizacao">{business.street}<br />{business.district} · {business.city}, {business.state}</a></div>
       <nav className="footer-nav" aria-label="Links do rodapé"><strong>Explore</strong><a href="#cuidado">Nosso cuidado</a><a href="#servicos">Serviços</a><a href="#planos">Planos</a><a href="#sobre">A Tia Bia</a><a href="#duvidas">Dúvidas</a></nav>
       <div className="footer-contact"><strong>Fale com a gente</strong><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer"><WhatsappLogo size={19} aria-hidden="true" />{business.displayPhone}</a><a href="#localizacao">Como chegar <ArrowUpRight size={16} aria-hidden="true" /></a></div>
