@@ -57,7 +57,7 @@ export default function CookieConsent() {
 
   if (consent.decided) return null;
 
-  if (view === 'banner') return <div className="cookie-welcome-backdrop"><aside className="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cookie-welcome-title">
+  if (view === 'banner') return <div className="cookie-welcome-backdrop"><aside className="cookie-banner" aria-labelledby="cookie-welcome-title">
     <div className="cookie-pet-details" aria-hidden="true"><PawPrint size={34} weight="duotone" /><Bone size={31} weight="duotone" /><Heart size={25} weight="fill" /></div>
     <div className="cookie-mark"><Cookie size={28} weight="duotone" aria-hidden="true" /></div>
     <div className="cookie-copy"><span className="cookie-kicker">UMA PAUSA PARA O PETISCO</span><strong id="cookie-welcome-title">Cuidado com seu pet.<br /><em>Respeito pelos seus dados.</em></strong><p>Usamos o armazenamento necessário para o site funcionar e, com sua escolha, para lembrar suas preferências.</p><button type="button" className="cookie-text-button" onClick={() => setView('terms')}>Termos e privacidade</button></div>
