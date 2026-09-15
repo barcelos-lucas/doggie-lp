@@ -457,42 +457,42 @@ main>.section+.section{padding-top:40px}
 .visit-trail:focus-within .visit-paws button>svg{animation-play-state:paused}
 
 .review-star{position:relative;display:inline-flex;width:18px;height:18px}
-.review-star-fill{position:absolute;inset:0;transform-origin:center}
+.review-star-fill{position:absolute;inset:0;transform-origin:center;overflow:visible;background:transparent}
 @media(prefers-reduced-motion:no-preference){
   .review-star-fill{animation:review-star-cycle-0 6s linear infinite both}
 }
 @media(prefers-reduced-motion:no-preference){.review-star:nth-child(1) .review-star-fill{animation-name:review-star-cycle-0}}
 @keyframes review-star-cycle-0{
-0%,0%{clip-path:inset(0 100% 0 0);filter:none;scale:1}
-3.333%,16.667%{clip-path:inset(0);filter:none;scale:1}
-25%,41.667%,58.333%,75%,91.667%{clip-path:inset(0);filter:drop-shadow(0 0 4px var(--gold-ink));scale:1.08}
-33.333%,50%,66.667%,83.333%,99.99%{clip-path:inset(0);filter:drop-shadow(0 0 1px var(--gold-ink));scale:1}
-100%{clip-path:inset(0 100% 0 0);filter:none;scale:1}}
+0%,0%{opacity:0;filter:none;scale:1}
+3.333%,16.667%{opacity:1;filter:none;scale:1}
+25%,41.667%,58.333%,75%,91.667%{opacity:1;filter:drop-shadow(0 0 4px var(--gold-ink));scale:1.08}
+33.333%,50%,66.667%,83.333%,99.99%{opacity:1;filter:drop-shadow(0 0 1px var(--gold-ink));scale:1}
+100%{opacity:0;filter:none;scale:1}}
 @media(prefers-reduced-motion:no-preference){.review-star:nth-child(2) .review-star-fill{animation-name:review-star-cycle-1}}
 @keyframes review-star-cycle-1{
-0%,3.333%{clip-path:inset(0 100% 0 0);filter:none;scale:1}
-6.667%,16.667%{clip-path:inset(0);filter:none;scale:1}
-25%,41.667%,58.333%,75%,91.667%{clip-path:inset(0);filter:drop-shadow(0 0 4px var(--gold-ink));scale:1.08}
-33.333%,50%,66.667%,83.333%,99.99%{clip-path:inset(0);filter:drop-shadow(0 0 1px var(--gold-ink));scale:1}
-100%{clip-path:inset(0 100% 0 0);filter:none;scale:1}}
+0%,3.333%{opacity:0;filter:none;scale:1}
+6.667%,16.667%{opacity:1;filter:none;scale:1}
+25%,41.667%,58.333%,75%,91.667%{opacity:1;filter:drop-shadow(0 0 4px var(--gold-ink));scale:1.08}
+33.333%,50%,66.667%,83.333%,99.99%{opacity:1;filter:drop-shadow(0 0 1px var(--gold-ink));scale:1}
+100%{opacity:0;filter:none;scale:1}}
 @media(prefers-reduced-motion:no-preference){.review-star:nth-child(3) .review-star-fill{animation-name:review-star-cycle-2}}
 @keyframes review-star-cycle-2{
-0%,6.667%{clip-path:inset(0 100% 0 0);filter:none;scale:1}
-10%,16.667%{clip-path:inset(0);filter:none;scale:1}
-25%,41.667%,58.333%,75%,91.667%{clip-path:inset(0);filter:drop-shadow(0 0 4px var(--gold-ink));scale:1.08}
-33.333%,50%,66.667%,83.333%,99.99%{clip-path:inset(0);filter:drop-shadow(0 0 1px var(--gold-ink));scale:1}
-100%{clip-path:inset(0 100% 0 0);filter:none;scale:1}}
+0%,6.667%{opacity:0;filter:none;scale:1}
+10%,16.667%{opacity:1;filter:none;scale:1}
+25%,41.667%,58.333%,75%,91.667%{opacity:1;filter:drop-shadow(0 0 4px var(--gold-ink));scale:1.08}
+33.333%,50%,66.667%,83.333%,99.99%{opacity:1;filter:drop-shadow(0 0 1px var(--gold-ink));scale:1}
+100%{opacity:0;filter:none;scale:1}}
 @media(prefers-reduced-motion:no-preference){.review-star:nth-child(4) .review-star-fill{animation-name:review-star-cycle-3}}
 @keyframes review-star-cycle-3{
-0%,10%{clip-path:inset(0 100% 0 0);filter:none;scale:1}
-13.333%,16.667%{clip-path:inset(0);filter:none;scale:1}
-25%,41.667%,58.333%,75%,91.667%{clip-path:inset(0);filter:drop-shadow(0 0 4px var(--gold-ink));scale:1.08}
-33.333%,50%,66.667%,83.333%,99.99%{clip-path:inset(0);filter:drop-shadow(0 0 1px var(--gold-ink));scale:1}
-100%{clip-path:inset(0 100% 0 0);filter:none;scale:1}}
+0%,10%{opacity:0;filter:none;scale:1}
+13.333%,16.667%{opacity:1;filter:none;scale:1}
+25%,41.667%,58.333%,75%,91.667%{opacity:1;filter:drop-shadow(0 0 4px var(--gold-ink));scale:1.08}
+33.333%,50%,66.667%,83.333%,99.99%{opacity:1;filter:drop-shadow(0 0 1px var(--gold-ink));scale:1}
+100%{opacity:0;filter:none;scale:1}}
 @media(prefers-reduced-motion:no-preference){.review-star:nth-child(5) .review-star-fill{animation-name:review-star-cycle-4}}
 @keyframes review-star-cycle-4{
-0%,13.333%{clip-path:inset(0 100% 0 0);filter:none;scale:1}
-16.667%,16.667%{clip-path:inset(0);filter:none;scale:1}
-25%,41.667%,58.333%,75%,91.667%{clip-path:inset(0);filter:drop-shadow(0 0 4px var(--gold-ink));scale:1.08}
-33.333%,50%,66.667%,83.333%,99.99%{clip-path:inset(0);filter:drop-shadow(0 0 1px var(--gold-ink));scale:1}
-100%{clip-path:inset(0 100% 0 0);filter:none;scale:1}}
+0%,13.333%{opacity:0;filter:none;scale:1}
+16.667%,16.667%{opacity:1;filter:none;scale:1}
+25%,41.667%,58.333%,75%,91.667%{opacity:1;filter:drop-shadow(0 0 4px var(--gold-ink));scale:1.08}
+33.333%,50%,66.667%,83.333%,99.99%{opacity:1;filter:drop-shadow(0 0 1px var(--gold-ink));scale:1}
+100%{opacity:0;filter:none;scale:1}}
