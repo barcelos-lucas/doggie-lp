@@ -403,3 +403,26 @@ main>.section+.section{padding-top:40px}
 @media(prefers-reduced-motion:reduce){
   .whatsapp-mark-logo,.whatsapp-mark-paw{animation:none}
 }
+
+/* A small, optional pet trail invites exploration while directions remain visible. */
+.location-single .location-copy{overflow:hidden;position:relative;background:var(--paper);border:1px solid var(--gold-border);gap:28px}
+.location-single .location-heading{min-width:0}
+.visit-invitation{margin-top:16px;font-size:14px;color:var(--muted)}
+.visit-paws{position:relative;display:flex;justify-content:space-between;gap:12px;margin:24px 0}
+.visit-paws::before{content:"";position:absolute;left:28px;right:28px;top:27px;border-top:2px dashed var(--line)}
+.visit-paws button{position:relative;display:grid;justify-items:center;gap:8px;padding:0;border:0;background:transparent;color:var(--muted);cursor:pointer;min-width:60px;min-height:76px}
+.visit-paws button>svg{box-sizing:content-box;padding:13px;background:var(--surface-warm);border:1px solid var(--line);border-radius:50%;transition:transform .25s ease}
+.visit-paws button:nth-child(2)>svg{rotate:-12deg}
+.visit-paws button span{font-size:11px;font-weight:600}
+.visit-paws button.is-current{color:var(--primary)}
+.visit-paws button.is-current>svg{background:var(--surface-deep);border-color:var(--gold-border);transform:translateY(-4px) rotate(10deg)}
+@media(hover:hover){.visit-paws button:hover>svg{transform:translateY(-4px) rotate(10deg)}}
+.visit-message{display:flex;gap:12px;align-items:flex-start;min-height:130px;padding-top:8px}
+.visit-message>svg{color:var(--primary);margin-top:2px}
+.visit-message strong{font-size:15px;line-height:1.4;display:block}
+.visit-message p{font-size:13px;color:var(--muted);line-height:1.7;margin-top:7px;max-width:360px}
+.location-single .location-details{background:var(--surface-warm);padding:24px;border:1px solid var(--line);border-radius:20px;align-self:center}
+.location-single .location-pin{background:var(--paper);transform:rotate(-8deg)}
+@media(min-width:760px){.location-single .location-copy{grid-template-columns:1fr 1.1fr;padding:36px;gap:40px}.location-single .location-details{padding:30px}.visit-message{min-height:140px}}
+@media(max-width:390px){.location-single .location-copy{padding:20px}.location-single .location-details{padding:18px}.visit-message{min-height:145px}}
+@media(prefers-reduced-motion:reduce){.visit-paws button>svg{transition:none}}
