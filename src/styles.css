@@ -544,3 +544,21 @@ main>.section+.section{padding-top:40px}
 @keyframes closing-paw-greeting{0%,65%,100%{rotate:0deg}72%{rotate:-12deg}80%{rotate:12deg}88%{rotate:-7deg}}
 @keyframes footer-paw-walk{0%,36%,100%{opacity:.2;scale:1}12%{opacity:.7;scale:1.12}24%{opacity:.45;scale:1}}
 @media(max-width:639px){.closing-pets>span svg{width:24px;height:24px}.closing-pets>span{opacity:.12}.closing-pets>span:nth-child(3){left:1%;top:42%}.closing-pets>span:nth-child(6){right:4%;bottom:8%}.footer-paw-trail{gap:17px;margin-bottom:26px}}
+
+/* Full-width section boundary and calmer decorative motion. */
+#servicos{border-top:1px solid var(--gold-border)}
+@media(prefers-reduced-motion:no-preference){
+  .hero-doodle:nth-child(4n+1){animation-duration:17s}
+  .hero-doodle:nth-child(4n+2){animation-duration:20s}
+  .hero-doodle:nth-child(4n+3){animation-duration:18s}
+  .hero-doodle:nth-child(4n){animation-duration:22s}
+  .closing-pets>span{animation-duration:15s}
+  .pet-doodle{animation-duration:9s}
+  .hero-doodle>svg,.faq-doodle>svg,.closing-pets>span>svg,.pet-doodle>svg{animation:pet-soft-glow 4.8s ease-in-out infinite;transform-origin:center;overflow:visible}
+  .hero-doodle:nth-child(even)>svg,.faq-doodle:nth-child(even)>svg,.closing-pets>span:nth-child(even)>svg,.pet-doodle:nth-child(even)>svg{animation-delay:-2.4s}
+  .cookie-pet-details svg{animation:cookie-pet-float 9s ease-in-out infinite,pet-soft-glow 4.8s ease-in-out infinite}
+}
+@keyframes pet-soft-glow{
+  0%,100%{scale:1;filter:drop-shadow(0 0 0 transparent);opacity:.72}
+  50%{scale:1.09;filter:drop-shadow(0 0 5px currentColor);opacity:1}
+}

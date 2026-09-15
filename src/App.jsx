@@ -34,7 +34,7 @@ function FaqDoodles() {
         top: `${4 + Math.floor(index / 5) * 28}%`,
         '--pet-rotation': `${(index % 5) * 12 - 24}deg`,
         animationDelay: `${-index * 1.7}s`,
-        animationDuration: `${14 + index % 7}s`,
+        animationDuration: `${17 + index % 7}s`,
       }}><Icon size={24 + index % 4 * 5} weight="duotone" /></span>;
     })}
   </div>;
