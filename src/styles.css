@@ -389,7 +389,7 @@ main>.section+.section{padding-top:40px}
 @media(prefers-reduced-motion:reduce){.faq-doodle{animation:none}}
 
 /* All input types share a 3-second loop: each icon takes a 1.5-second turn. */
-@media(hover:none) and (pointer:coarse){
+@media(prefers-reduced-motion:no-preference){
   .whatsapp-mark-logo{animation:whatsapp-icon-turn 3s ease-in-out infinite}
   .whatsapp-mark-paw{animation:whatsapp-icon-turn 3s ease-in-out -1.5s infinite}
   .whatsapp:active .whatsapp-mark-logo,.whatsapp:active .whatsapp-mark-paw{animation-play-state:running}
