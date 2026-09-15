@@ -66,12 +66,18 @@ function ThemeToggle() {
     const next = stored === 'dark';
     setDark(next);
     document.documentElement.dataset.theme = next ? 'dark' : 'light';
+    const syncTheme = (event) => setDark(event.detail === 'dark');
+    window.addEventListener('doggie:theme-change', syncTheme);
+    return () => window.removeEventListener('doggie:theme-change', syncTheme);
   }, []);
   const toggle = () => {
     const next = !dark;
     setDark(next);
     document.documentElement.dataset.theme = next ? 'dark' : 'light';
-    try { window.localStorage.setItem('doggie-theme', next ? 'dark' : 'light'); } catch { /* Keep the theme usable without persistence. */ }
+    try {
+      const consent = JSON.parse(window.localStorage.getItem('doggie-cookie-consent'));
+      if (consent?.version === 1 && consent.preferences) window.localStorage.setItem('doggie-theme', next ? 'dark' : 'light');
+    } catch { /* Keep the theme usable without persistence. */ }
   };
   return <button type="button" role="switch" aria-checked={dark} className={`theme-toggle ${dark ? 'is-dark' : ''}`} onClick={toggle} aria-label="Modo escuro" title={dark ? 'Ativar modo claro' : 'Ativar modo escuro'}>
     <span className="theme-option theme-day" aria-hidden="true"><CatPaw /><span>Claro</span></span>

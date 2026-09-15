@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Check, Cookie, GearSix, ShieldCheck, X } from '@phosphor-icons/react';
+import { Bone, Check, Cookie, GearSix, Heart, PawPrint, ShieldCheck, X } from '@phosphor-icons/react';
 
 const STORAGE_KEY = 'doggie-cookie-consent';
 
@@ -16,11 +16,14 @@ function readConsent() {
 function persistConsent(preferences) {
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ version: 1, necessary: true, preferences, updatedAt: new Date().toISOString() }));
-    if (!preferences) {
+    if (preferences) {
+      window.localStorage.setItem('doggie-theme', document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
+    } else {
       window.localStorage.removeItem('doggie-theme');
       document.documentElement.dataset.theme = 'light';
     }
   } catch { /* The choice still applies to the current visit when storage is unavailable. */ }
+  window.dispatchEvent(new CustomEvent('doggie:theme-change', { detail: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light' }));
 }
 
 export function openCookiePreferences() {
@@ -54,11 +57,12 @@ export default function CookieConsent() {
 
   if (consent.decided) return null;
 
-  if (view === 'banner') return <aside className="cookie-banner" aria-label="Aviso de cookies">
-    <div className="cookie-mark"><Cookie size={25} weight="duotone" aria-hidden="true" /></div>
-    <div className="cookie-copy"><strong>Um cuidado também com seus dados.</strong><p>Usamos o armazenamento necessário para o site funcionar e, com sua escolha, para lembrar suas preferências.</p><button type="button" className="cookie-text-button" onClick={() => setView('terms')}>Termos e privacidade</button></div>
-    <div className="cookie-actions"><button type="button" className="button cookie-primary" onClick={() => choose(true)}>Aceitar todos</button><button type="button" className="button cookie-secondary" onClick={() => choose(false)}>Somente necessários</button><button type="button" className="cookie-configure" onClick={() => setView('preferences')}><GearSix size={18} aria-hidden="true" />Configurar</button></div>
-  </aside>;
+  if (view === 'banner') return <div className="cookie-welcome-backdrop"><aside className="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cookie-welcome-title">
+    <div className="cookie-pet-details" aria-hidden="true"><PawPrint size={34} weight="duotone" /><Bone size={31} weight="duotone" /><Heart size={25} weight="fill" /></div>
+    <div className="cookie-mark"><Cookie size={28} weight="duotone" aria-hidden="true" /></div>
+    <div className="cookie-copy"><span className="cookie-kicker">UMA PAUSA PARA O PETISCO</span><strong id="cookie-welcome-title">Cuidado com seu pet.<br /><em>Respeito pelos seus dados.</em></strong><p>Usamos o armazenamento necessário para o site funcionar e, com sua escolha, para lembrar suas preferências.</p><button type="button" className="cookie-text-button" onClick={() => setView('terms')}>Termos e privacidade</button></div>
+    <div className="cookie-actions"><button type="button" className="button cookie-primary" onClick={() => choose(true)}>Aceitar todos</button><button type="button" className="button cookie-secondary" onClick={() => choose(false)}>Somente necessários</button><button type="button" className="cookie-configure" onClick={() => setView('preferences')}><GearSix size={18} aria-hidden="true" />Configurar preferências</button></div>
+  </aside></div>;
 
   return <div className="cookie-backdrop">
     <section className="cookie-dialog" role="dialog" aria-modal="true" aria-labelledby="cookie-title">
