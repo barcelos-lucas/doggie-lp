@@ -387,3 +387,19 @@ main>.section+.section{padding-top:40px}
 .faq-section .faqs{background:color-mix(in srgb,var(--paper) 92%,transparent);border-radius:16px;padding-inline:20px}
 @media(max-width:639px){.faq-doodle{opacity:.09}.faq-doodle svg{width:24px;height:24px}.faq-section .faqs{padding-inline:12px}}
 @media(prefers-reduced-motion:reduce){.faq-doodle{animation:none}}
+
+/* Touch devices get an automatic icon exchange; the link itself stays still. */
+@media(hover:none) and (pointer:coarse){
+  .whatsapp-mark-logo{animation:whatsapp-icon-turn 6s ease-in-out infinite}
+  .whatsapp-mark-paw{animation:whatsapp-icon-turn 6s ease-in-out -3s infinite}
+  .whatsapp:active .whatsapp-mark-logo,.whatsapp:active .whatsapp-mark-paw{animation-play-state:running}
+}
+@keyframes whatsapp-icon-turn{
+  0%,35%{opacity:1;transform:rotate(0deg) scale(1)}
+  45%{opacity:0;transform:rotate(180deg) scale(.65)}
+  50%,85%{opacity:0;transform:rotate(180deg) scale(.65)}
+  95%,100%{opacity:1;transform:rotate(360deg) scale(1)}
+}
+@media(prefers-reduced-motion:reduce){
+  .whatsapp-mark-logo,.whatsapp-mark-paw{animation:none}
+}
