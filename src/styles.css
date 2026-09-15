@@ -494,3 +494,17 @@ main>.section+.section{padding-top:40px}
 25%,41.667%,58.333%,75%,91.667%{opacity:1;filter:drop-shadow(0 0 4px var(--review-star-gold));scale:1.08}
 33.333%,50%,66.667%,83.333%,99.99%{opacity:1;filter:drop-shadow(0 0 1px var(--review-star-gold));scale:1}
 100%{opacity:0;filter:none;scale:1}}
+
+/* Brand silhouettes from Simple Icons, rendered in the button's foreground color. */
+.route-brand{display:inline-block;width:22px;height:22px;flex:0 0 22px;background:currentColor;mask:center / contain no-repeat;-webkit-mask:center / contain no-repeat}
+.route-brand-maps{mask-image:url('/icons/googlemaps.svg');-webkit-mask-image:url('/icons/googlemaps.svg')}
+.route-brand-waze{mask-image:url('/icons/waze.svg');-webkit-mask-image:url('/icons/waze.svg')}
+.location-single .location-directions .button{justify-content:center;gap:9px}
+@media(min-width:760px){.location-single .location-directions{grid-template-columns:1fr}.location-single .location-directions .button{font-size:12px}.location-single .location-directions .button>svg:last-child{margin-left:auto}}
+@media(min-width:1100px){.location-single .location-directions{grid-template-columns:1fr 1fr}.location-single .location-directions .button{font-size:11px;padding-inline:10px;gap:6px}.route-brand{width:19px;height:19px;flex-basis:19px}}
+@media(prefers-reduced-motion:no-preference){
+  @media(hover:hover){.location-directions .button:hover .route-brand-maps,.location-directions .button:focus-visible .route-brand-maps{animation:route-map-hop 1.4s ease-in-out infinite}.location-directions .button:hover .route-brand-waze,.location-directions .button:focus-visible .route-brand-waze{animation:route-waze-roll 1.6s ease-in-out infinite}}
+  @media(hover:none) and (pointer:coarse){.route-brand-maps{animation:route-map-hop 3s ease-in-out infinite}.route-brand-waze{animation:route-waze-roll 3s .4s ease-in-out infinite}}
+}
+@keyframes route-map-hop{0%,45%,100%{translate:0 0;scale:1}18%{translate:0 -4px;scale:1.06}32%{translate:0 1px;scale:.96}}
+@keyframes route-waze-roll{0%,50%,100%{translate:0 0;rotate:0deg}18%{translate:3px -1px;rotate:8deg}35%{translate:-2px 0;rotate:-5deg}}
