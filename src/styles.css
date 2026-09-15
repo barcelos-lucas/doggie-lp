@@ -562,3 +562,13 @@ main>.section+.section{padding-top:40px}
   0%,100%{scale:1;filter:drop-shadow(0 0 0 transparent);opacity:.72}
   50%{scale:1.09;filter:drop-shadow(0 0 5px currentColor);opacity:1}
 }
+
+/* Edge-to-edge paw trail, with density matched to the available width. */
+.footer-paw-trail{width:100%;max-width:none;justify-content:space-between;gap:0;padding:8px 12px;margin:0 0 32px}
+.footer-paw-trail>svg{width:18px;height:18px;flex:0 0 18px}
+.footer-paw-trail>svg:nth-child(n+11){display:none}
+@media(min-width:480px){.footer-paw-trail>svg:nth-child(-n+14){display:block}}
+@media(min-width:768px){.footer-paw-trail{padding-inline:18px;margin-bottom:36px}.footer-paw-trail>svg:nth-child(-n+20){display:block}}
+@media(min-width:1200px){.footer-paw-trail{padding-inline:24px}.footer-paw-trail>svg:nth-child(-n+26){display:block}}
+@media(min-width:1600px){.footer-paw-trail>svg:nth-child(-n+32){display:block}}
+@media(prefers-reduced-motion:no-preference){.footer-paw-trail>svg{animation-delay:calc(var(--step) * -.16s)}}
