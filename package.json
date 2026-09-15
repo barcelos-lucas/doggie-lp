@@ -16,6 +16,7 @@
     "@fontsource-variable/dm-sans": "^5.3.0",
     "@fontsource-variable/fraunces": "^5.3.0",
     "@phosphor-icons/react": "^2.1.10",
+    "@sohumsuthar/liquid-glass": "^3.1.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"
   },

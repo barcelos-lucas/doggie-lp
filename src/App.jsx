@@ -1,3 +1,4 @@
+import GlassMaterial from './GlassMaterial.jsx';
 import { useEffect, useRef, useState } from 'react';
 import {
   ArrowUpRight, Bathtub, Bone, CaretLeft, CaretRight, Certificate, Check, Clock, HairDryer, Heart, InstagramLogo, List, MapPin, Medal, PawPrint,
@@ -37,7 +38,7 @@ function CareRibbon() {
 function WhatsAppButton({ intent = 'booking', className = '', placement = 'page' }) {
   const label = intent === 'plans' ? 'Quero conhecer os planos' : 'Consultar horário no WhatsApp';
   return <a className={`button whatsapp ${className}`} href={whatsappUrl(intent)} target="_blank" rel="noopener noreferrer" data-cta={placement}>
-    <WhatsappLogo {...iconProps} /> <span>{label}</span><ArrowUpRight size={18} aria-hidden="true" />
+    <GlassMaterial /><WhatsappLogo {...iconProps} /> <span>{label}</span><ArrowUpRight size={18} aria-hidden="true" />
   </a>;
 }
 
@@ -61,8 +62,8 @@ function CatPaw({ filled = false }) {
 function ThemeToggle() {
   const [dark, setDark] = useState(false);
   useEffect(() => {
-    let stored;
-    try { stored = window.localStorage.getItem('doggie-theme'); } catch { /* Storage can be disabled. */ }
+    let stored = 'light';
+    try { window.localStorage.removeItem('doggie-theme'); } catch { /* Storage can be disabled. */ }
     const next = stored === 'dark';
     setDark(next);
     document.documentElement.dataset.theme = next ? 'dark' : 'light';
@@ -123,7 +124,7 @@ function ServicesSection() {
       {category.title.startsWith('Banho') && <p className="service-note"><strong>Banho terapêutico:</strong> realizado com produtos e protocolos específicos, quando indicados para as necessidades do pet e, quando necessário, sob orientação veterinária.</p>}
       <span className="service-link">Consultar esse cuidado <ArrowUpRight size={18} aria-hidden="true" /></span>
     </label>; })}</div></fieldset>
-    <div className="service-action"><p aria-live="polite">Vamos conversar sobre <strong>{selectedCategory.title.toLowerCase()}</strong>?</p><a className="button whatsapp" href={whatsappUrl(selectedCategory.title)} target="_blank" rel="noopener noreferrer" data-cta="services"><WhatsappLogo {...iconProps} /><span>Consultar este cuidado no WhatsApp</span><ArrowUpRight size={18} aria-hidden="true" /></a><small>A Tia Bia te ajuda a escolher o cuidado ideal para o seu pet.</small></div>
+    <div className="service-action"><p aria-live="polite">Vamos conversar sobre <strong>{selectedCategory.title.toLowerCase()}</strong>?</p><a className="button whatsapp" href={whatsappUrl(selectedCategory.title)} target="_blank" rel="noopener noreferrer" data-cta="services"><GlassMaterial /><WhatsappLogo {...iconProps} /><span>Consultar este cuidado no WhatsApp</span><ArrowUpRight size={18} aria-hidden="true" /></a><small>A Tia Bia te ajuda a escolher o cuidado ideal para o seu pet.</small></div>
   </div></section>;
 }
 
@@ -142,7 +143,7 @@ function PlansSection() {
       </label>)}
     </div></fieldset>
     <div className="plan-action"><p aria-live="polite"><strong>Vamos conversar sobre os planos de cuidados?</strong></p>
-      <a className="button whatsapp" href={whatsappUrl(`Plano de cuidados ${selected}`)} target="_blank" rel="noopener noreferrer" data-cta="plans"><WhatsappLogo {...iconProps} /><span>Quero conhecer o plano {selected.toLowerCase()}</span><ArrowUpRight size={18} aria-hidden="true" /></a>
+      <a className="button whatsapp" href={whatsappUrl(`Plano de cuidados ${selected}`)} target="_blank" rel="noopener noreferrer" data-cta="plans"><GlassMaterial /><WhatsappLogo {...iconProps} /><span>Quero conhecer o plano {selected.toLowerCase()}</span><ArrowUpRight size={18} aria-hidden="true" /></a>
       <small>A escolha é um primeiro passo. A Tia Bia te ajuda a definir o cuidado ideal.</small>
     </div>
   </div></section>;

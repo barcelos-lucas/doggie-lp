@@ -1,3 +1,4 @@
+import GlassMaterial from './GlassMaterial.jsx';
 import { useEffect, useState } from 'react';
 import { ArrowClockwise, Bone, Cat, Dog, House, PawPrint, TennisBall, WhatsappLogo } from '@phosphor-icons/react';
 import { whatsappUrl } from './content.js';
@@ -55,7 +56,7 @@ export default function ErrorPage({ code }) {
       <p className="eyebrow">{message.eyebrow}</p>
       <h1>{message.title}<br /><em>{message.emphasis}</em></h1>
       <p className="error-description">{message.description}</p>
-      <div className="error-actions">{missing ? <><a className="button cookie-primary" href="/"><House size={19} aria-hidden="true" />Voltar ao início</a><a className="button whatsapp" href={whatsappUrl()} target="_blank" rel="noopener noreferrer"><WhatsappLogo size={19} aria-hidden="true" />Falar com a Doggie</a></> : <><button type="button" className="button cookie-primary" onClick={() => window.location.reload()}><ArrowClockwise size={19} aria-hidden="true" />Tentar novamente</button><a className="button whatsapp" href={whatsappUrl()} target="_blank" rel="noopener noreferrer"><WhatsappLogo size={19} aria-hidden="true" />Falar com a Tia Bia</a><a className="error-home-link" href="/"><House size={16} aria-hidden="true" />Voltar ao início</a></>}</div>
+      <div className="error-actions">{missing ? <><a className="button cookie-primary" href="/"><House size={19} aria-hidden="true" />Voltar ao início</a><a className="button whatsapp" href={whatsappUrl()} target="_blank" rel="noopener noreferrer"><GlassMaterial /><WhatsappLogo size={19} aria-hidden="true" /><span>Falar com a Doggie</span></a></> : <><button type="button" className="button cookie-primary" onClick={() => window.location.reload()}><ArrowClockwise size={19} aria-hidden="true" />Tentar novamente</button><a className="button whatsapp" href={whatsappUrl()} target="_blank" rel="noopener noreferrer"><GlassMaterial /><WhatsappLogo size={19} aria-hidden="true" /><span>Falar com a Tia Bia</span></a><a className="error-home-link" href="/"><House size={16} aria-hidden="true" />Voltar ao início</a></>}</div>
       <p className="error-note"><PawPrint size={16} weight="fill" aria-hidden="true" /> cuidado que encanta, até quando algo sai do lugar.</p>
     </section>
   </main>;
