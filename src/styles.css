@@ -429,9 +429,9 @@ main>.section+.section{padding-top:40px}
 
 /* The trail walks toward the address, without advancing the visitor's reading. */
 @media(prefers-reduced-motion:no-preference){
-  .visit-paws button>svg{animation:visit-paw-step 6s ease-in-out infinite}
-  .visit-paws button:nth-child(2)>svg{animation-delay:.65s}
-  .visit-paws button:nth-child(3)>svg{animation-delay:1.3s}
+  .visit-paws button>svg{animation:visit-paw-step 3s ease-in-out infinite}
+  .visit-paws button:nth-child(2)>svg{animation-delay:.32s}
+  .visit-paws button:nth-child(3)>svg{animation-delay:.64s}
   .visit-paws button.is-current>svg{animation-name:visit-paw-selected}
   .location-single .location-pin{animation:visit-pin-sway 7s ease-in-out infinite}
   .visit-message>svg{animation:visit-message-arrive .35s ease-out both}
@@ -455,3 +455,26 @@ main>.section+.section{padding-top:40px}
 }
 @media(hover:hover){.visit-trail:hover .visit-paws button>svg{animation-play-state:paused}}
 .visit-trail:focus-within .visit-paws button>svg{animation-play-state:paused}
+
+.review-star{position:relative;display:inline-flex;width:18px;height:18px}
+.review-star-fill{position:absolute;inset:0}
+@media(prefers-reduced-motion:no-preference){
+  .review-star-fill{animation:review-star-fill-0 7s linear infinite;animation-fill-mode:both}
+  .review .stars{animation:review-stars-glow 7s ease-in-out infinite}
+}
+@keyframes review-star-fill{
+  0%{clip-path:inset(0 100% 0 0)}
+  2.85%,85.7%{clip-path:inset(0)}
+  85.71%,100%{clip-path:inset(0 100% 0 0)}
+}
+@keyframes review-stars-glow{
+  0%,14.28%,28.57%,100%{filter:drop-shadow(0 0 0 transparent);scale:1}
+  18%,25%{filter:drop-shadow(0 0 4px var(--gold-ink));scale:1.025}
+  21.5%{filter:drop-shadow(0 0 1px var(--gold-ink));scale:1}
+}
+.review .stars{transform-origin:left center}
+@media(prefers-reduced-motion:no-preference){.review-star:nth-child(1) .review-star-fill{animation-name:review-star-fill-0}} @keyframes review-star-fill-0{0%,0%{clip-path:inset(0 100% 0 0)}2.857%,99.99%{clip-path:inset(0)}100%{clip-path:inset(0 100% 0 0)}}
+@media(prefers-reduced-motion:no-preference){.review-star:nth-child(2) .review-star-fill{animation-name:review-star-fill-1}} @keyframes review-star-fill-1{0%,2.857%{clip-path:inset(0 100% 0 0)}5.714%,99.99%{clip-path:inset(0)}100%{clip-path:inset(0 100% 0 0)}}
+@media(prefers-reduced-motion:no-preference){.review-star:nth-child(3) .review-star-fill{animation-name:review-star-fill-2}} @keyframes review-star-fill-2{0%,5.714%{clip-path:inset(0 100% 0 0)}8.571%,99.99%{clip-path:inset(0)}100%{clip-path:inset(0 100% 0 0)}}
+@media(prefers-reduced-motion:no-preference){.review-star:nth-child(4) .review-star-fill{animation-name:review-star-fill-3}} @keyframes review-star-fill-3{0%,8.571%{clip-path:inset(0 100% 0 0)}11.429%,99.99%{clip-path:inset(0)}100%{clip-path:inset(0 100% 0 0)}}
+@media(prefers-reduced-motion:no-preference){.review-star:nth-child(5) .review-star-fill{animation-name:review-star-fill-4}} @keyframes review-star-fill-4{0%,11.429%{clip-path:inset(0 100% 0 0)}14.286%,99.99%{clip-path:inset(0)}100%{clip-path:inset(0 100% 0 0)}}
