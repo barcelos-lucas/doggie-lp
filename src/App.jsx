@@ -1,12 +1,16 @@
+import VisitTrail from './VisitTrail.jsx';
+import WhatsAppMark from './WhatsAppMark.jsx';
 import { useEffect, useRef, useState } from 'react';
 import {
-  ArrowUpRight, Bathtub, CaretLeft, CaretRight, Certificate, Check, Clock, HairDryer, Heart, InstagramLogo, List, MapPin, PawPrint,
-  Scissors, Sparkle, Star, WhatsappLogo, X,
+  ArrowUpRight, Bathtub, Bone, CaretLeft, CaretRight, Certificate, Check, Clock, HairDryer, Heart, InstagramLogo, List, MapPin, Medal, PawPrint, Play,
+  Scissors, Sparkle, Star, TennisBall, WhatsappLogo, X,
 } from '@phosphor-icons/react';
 import {
   business, carePillars, experienceSteps, faqs, mapsUrl, plans, portfolio, reviewExamples, reviews,
   reviewsProfileUrl, serviceCategories, specialties, whatsappUrl,
 } from './content.js';
+import CookieConsent, { openCookiePreferences } from './CookieConsent.jsx';
+import ErrorPage from './ErrorPage.jsx';
 
 const iconProps = { size: 22, weight: 'regular', 'aria-hidden': true };
 const pillarIcons = { paw: PawPrint, heart: Heart, certificate: Certificate, clock: Clock };
@@ -16,10 +20,25 @@ const careHighlights = [
   { label: 'Técnica para cada pelagem', icon: Scissors },
   { label: 'Banho com tempo e calma', icon: Heart },
   { label: 'Avaliação individual', icon: PawPrint },
-  { label: '10+ anos de experiência', icon: Sparkle },
+  { label: '10+ anos de experiência', icon: Medal },
   { label: 'Orientação para a rotina', icon: Check },
 ];
 
+function FaqDoodles() {
+  const icons = [PawPrint, Bone, TennisBall, Bathtub, Scissors, Heart, HairDryer];
+  return <div className="faq-doodles" aria-hidden="true">
+    {Array.from({ length: 20 }, (_, index) => {
+      const Icon = icons[index % icons.length];
+      return <span key={index} className="faq-doodle" style={{
+        left: `${3 + (index % 5) * 23}%`,
+        top: `${4 + Math.floor(index / 5) * 28}%`,
+        '--pet-rotation': `${(index % 5) * 12 - 24}deg`,
+        animationDelay: `${-index * 1.7}s`,
+        animationDuration: `${17 + index % 7}s`,
+      }}><Icon size={24 + index % 4 * 5} weight="duotone" /></span>;
+    })}
+  </div>;
+}
 function CareRibbon() {
   const renderItems = (hidden = false) => careHighlights.map(({ label, icon: Icon }) => <span className="care-ribbon-item" key={`${hidden ? 'hidden-' : ''}${label}`} aria-hidden={hidden}>
     <Icon size={20} weight="duotone" aria-hidden="true" /><strong>{label}</strong>
@@ -35,7 +54,7 @@ function CareRibbon() {
 function WhatsAppButton({ intent = 'booking', className = '', placement = 'page' }) {
   const label = intent === 'plans' ? 'Quero conhecer os planos' : 'Consultar horário no WhatsApp';
   return <a className={`button whatsapp ${className}`} href={whatsappUrl(intent)} target="_blank" rel="noopener noreferrer" data-cta={placement}>
-    <WhatsappLogo {...iconProps} /> <span>{label}</span><ArrowUpRight size={18} aria-hidden="true" />
+    <WhatsAppMark /> <span>{label}</span><ArrowUpRight size={18} aria-hidden="true" />
   </a>;
 }
 
@@ -59,17 +78,23 @@ function CatPaw({ filled = false }) {
 function ThemeToggle() {
   const [dark, setDark] = useState(false);
   useEffect(() => {
-    let stored;
-    try { stored = window.localStorage.getItem('doggie-theme'); } catch { /* Storage can be disabled. */ }
+    let stored = 'light';
+    try { window.localStorage.removeItem('doggie-theme'); } catch { /* Storage can be disabled. */ }
     const next = stored === 'dark';
     setDark(next);
     document.documentElement.dataset.theme = next ? 'dark' : 'light';
+    const syncTheme = (event) => setDark(event.detail === 'dark');
+    window.addEventListener('doggie:theme-change', syncTheme);
+    return () => window.removeEventListener('doggie:theme-change', syncTheme);
   }, []);
   const toggle = () => {
     const next = !dark;
     setDark(next);
     document.documentElement.dataset.theme = next ? 'dark' : 'light';
-    try { window.localStorage.setItem('doggie-theme', next ? 'dark' : 'light'); } catch { /* Keep the theme usable without persistence. */ }
+    try {
+      const consent = JSON.parse(window.localStorage.getItem('doggie-cookie-consent'));
+      if (consent?.version === 1 && consent.preferences) window.localStorage.setItem('doggie-theme', next ? 'dark' : 'light');
+    } catch { /* Keep the theme usable without persistence. */ }
   };
   return <button type="button" role="switch" aria-checked={dark} className={`theme-toggle ${dark ? 'is-dark' : ''}`} onClick={toggle} aria-label="Modo escuro" title={dark ? 'Ativar modo claro' : 'Ativar modo escuro'}>
     <span className="theme-option theme-day" aria-hidden="true"><CatPaw /><span>Claro</span></span>
@@ -115,7 +140,7 @@ function ServicesSection() {
       {category.title.startsWith('Banho') && <p className="service-note"><strong>Banho terapêutico:</strong> realizado com produtos e protocolos específicos, quando indicados para as necessidades do pet e, quando necessário, sob orientação veterinária.</p>}
       <span className="service-link">Consultar esse cuidado <ArrowUpRight size={18} aria-hidden="true" /></span>
     </label>; })}</div></fieldset>
-    <div className="service-action"><p aria-live="polite">Vamos conversar sobre <strong>{selectedCategory.title.toLowerCase()}</strong>?</p><a className="button whatsapp" href={whatsappUrl(selectedCategory.title)} target="_blank" rel="noopener noreferrer" data-cta="services"><WhatsappLogo {...iconProps} /><span>Consultar este cuidado no WhatsApp</span><ArrowUpRight size={18} aria-hidden="true" /></a><small>A Tia Bia te ajuda a escolher o cuidado ideal para o seu pet.</small></div>
+    <div className="service-action"><p aria-live="polite">Vamos conversar sobre <strong>{selectedCategory.title.toLowerCase()}</strong>?</p><a className="button whatsapp" href={whatsappUrl(selectedCategory.title)} target="_blank" rel="noopener noreferrer" data-cta="services"><WhatsAppMark /><span>Consultar este cuidado no WhatsApp</span><ArrowUpRight size={18} aria-hidden="true" /></a><small>A Tia Bia te ajuda a escolher o cuidado ideal para o seu pet.</small></div>
   </div></section>;
 }
 
@@ -134,7 +159,7 @@ function PlansSection() {
       </label>)}
     </div></fieldset>
     <div className="plan-action"><p aria-live="polite"><strong>Vamos conversar sobre os planos de cuidados?</strong></p>
-      <a className="button whatsapp" href={whatsappUrl(`Plano de cuidados ${selected}`)} target="_blank" rel="noopener noreferrer" data-cta="plans"><WhatsappLogo {...iconProps} /><span>Quero conhecer o plano {selected.toLowerCase()}</span><ArrowUpRight size={18} aria-hidden="true" /></a>
+      <a className="button whatsapp" href={whatsappUrl(`Plano de cuidados ${selected}`)} target="_blank" rel="noopener noreferrer" data-cta="plans"><WhatsAppMark /><span>Quero conhecer o plano {selected.toLowerCase()}</span><ArrowUpRight size={18} aria-hidden="true" /></a>
       <small>A escolha é um primeiro passo. A Tia Bia te ajuda a definir o cuidado ideal.</small>
     </div>
   </div></section>;
@@ -155,7 +180,7 @@ function PortfolioCarousel({ items }) {
   };
   const renderCard = (item, index) => <figure className="portfolio-card" key={item.url} role="group" aria-label={`${index + 1} de ${items.length}: ${item.alt}`}>
     <div className="portfolio-media">
-      {item.type === 'video' ? <video src={item.src} poster={item.poster} controls playsInline preload="none" aria-label={item.alt} onPlay={(event) => { document.querySelectorAll('.portfolio-media video').forEach((video) => { if (video !== event.currentTarget) video.pause(); }); }} /> : <img src={item.src} alt={item.alt} width="900" height="900" loading="lazy" />}
+      {item.type === 'video' ? <><video src={item.src} poster={item.poster} playsInline loop muted preload="none" aria-label={item.alt} onPlay={(event) => { document.querySelectorAll('.portfolio-media video').forEach((video) => { if (video !== event.currentTarget) video.pause(); }); event.currentTarget.closest('.portfolio-media').classList.add('is-playing'); }} onPause={(event) => event.currentTarget.closest('.portfolio-media').classList.remove('is-playing')} onClick={(event) => { const video = event.currentTarget; if (video.paused) { video.muted = false; video.play(); } else { video.muted = !video.muted; } }} /><Play className="portfolio-play-hint" size={44} weight="fill" aria-hidden="true" /></> : <img src={item.src} alt={item.alt} width="900" height="900" loading="lazy" />}
     </div>
     <figcaption><a className="portfolio-instagram" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={`Ver no Instagram: ${item.alt}`}><InstagramLogo size={18} aria-hidden="true" /><span>Ver no Instagram</span><ArrowUpRight size={16} aria-hidden="true" /></a></figcaption>
   </figure>;
@@ -176,7 +201,7 @@ function PortfolioSection() {
 
 function ReviewCard({ review, preview, hidden = false }) {
   return <figure className="review" aria-hidden={hidden || undefined}>
-    <div className="stars" aria-label={`${review.rating} de 5 estrelas`}>{Array.from({ length: review.rating }, (_, i) => <Star key={i} weight="fill" size={18} aria-hidden="true" />)}</div>
+    <div className="stars" aria-label={`${review.rating} de 5 estrelas`}>{Array.from({ length: review.rating }, (_, i) => <span className="review-star" key={i}><Star weight="regular" size={18} aria-hidden="true" /><Star className="review-star-fill" weight="fill" size={18} aria-hidden="true" /></span>)}</div>
     <blockquote>“{review.text}”</blockquote>
     <figcaption><strong>{review.name}</strong><span>{preview ? review.pet : `${review.pet} · Google · ${review.date}`}</span></figcaption>
   </figure>;
@@ -214,25 +239,48 @@ function ReviewsSection() {
   </div></section>;
 }
 
-export default function App() {
+export default function App({ initialPath }) {
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } }), { threshold: 0.08 });
     document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
+  const pathname = initialPath ?? (typeof window === 'undefined' ? '/' : window.location.pathname);
+  const normalizedPath = pathname.length > 1 ? pathname.replace(/\/$/, '') : pathname;
+  const errorCode = normalizedPath === '/500' || normalizedPath === '/500.html' ? 500 : !['/', '/index.html'].includes(normalizedPath) ? 404 : null;
+  if (errorCode) return <><ErrorPage code={errorCode} /><CookieConsent /></>;
+
   return <>
     <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <Header />
     <main id="conteudo">
       <section id="inicio" className="hero container">
+        <div className="hero-doodles" aria-hidden="true">
+          <span className="hero-doodle hero-doodle-paw"><PawPrint size={34} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-bone"><Bone size={38} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-ball"><TennisBall size={30} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-bath"><Bathtub size={36} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-scissors"><Scissors size={31} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-heart"><Heart size={32} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-dryer"><HairDryer size={38} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-paw-two"><PawPrint size={25} weight="fill" /></span>
+          <span className="hero-doodle hero-doodle-extra hero-doodle-nine"><PawPrint size={23} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-extra hero-doodle-ten"><Bone size={29} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-extra hero-doodle-eleven"><Heart size={22} weight="fill" /></span>
+          <span className="hero-doodle hero-doodle-extra hero-doodle-twelve"><TennisBall size={27} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-extra hero-doodle-thirteen"><Scissors size={26} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-extra hero-doodle-fourteen"><Bathtub size={29} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-extra hero-doodle-fifteen"><HairDryer size={27} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-extra hero-doodle-sixteen"><PawPrint size={21} weight="fill" /></span>
+        </div>
         <div className="hero-copy">
           <p className="eyebrow">DOGGIE ESTÉTICA ANIMAL</p>
           <h1>cuidado <em>que encanta</em></h1>
           <p className="hero-description">Atendimento individual, técnica e tranquilidade para cuidar de cada pet de forma única.</p>
           <WhatsAppButton placement="hero" />
         </div>
-        <div className="hero-visual"><figure className="hero-photo"><img src="/images/hero-960.webp" srcSet="/images/hero-640.webp 640w, /images/hero-960.webp 960w" sizes="(min-width: 1024px) 46vw, 90vw" width="960" height="1200" alt="Cão com bandana terracota; foto provisória enquanto a foto real da Tia Bia é produzida" fetchPriority="high" /><figcaption>Imagem provisória</figcaption></figure><div className="care-seal" aria-label="Agendamento personalizado"><PawPrint weight="light" size={31} aria-hidden="true" /><span>Agendamento<br />personalizado</span></div><p className="photo-note">tempo para cuidar bem.</p></div>
+        <div className="hero-visual"><figure className="hero-photo"><img src="/images/hero-generated-960.webp" srcSet="/images/hero-generated-640.webp 640w, /images/hero-generated-960.webp 960w" sizes="(min-width: 1024px) 46vw, 90vw" width="960" height="1104" alt="Shih-tzu branco após a tosa, com laços azuis" fetchPriority="high" /></figure><div className="care-seal" aria-label="Agendamento personalizado"><PawPrint weight="light" size={31} aria-hidden="true" /><span>Agendamento<br />personalizado</span></div><p className="photo-note">tempo para cuidar bem.</p></div>
       </section>
 
       <CareRibbon />
@@ -247,24 +295,25 @@ export default function App() {
 
       <section id="sobre" className="section about-section"><div className="container about-grid" data-reveal><div className="about-visual"><img src="/images/tia-bia-profile.webp" width="1200" height="1200" alt="Tia Bia, groomer da Doggie Estética Animal" loading="lazy" /><span className="image-caption">Tia Bia · @tiabiatosadora</span></div><div className="about-copy"><p className="eyebrow">A PESSOA POR TRÁS DO CUIDADO</p><h2>Conheça <em>a Tia Bia.</em></h2><p>Com mais de 10 anos de experiência em estética animal, a Tia Bia une prática, conhecimento técnico e atualização constante para tomar decisões adequadas para cada pet.</p><p>Na Doggie, cada atendimento considera características da pelagem, comportamento, rotina e necessidades individuais, buscando sempre o melhor resultado com segurança e qualidade.</p><h3 className="specialties-title">Especializada em:</h3><ul className="specialties">{specialties.map((item) => <li key={item}><Check {...iconProps} />{item}</li>)}</ul><a className="text-link bia-instagram" href={business.biaInstagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={20} aria-hidden="true" />Tia Bia · @tiabiatosadora<ArrowUpRight size={18} aria-hidden="true" /></a></div></div></section>
 
-      <section id="experiencia" className="section experience-section"><div className="container" data-reveal><p className="eyebrow">DO PRIMEIRO OI À FINALIZAÇÃO</p><h2>Sua experiência<br /><em>na Doggie.</em></h2><div className="steps">{experienceSteps.map((step) => <article key={step.number}><span className="step-number">{step.number}</span><h3>{step.title}</h3>{step.badge && <span className="step-badge">{step.badge}</span>}<p>{step.description}</p></article>)}</div></div></section>
+      <section id="experiencia" className="section experience-section"><div className="container" data-reveal><p className="eyebrow">DO PRIMEIRO OI À FINALIZAÇÃO</p><h2>Sua experiência<br /><em>na Doggie.</em></h2><div className="steps">{experienceSteps.map((step) => <article key={step.number}><span className="step-number">{step.number}</span><h3>{step.title}</h3><p>{step.description}</p>{step.badge && <span className="step-badge">{step.badge}</span>}</article>)}</div></div></section>
 
       <section className="section price-section"><div className="container price-card" data-reveal><div><p className="eyebrow">TRANSPARÊNCIA PARA DECIDIR</p><h2>Serviços a partir de<br /><em>R$ 65,00</em></h2></div><div className="price-side"><strong>Economize até 18%</strong><p>com nossos Planos de cuidados.</p><small>Os valores podem variar conforme porte, pelagem, serviço e necessidades do pet.</small></div></div></section>
 
       <PlansSection />
 
-      <section id="duvidas" className="section faq-section"><div className="container faq-grid" data-reveal><div><p className="eyebrow">COMBINE TUDO COM TRANQUILIDADE</p><h2>O que você<br /><em>precisa saber.</em></h2></div><div className="faqs">{faqs.map((faq) => <details key={faq.question}><summary>{faq.question}<span className="faq-symbol" aria-hidden="true">+</span></summary><p>{faq.answer}</p></details>)}</div></div></section>
+      <section id="duvidas" className="section faq-section"><FaqDoodles /><div className="container faq-grid" data-reveal><div><p className="eyebrow">COMBINE TUDO COM TRANQUILIDADE</p><h2>O que você<br /><em>precisa saber.</em></h2></div><div className="faqs">{faqs.map((faq) => <details key={faq.question}><summary>{faq.question}<span className="faq-symbol" aria-hidden="true">+</span></summary><p>{faq.answer}</p></details>)}</div></div></section>
 
-      <section id="localizacao" className="section location-section"><div className="container location-grid location-single" data-reveal><div className="location-copy"><div className="location-heading"><p className="eyebrow"><MapPin size={15} weight="duotone" aria-hidden="true" /> PERTINHO DE VOCÊ</p><h2>Onde <em>estamos.</em></h2></div><div className="location-details"><div className="location-address-block"><span className="location-pin"><MapPin size={24} weight="duotone" aria-hidden="true" /></span><div><span className="location-label">Endereço</span><strong>R. Heitor de Souza, 190</strong><p>Demarchi · São Bernardo do Campo, SP</p></div></div><p className="location-note"><Clock size={18} weight="duotone" aria-hidden="true" /> Atendimento com horário agendado</p><div className="location-directions"><a className="button outline" href={mapsUrl} target="_blank" rel="noopener noreferrer"><MapPin {...iconProps} /> Abrir no Google Maps <ArrowUpRight size={18} aria-hidden="true" /></a><a className="button outline" href={business.wazeUrl} target="_blank" rel="noopener noreferrer"><MapPin {...iconProps} /> Abrir no Waze <ArrowUpRight size={18} aria-hidden="true" /></a></div></div></div></div></section>
+      <section id="localizacao" className="section location-section"><div className="container location-grid location-single" data-reveal><div className="location-copy"><div className="location-heading"><p className="eyebrow"><MapPin size={15} weight="duotone" aria-hidden="true" /> PERTINHO DE VOCÊ</p><h2>Onde <em>estamos.</em></h2><VisitTrail /></div><div className="location-details"><div className="location-address-block"><span className="location-pin"><MapPin size={24} weight="duotone" aria-hidden="true" /></span><div><span className="location-label">Endereço</span><strong>R. Heitor de Souza, 190</strong><p>Demarchi · São Bernardo do Campo, SP<br />CEP {business.postalCode}</p></div></div><p className="location-note"><Clock size={18} weight="duotone" aria-hidden="true" /> Atendimento com horário agendado</p><div className="location-directions"><a className="button outline" href={mapsUrl} target="_blank" rel="noopener noreferrer"><span className="route-brand route-brand-maps" aria-hidden="true" /> <span>Abrir no Google Maps</span> <ArrowUpRight size={18} aria-hidden="true" /></a><a className="button outline" href={business.wazeUrl} target="_blank" rel="noopener noreferrer"><span className="route-brand route-brand-waze" aria-hidden="true" /> <span>Abrir no Waze</span> <ArrowUpRight size={18} aria-hidden="true" /></a></div></div></div></div></section>
 
-      <section className="closing"><div className="container"><PawPrint size={44} weight="light" aria-hidden="true" /><h2>Pronto para proporcionar<br /><em>um novo padrão de cuidado ao seu pet?</em></h2><p>Fale com a Tia Bia e consulte um horário pelo WhatsApp.</p><WhatsAppButton placement="closing" /></div></section>
+      <section className="closing"><div className="closing-pets" aria-hidden="true">{[PawPrint, Heart, Bone, PawPrint, TennisBall, Heart, PawPrint, Bone].map((Icon, index) => <span key={index} style={{ "--pet-index": index }}><Icon size={28 + index % 3 * 8} weight="duotone" /></span>)}</div><div className="container"><PawPrint size={44} weight="light" aria-hidden="true" /><h2>Pronto para proporcionar<br /><em>um novo padrão de cuidado ao seu pet?</em></h2><p>Fale com a Tia Bia e consulte um horário pelo WhatsApp.</p><WhatsAppButton placement="closing" /></div></section>
     </main>
-    <footer className="footer"><div className="container"><div className="footer-main">
+    <footer className="footer"><div className="footer-paw-trail" aria-hidden="true">{Array.from({ length: 20 }, (_, index) => <PawPrint key={index} size={19} weight="fill" style={{ "--step": index }} />)}</div><div className="container"><div className="footer-main">
       <div className="footer-brand"><Brand /><p>Cuidado que encanta, com tempo e atenção para cada pet.</p><a className="footer-address" href="#localizacao">{business.street}<br />{business.district} · {business.city}, {business.state}</a></div>
       <nav className="footer-nav" aria-label="Links do rodapé"><strong>Explore</strong><a href="#cuidado">Nosso cuidado</a><a href="#servicos">Serviços</a><a href="#planos">Planos</a><a href="#sobre">A Tia Bia</a><a href="#duvidas">Dúvidas</a></nav>
       <div className="footer-contact"><strong>Fale com a gente</strong><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer"><WhatsappLogo size={19} aria-hidden="true" />{business.displayPhone}</a><a href="#localizacao">Como chegar <ArrowUpRight size={16} aria-hidden="true" /></a></div>
       <div className="footer-social"><strong>Siga de perto</strong><a href={business.instagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={19} aria-hidden="true" />@doggie.esteticapet</a><a href={business.biaInstagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={19} aria-hidden="true" />@tiabiatosadora</a></div>
-    </div><div className="footer-bottom"><span>© 2026 Doggie Estética Animal. Todos os direitos reservados.</span><span>{business.slogan}</span></div></div></footer>
+    </div><div className="footer-bottom"><span>© 2026 Doggie Estética Animal. Todos os direitos reservados.</span><div className="footer-legal"><button type="button" onClick={openCookiePreferences}>Privacidade e cookies</button><span>{business.slogan}</span></div></div></div></footer>
     <div className="mobile-cta"><WhatsAppButton placement="mobile-fixed" /></div>
+    <CookieConsent />
   </>;
 }
