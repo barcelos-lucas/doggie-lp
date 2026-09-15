@@ -368,3 +368,22 @@ main>.section+.section{padding-top:40px}
 .whatsapp:focus-visible .whatsapp-mark-logo,.whatsapp:active .whatsapp-mark-logo{opacity:0}
 .whatsapp:focus-visible .whatsapp-mark-paw,.whatsapp:active .whatsapp-mark-paw{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.button.whatsapp,.whatsapp-mark>svg{transition:none}.button.whatsapp:hover,.button.whatsapp:active{transform:none}}
+
+/* Shared rows align each stage without imposing a fixed text height. */
+.experience-section .steps{gap:24px}
+.experience-section .steps>article{display:grid;grid-template-rows:auto auto 1fr auto;gap:14px;padding:20px 0 0;border-top:1px solid var(--line);align-content:start}
+.experience-section .steps .step-number{position:static;margin:0;line-height:1;font-size:30px}
+.experience-section .steps h3{margin:0;line-height:1.35}
+.experience-section .steps p{margin:0;max-width:none;line-height:1.7}
+.experience-section .step-badge{justify-self:start;align-self:end;margin:0}
+@media(min-width:640px){.experience-section .steps>article{grid-row:span 4;grid-template-rows:subgrid;row-gap:14px}}
+.faq-section{position:relative;isolation:isolate;overflow:hidden}
+.faq-section>.faq-grid{position:relative;z-index:1}
+.faq-doodles{position:absolute;inset:0;pointer-events:none;z-index:0}
+.faq-doodle{position:absolute;color:var(--gold-ink);opacity:.12;transform:rotate(var(--pet-rotation));animation:faq-pet-drift 16s ease-in-out infinite}
+.faq-doodle:nth-child(3n){color:var(--primary)}
+@keyframes faq-pet-drift{0%,100%{translate:0 0;rotate:0deg}30%{translate:16px -19px;rotate:8deg}65%{translate:-12px 14px;rotate:-6deg}}
+:root[data-theme="dark"] .faq-doodle{opacity:.15}
+.faq-section .faqs{background:color-mix(in srgb,var(--paper) 92%,transparent);border-radius:16px;padding-inline:20px}
+@media(max-width:639px){.faq-doodle{opacity:.09}.faq-doodle svg{width:24px;height:24px}.faq-section .faqs{padding-inline:12px}}
+@media(prefers-reduced-motion:reduce){.faq-doodle{animation:none}}

@@ -23,6 +23,21 @@ const careHighlights = [
   { label: 'Orientação para a rotina', icon: Check },
 ];
 
+function FaqDoodles() {
+  const icons = [PawPrint, Bone, TennisBall, Bathtub, Scissors, Heart, HairDryer];
+  return <div className="faq-doodles" aria-hidden="true">
+    {Array.from({ length: 20 }, (_, index) => {
+      const Icon = icons[index % icons.length];
+      return <span key={index} className="faq-doodle" style={{
+        left: `${3 + (index % 5) * 23}%`,
+        top: `${4 + Math.floor(index / 5) * 28}%`,
+        '--pet-rotation': `${(index % 5) * 12 - 24}deg`,
+        animationDelay: `${-index * 1.7}s`,
+        animationDuration: `${14 + index % 7}s`,
+      }}><Icon size={24 + index % 4 * 5} weight="duotone" /></span>;
+    })}
+  </div>;
+}
 function CareRibbon() {
   const renderItems = (hidden = false) => careHighlights.map(({ label, icon: Icon }) => <span className="care-ribbon-item" key={`${hidden ? 'hidden-' : ''}${label}`} aria-hidden={hidden}>
     <Icon size={20} weight="duotone" aria-hidden="true" /><strong>{label}</strong>
@@ -279,13 +294,13 @@ export default function App({ initialPath }) {
 
       <section id="sobre" className="section about-section"><div className="container about-grid" data-reveal><div className="about-visual"><img src="/images/tia-bia-profile.webp" width="1200" height="1200" alt="Tia Bia, groomer da Doggie Estética Animal" loading="lazy" /><span className="image-caption">Tia Bia · @tiabiatosadora</span></div><div className="about-copy"><p className="eyebrow">A PESSOA POR TRÁS DO CUIDADO</p><h2>Conheça <em>a Tia Bia.</em></h2><p>Com mais de 10 anos de experiência em estética animal, a Tia Bia une prática, conhecimento técnico e atualização constante para tomar decisões adequadas para cada pet.</p><p>Na Doggie, cada atendimento considera características da pelagem, comportamento, rotina e necessidades individuais, buscando sempre o melhor resultado com segurança e qualidade.</p><h3 className="specialties-title">Especializada em:</h3><ul className="specialties">{specialties.map((item) => <li key={item}><Check {...iconProps} />{item}</li>)}</ul><a className="text-link bia-instagram" href={business.biaInstagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={20} aria-hidden="true" />Tia Bia · @tiabiatosadora<ArrowUpRight size={18} aria-hidden="true" /></a></div></div></section>
 
-      <section id="experiencia" className="section experience-section"><div className="container" data-reveal><p className="eyebrow">DO PRIMEIRO OI À FINALIZAÇÃO</p><h2>Sua experiência<br /><em>na Doggie.</em></h2><div className="steps">{experienceSteps.map((step) => <article key={step.number}><span className="step-number">{step.number}</span><h3>{step.title}</h3>{step.badge && <span className="step-badge">{step.badge}</span>}<p>{step.description}</p></article>)}</div></div></section>
+      <section id="experiencia" className="section experience-section"><div className="container" data-reveal><p className="eyebrow">DO PRIMEIRO OI À FINALIZAÇÃO</p><h2>Sua experiência<br /><em>na Doggie.</em></h2><div className="steps">{experienceSteps.map((step) => <article key={step.number}><span className="step-number">{step.number}</span><h3>{step.title}</h3><p>{step.description}</p>{step.badge && <span className="step-badge">{step.badge}</span>}</article>)}</div></div></section>
 
       <section className="section price-section"><div className="container price-card" data-reveal><div><p className="eyebrow">TRANSPARÊNCIA PARA DECIDIR</p><h2>Serviços a partir de<br /><em>R$ 65,00</em></h2></div><div className="price-side"><strong>Economize até 18%</strong><p>com nossos Planos de cuidados.</p><small>Os valores podem variar conforme porte, pelagem, serviço e necessidades do pet.</small></div></div></section>
 
       <PlansSection />
 
-      <section id="duvidas" className="section faq-section"><div className="container faq-grid" data-reveal><div><p className="eyebrow">COMBINE TUDO COM TRANQUILIDADE</p><h2>O que você<br /><em>precisa saber.</em></h2></div><div className="faqs">{faqs.map((faq) => <details key={faq.question}><summary>{faq.question}<span className="faq-symbol" aria-hidden="true">+</span></summary><p>{faq.answer}</p></details>)}</div></div></section>
+      <section id="duvidas" className="section faq-section"><FaqDoodles /><div className="container faq-grid" data-reveal><div><p className="eyebrow">COMBINE TUDO COM TRANQUILIDADE</p><h2>O que você<br /><em>precisa saber.</em></h2></div><div className="faqs">{faqs.map((faq) => <details key={faq.question}><summary>{faq.question}<span className="faq-symbol" aria-hidden="true">+</span></summary><p>{faq.answer}</p></details>)}</div></div></section>
 
       <section id="localizacao" className="section location-section"><div className="container location-grid location-single" data-reveal><div className="location-copy"><div className="location-heading"><p className="eyebrow"><MapPin size={15} weight="duotone" aria-hidden="true" /> PERTINHO DE VOCÊ</p><h2>Onde <em>estamos.</em></h2></div><div className="location-details"><div className="location-address-block"><span className="location-pin"><MapPin size={24} weight="duotone" aria-hidden="true" /></span><div><span className="location-label">Endereço</span><strong>R. Heitor de Souza, 190</strong><p>Demarchi · São Bernardo do Campo, SP</p></div></div><p className="location-note"><Clock size={18} weight="duotone" aria-hidden="true" /> Atendimento com horário agendado</p><div className="location-directions"><a className="button outline" href={mapsUrl} target="_blank" rel="noopener noreferrer"><MapPin {...iconProps} /> Abrir no Google Maps <ArrowUpRight size={18} aria-hidden="true" /></a><a className="button outline" href={business.wazeUrl} target="_blank" rel="noopener noreferrer"><MapPin {...iconProps} /> Abrir no Waze <ArrowUpRight size={18} aria-hidden="true" /></a></div></div></div></div></section>
 
