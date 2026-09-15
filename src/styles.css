@@ -462,18 +462,14 @@ main>.section+.section{padding-top:40px}
   .review-star-fill{animation:review-star-fill-0 7s linear infinite;animation-fill-mode:both}
   .review .stars{animation:review-stars-glow 7s ease-in-out infinite}
 }
-@keyframes review-star-fill{
-  0%{clip-path:inset(0 100% 0 0)}
-  2.85%,85.7%{clip-path:inset(0)}
-  85.71%,100%{clip-path:inset(0 100% 0 0)}
-}
+
 @keyframes review-stars-glow{
   0%,14.28%,28.57%,100%{filter:drop-shadow(0 0 0 transparent);scale:1}
   18%,25%{filter:drop-shadow(0 0 4px var(--gold-ink));scale:1.025}
   21.5%{filter:drop-shadow(0 0 1px var(--gold-ink));scale:1}
 }
 .review .stars{transform-origin:left center}
-@media(prefers-reduced-motion:no-preference){.review-star:nth-child(1) .review-star-fill{animation-name:review-star-fill-0}} @keyframes review-star-fill-0{0%,0%{clip-path:inset(0 100% 0 0)}2.857%,99.99%{clip-path:inset(0)}100%{clip-path:inset(0 100% 0 0)}}
+@media(prefers-reduced-motion:no-preference){.review-star:nth-child(1) .review-star-fill{animation-name:review-star-fill-0}} @keyframes review-star-fill-0{0%{clip-path:inset(0 100% 0 0)}2.857%,99.99%{clip-path:inset(0)}100%{clip-path:inset(0 100% 0 0)}}
 @media(prefers-reduced-motion:no-preference){.review-star:nth-child(2) .review-star-fill{animation-name:review-star-fill-1}} @keyframes review-star-fill-1{0%,2.857%{clip-path:inset(0 100% 0 0)}5.714%,99.99%{clip-path:inset(0)}100%{clip-path:inset(0 100% 0 0)}}
 @media(prefers-reduced-motion:no-preference){.review-star:nth-child(3) .review-star-fill{animation-name:review-star-fill-2}} @keyframes review-star-fill-2{0%,5.714%{clip-path:inset(0 100% 0 0)}8.571%,99.99%{clip-path:inset(0)}100%{clip-path:inset(0 100% 0 0)}}
 @media(prefers-reduced-motion:no-preference){.review-star:nth-child(4) .review-star-fill{animation-name:review-star-fill-3}} @keyframes review-star-fill-3{0%,8.571%{clip-path:inset(0 100% 0 0)}11.429%,99.99%{clip-path:inset(0)}100%{clip-path:inset(0 100% 0 0)}}

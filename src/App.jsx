@@ -201,7 +201,7 @@ function PortfolioSection() {
 
 function ReviewCard({ review, preview, hidden = false }) {
   return <figure className="review" aria-hidden={hidden || undefined}>
-    <div className="stars" aria-label={`${review.rating} de 5 estrelas`}>{Array.from({ length: review.rating }, (_, i) => <span className="review-star" key={i} style={{ "--star-fill-at": `${i * 0.2}s` }}><Star weight="regular" size={18} aria-hidden="true" /><Star className="review-star-fill" weight="fill" size={18} aria-hidden="true" /></span>)}</div>
+    <div className="stars" aria-label={`${review.rating} de 5 estrelas`}>{Array.from({ length: review.rating }, (_, i) => <span className="review-star" key={i}><Star weight="regular" size={18} aria-hidden="true" /><Star className="review-star-fill" weight="fill" size={18} aria-hidden="true" /></span>)}</div>
     <blockquote>“{review.text}”</blockquote>
     <figcaption><strong>{review.name}</strong><span>{preview ? review.pet : `${review.pet} · Google · ${review.date}`}</span></figcaption>
   </figure>;
