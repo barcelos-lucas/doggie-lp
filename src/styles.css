@@ -409,7 +409,7 @@ main>.section+.section{padding-top:40px}
 .location-single .location-heading{min-width:0}
 .visit-invitation{margin-top:16px;font-size:14px;color:var(--muted)}
 .visit-paws{position:relative;display:flex;justify-content:space-between;gap:12px;margin:24px 0}
-.visit-paws::before{content:"";position:absolute;left:28px;right:28px;top:27px;border-top:2px dashed var(--line)}
+.visit-path{position:absolute;inset:0;width:100%;height:64px;overflow:visible;pointer-events:none}.visit-path path{fill:none;stroke:var(--gold-border);stroke-width:2;stroke-dasharray:4 8;stroke-linecap:round;vector-effect:non-scaling-stroke}
 .visit-paws button{position:relative;display:grid;justify-items:center;gap:8px;padding:0;border:0;background:transparent;color:var(--muted);cursor:pointer;min-width:60px;min-height:76px}
 .visit-paws button>svg{box-sizing:content-box;padding:13px;background:var(--surface-warm);border:1px solid var(--line);border-radius:50%;transition:transform .25s ease}
 .visit-paws button:nth-child(2)>svg{rotate:-12deg}
@@ -433,7 +433,7 @@ main>.section+.section{padding-top:40px}
   .visit-paws button:nth-child(2)>svg{animation-delay:.32s}
   .visit-paws button:nth-child(3)>svg{animation-delay:.64s}
   .visit-paws button.is-current>svg{animation-name:visit-paw-selected}
-  .location-single .location-pin{animation:visit-pin-sway 7s ease-in-out infinite}
+  .location-single .location-pin{animation:visit-pin-float 3s ease-in-out infinite}.location-single .location-note>svg{animation:visit-clock-turn 8s linear infinite}
   .visit-message>svg{animation:visit-message-arrive .35s ease-out both}
 }
 @keyframes visit-paw-step{
@@ -444,11 +444,7 @@ main>.section+.section{padding-top:40px}
   0%,12%,100%{translate:0 0;scale:1}
   5%{translate:0 -7px;scale:1.09}
 }
-@keyframes visit-pin-sway{
-  0%,100%{rotate:0deg}
-  40%{rotate:9deg}
-  70%{rotate:3deg}
-}
+@keyframes visit-pin-float{0%,100%{translate:0 0}50%{translate:0 -7px}} @keyframes visit-clock-turn{to{rotate:360deg}}
 @keyframes visit-message-arrive{
   from{opacity:0;translate:0 5px}
   to{opacity:1;translate:0 0}

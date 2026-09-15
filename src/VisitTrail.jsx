@@ -14,6 +14,7 @@ export default function VisitTrail() {
   return <div className="visit-trail">
     <p className="visit-invitation">O caminho para um pet bem cuidado.</p>
     <div className="visit-paws" role="group" aria-label="Explore o caminho até a Doggie">
+      <svg className="visit-path" viewBox="0 0 400 64" preserveAspectRatio="none" aria-hidden="true"><path d="M 28 30 C 75 -4, 128 62, 200 27 S 306 2, 372 30" /></svg>
       {stops.map((item, index) => <button type="button" key={item.title}
         aria-label={item.title} aria-pressed={selected === index}
         className={selected === index ? 'is-current' : ''}
