@@ -364,9 +364,9 @@ main>.section+.section{padding-top:40px}
 .whatsapp-mark{position:relative;display:inline-grid;place-items:center;width:22px;height:22px;flex:0 0 22px}
 .whatsapp-mark>svg{position:absolute;inset:0;transition:opacity .18s ease,transform .28s cubic-bezier(.2,.8,.2,1)}
 .whatsapp-mark-paw{opacity:0;transform:translateY(7px) rotate(-20deg) scale(.7)}
-@media(hover:hover){.whatsapp:hover .whatsapp-mark-logo{opacity:0;transform:translateY(-7px) scale(.7)}.whatsapp:hover .whatsapp-mark-paw{opacity:1;transform:translateY(0) rotate(0) scale(1)}}
-.whatsapp:focus-visible .whatsapp-mark-logo,.whatsapp:active .whatsapp-mark-logo{opacity:0}
-.whatsapp:focus-visible .whatsapp-mark-paw,.whatsapp:active .whatsapp-mark-paw{opacity:1;transform:none}
+
+
+
 @media(prefers-reduced-motion:reduce){.button.whatsapp,.whatsapp-mark>svg{transition:none}.button.whatsapp:hover,.button.whatsapp:active{transform:none}}
 
 /* Shared rows align each stage without imposing a fixed text height. */
@@ -388,10 +388,10 @@ main>.section+.section{padding-top:40px}
 @media(max-width:639px){.faq-doodle{opacity:.09}.faq-doodle svg{width:24px;height:24px}.faq-section .faqs{padding-inline:12px}}
 @media(prefers-reduced-motion:reduce){.faq-doodle{animation:none}}
 
-/* Touch devices get an automatic icon exchange; the link itself stays still. */
+/* All input types share a 3-second loop: each icon takes a 1.5-second turn. */
 @media(hover:none) and (pointer:coarse){
-  .whatsapp-mark-logo{animation:whatsapp-icon-turn 6s ease-in-out infinite}
-  .whatsapp-mark-paw{animation:whatsapp-icon-turn 6s ease-in-out -3s infinite}
+  .whatsapp-mark-logo{animation:whatsapp-icon-turn 3s ease-in-out infinite}
+  .whatsapp-mark-paw{animation:whatsapp-icon-turn 3s ease-in-out -1.5s infinite}
   .whatsapp:active .whatsapp-mark-logo,.whatsapp:active .whatsapp-mark-paw{animation-play-state:running}
 }
 @keyframes whatsapp-icon-turn{
