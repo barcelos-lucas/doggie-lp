@@ -374,3 +374,10 @@ main>.section+.section{padding-top:40px}
 .whatsapp-material .liquid-glass-shine{border-radius:999px}
 :root[data-theme="dark"] .whatsapp-material .liquid-glass-tint{background:rgb(169 47 35 / .6)}
 @media(prefers-reduced-transparency:reduce){:root .button.whatsapp,:root[data-theme="dark"] .button.whatsapp{background:#981f18}.whatsapp-material{display:none}}
+
+/* Keep the optical surface stable on hover and override the library's .dark convention. */
+:root .button.whatsapp:hover,:root .button.whatsapp:active{transform:none}
+:root .button.whatsapp>.whatsapp-material>.liquid-glass-tint{background:rgb(145 28 22 / .82);transition:none}
+:root[data-theme="dark"] .button.whatsapp>.whatsapp-material>.liquid-glass-tint{background:rgb(169 47 35 / .78)}
+:root .button.whatsapp>.whatsapp-material{opacity:1;visibility:visible}
+:root .button.whatsapp:hover>.whatsapp-material>.liquid-glass-shine{box-shadow:inset 0 1px 1px rgb(255 255 255 / .55),inset 0 -1px 1px rgb(255 255 255 / .22)}
