@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import {
-  ArrowUpRight, Bathtub, CaretLeft, CaretRight, Certificate, Check, Clock, HairDryer, Heart, InstagramLogo, List, MapPin, PawPrint,
-  Scissors, Sparkle, Star, WhatsappLogo, X,
+  ArrowUpRight, Bathtub, Bone, CaretLeft, CaretRight, Certificate, Check, Clock, HairDryer, Heart, InstagramLogo, List, MapPin, Medal, PawPrint,
+  Scissors, Sparkle, Star, TennisBall, WhatsappLogo, X,
 } from '@phosphor-icons/react';
 import {
   business, carePillars, experienceSteps, faqs, mapsUrl, plans, portfolio, reviewExamples, reviews,
   reviewsProfileUrl, serviceCategories, specialties, whatsappUrl,
 } from './content.js';
+import CookieConsent, { openCookiePreferences } from './CookieConsent.jsx';
+import ErrorPage from './ErrorPage.jsx';
 
 const iconProps = { size: 22, weight: 'regular', 'aria-hidden': true };
 const pillarIcons = { paw: PawPrint, heart: Heart, certificate: Certificate, clock: Clock };
@@ -16,7 +18,7 @@ const careHighlights = [
   { label: 'Técnica para cada pelagem', icon: Scissors },
   { label: 'Banho com tempo e calma', icon: Heart },
   { label: 'Avaliação individual', icon: PawPrint },
-  { label: '10+ anos de experiência', icon: Sparkle },
+  { label: '10+ anos de experiência', icon: Medal },
   { label: 'Orientação para a rotina', icon: Check },
 ];
 
@@ -214,25 +216,48 @@ function ReviewsSection() {
   </div></section>;
 }
 
-export default function App() {
+export default function App({ initialPath }) {
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } }), { threshold: 0.08 });
     document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
+  const pathname = initialPath ?? (typeof window === 'undefined' ? '/' : window.location.pathname);
+  const normalizedPath = pathname.length > 1 ? pathname.replace(/\/$/, '') : pathname;
+  const errorCode = normalizedPath === '/500' || normalizedPath === '/500.html' ? 500 : !['/', '/index.html'].includes(normalizedPath) ? 404 : null;
+  if (errorCode) return <><ErrorPage code={errorCode} /><CookieConsent /></>;
+
   return <>
     <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <Header />
     <main id="conteudo">
       <section id="inicio" className="hero container">
+        <div className="hero-doodles" aria-hidden="true">
+          <span className="hero-doodle hero-doodle-paw"><PawPrint size={34} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-bone"><Bone size={38} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-ball"><TennisBall size={30} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-bath"><Bathtub size={36} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-scissors"><Scissors size={31} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-heart"><Heart size={32} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-dryer"><HairDryer size={38} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-paw-two"><PawPrint size={25} weight="fill" /></span>
+          <span className="hero-doodle hero-doodle-extra hero-doodle-nine"><PawPrint size={23} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-extra hero-doodle-ten"><Bone size={29} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-extra hero-doodle-eleven"><Heart size={22} weight="fill" /></span>
+          <span className="hero-doodle hero-doodle-extra hero-doodle-twelve"><TennisBall size={27} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-extra hero-doodle-thirteen"><Scissors size={26} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-extra hero-doodle-fourteen"><Bathtub size={29} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-extra hero-doodle-fifteen"><HairDryer size={27} weight="duotone" /></span>
+          <span className="hero-doodle hero-doodle-extra hero-doodle-sixteen"><PawPrint size={21} weight="fill" /></span>
+        </div>
         <div className="hero-copy">
           <p className="eyebrow">DOGGIE ESTÉTICA ANIMAL</p>
           <h1>cuidado <em>que encanta</em></h1>
           <p className="hero-description">Atendimento individual, técnica e tranquilidade para cuidar de cada pet de forma única.</p>
           <WhatsAppButton placement="hero" />
         </div>
-        <div className="hero-visual"><figure className="hero-photo"><img src="/images/hero-real-960.webp" srcSet="/images/hero-real-640.webp 640w, /images/hero-real-960.webp 960w" sizes="(min-width: 1024px) 46vw, 90vw" width="960" height="1104" alt="Pet com tosa finalizada e laços azuis, atendido pela Tia Bia" fetchPriority="high" /></figure><div className="care-seal" aria-label="Agendamento personalizado"><PawPrint weight="light" size={31} aria-hidden="true" /><span>Agendamento<br />personalizado</span></div><p className="photo-note">tempo para cuidar bem.</p></div>
+        <div className="hero-visual"><figure className="hero-photo"><img src="/images/hero-generated-960.webp" srcSet="/images/hero-generated-640.webp 640w, /images/hero-generated-960.webp 960w" sizes="(min-width: 1024px) 46vw, 90vw" width="960" height="1104" alt="Shih-tzu branco após a tosa, com laços azuis" fetchPriority="high" /></figure><div className="care-seal" aria-label="Agendamento personalizado"><PawPrint weight="light" size={31} aria-hidden="true" /><span>Agendamento<br />personalizado</span></div><p className="photo-note">tempo para cuidar bem.</p></div>
       </section>
 
       <CareRibbon />
@@ -264,7 +289,8 @@ export default function App() {
       <nav className="footer-nav" aria-label="Links do rodapé"><strong>Explore</strong><a href="#cuidado">Nosso cuidado</a><a href="#servicos">Serviços</a><a href="#planos">Planos</a><a href="#sobre">A Tia Bia</a><a href="#duvidas">Dúvidas</a></nav>
       <div className="footer-contact"><strong>Fale com a gente</strong><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer"><WhatsappLogo size={19} aria-hidden="true" />{business.displayPhone}</a><a href="#localizacao">Como chegar <ArrowUpRight size={16} aria-hidden="true" /></a></div>
       <div className="footer-social"><strong>Siga de perto</strong><a href={business.instagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={19} aria-hidden="true" />@doggie.esteticapet</a><a href={business.biaInstagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={19} aria-hidden="true" />@tiabiatosadora</a></div>
-    </div><div className="footer-bottom"><span>© 2026 Doggie Estética Animal. Todos os direitos reservados.</span><span>{business.slogan}</span></div></div></footer>
+    </div><div className="footer-bottom"><span>© 2026 Doggie Estética Animal. Todos os direitos reservados.</span><div className="footer-legal"><button type="button" onClick={openCookiePreferences}>Privacidade e cookies</button><span>{business.slogan}</span></div></div></div></footer>
     <div className="mobile-cta"><WhatsAppButton placement="mobile-fixed" /></div>
+    <CookieConsent />
   </>;
 }
