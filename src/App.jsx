@@ -232,7 +232,7 @@ export default function App() {
           <p className="hero-description">Atendimento individual, técnica e tranquilidade para cuidar de cada pet de forma única.</p>
           <WhatsAppButton placement="hero" />
         </div>
-        <div className="hero-visual"><figure className="hero-photo"><img src="/images/hero-960.webp" srcSet="/images/hero-640.webp 640w, /images/hero-960.webp 960w" sizes="(min-width: 1024px) 46vw, 90vw" width="960" height="1200" alt="Cão com bandana terracota; foto provisória enquanto a foto real da Tia Bia é produzida" fetchPriority="high" /><figcaption>Imagem provisória</figcaption></figure><div className="care-seal" aria-label="Agendamento personalizado"><PawPrint weight="light" size={31} aria-hidden="true" /><span>Agendamento<br />personalizado</span></div><p className="photo-note">tempo para cuidar bem.</p></div>
+        <div className="hero-visual"><figure className="hero-photo"><img src="/images/hero-real-960.webp" srcSet="/images/hero-real-640.webp 640w, /images/hero-real-960.webp 960w" sizes="(min-width: 1024px) 46vw, 90vw" width="960" height="1104" alt="Pet com tosa finalizada e laços azuis, atendido pela Tia Bia" fetchPriority="high" /></figure><div className="care-seal" aria-label="Agendamento personalizado"><PawPrint weight="light" size={31} aria-hidden="true" /><span>Agendamento<br />personalizado</span></div><p className="photo-note">tempo para cuidar bem.</p></div>
       </section>
 
       <CareRibbon />
