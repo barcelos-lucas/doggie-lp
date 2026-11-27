@@ -10,7 +10,7 @@ export const business = {
   state: 'SP',
   street: 'R. Heitor de Souza, 190',
   postalCode: '09811-300',
-  instagram: 'https://www.instagram.com/doggie.esteticapet/',
+  instagram: 'https://www.instagram.com/doggieesteticapet/',
   biaInstagram: 'https://www.instagram.com/tiabiatosadora/',
   wazeUrl: 'https://ul.waze.com/ul?from=place.ChIJJxPEsHVBzpQRcRdsyUdStsY&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location',
 };
