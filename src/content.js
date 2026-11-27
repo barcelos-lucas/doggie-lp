@@ -3,8 +3,8 @@
 export const business = {
   name: 'Doggie Estética Animal',
   slogan: 'cuidado que encanta',
-  phone: '5511925850201',
-  displayPhone: '(11) 92585-0201',
+  phone: '5511999639344',
+  displayPhone: '(11) 99963-9344',
   district: 'Demarchi',
   city: 'São Bernardo do Campo',
   state: 'SP',
