@@ -6,7 +6,7 @@ test('every WhatsApp link reaches the owner-confirmed number with a readable mes
   for (const intent of ['booking', 'plans', ...serviceCategories.map(({ name }) => name)]) {
     const url = new URL(whatsappUrl(intent));
     assert.equal(url.origin, 'https://wa.me');
-    assert.equal(url.pathname, '/5511925850201');
+    assert.equal(url.pathname, '/5511999639344');
     assert.ok(url.searchParams.get('text').includes('Tia Bia'));
   }
   assert.equal(new URL(whatsappUrl('booking')).searchParams.get('text'), 'Oi, Tia Bia! Gostaria de agendar um horário pro meu pet.');
